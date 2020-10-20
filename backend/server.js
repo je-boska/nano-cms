@@ -1,10 +1,21 @@
-const express = require('express')
+import express from 'express'
+import dotenv from 'dotenv'
+import connectDB from './config/db.js'
+
+import { data } from './data.js'
+
+dotenv.config()
+
+connectDB()
+
 const app = express()
-const PORT = 5000
-const data = require('./data')
 
 app.get('/api/posts', (req, res) => {
   res.json(data)
 })
 
-app.listen(PORT, () => console.log(`Server listening on port ${PORT}`))
+const PORT = process.env.PORT || 5000
+
+app.listen(PORT, () =>
+  console.log(`Server running in ${process.env.NODE_ENV} mode on port ${PORT}`)
+)
