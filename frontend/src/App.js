@@ -1,26 +1,15 @@
-import React, { useState, useEffect } from 'react'
-import axios from 'axios'
-import './App.css'
+import React from 'react'
+import { BrowserRouter as Router, Route } from 'react-router-dom'
+import HomeScreen from './screens/HomeScreen'
+import AdminScreen from './screens/AdminScreen'
 
 function App() {
-  const [posts, setPosts] = useState([])
-
-  useEffect(() => {
-    const getData = async () => {
-      const { data } = await axios.get('/api/posts')
-      setPosts(data)
-    }
-    getData()
-  }, [])
-
   return (
     <>
-      {posts.map(post => (
-        <div className='post' key={post._id}>
-          <h1>{post.title}</h1>
-          <p>{post.text}</p>
-        </div>
-      ))}
+      <Router>
+        <Route path='/' component={HomeScreen} exact />
+        <Route path='/admin' component={AdminScreen} />
+      </Router>
     </>
   )
 }

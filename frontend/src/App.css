@@ -13,6 +13,23 @@ h1 {
   margin-bottom: 15px;
 }
 
+h2 {
+  margin-bottom: 15px;
+}
+
+button {
+  background-color: rgba(0, 0, 0, 1);
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 10px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
 .post {
   max-width: 600px;
   border-radius: 10px;
@@ -21,4 +38,13 @@ h1 {
   padding: 30px;
   background-color: white;
   box-shadow: 0px 5px 17px rgba(0, 0, 0, 0.3);
+}
+
+.post-list {
+  display: flex;
+  justify-content: space-between;
+}
+
+.create-button {
+  margin: 30px;
 }
