@@ -1,0 +1,24 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: teal;
+  font-family: Roboto, sans-serif;
+}
+
+h1 {
+  margin-bottom: 15px;
+}
+
+.post {
+  max-width: 600px;
+  border-radius: 10px;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  margin: 30px;
+  padding: 30px;
+  background-color: white;
+  box-shadow: 0px 5px 17px rgba(0, 0, 0, 0.3);
+}
