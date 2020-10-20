@@ -5,7 +5,7 @@
 }
 
 body {
-  background-color: teal;
+  background-color: rgb(102, 32, 143);
   font-family: Roboto, sans-serif;
 }
 
@@ -47,4 +47,16 @@ button:hover {
 
 .create-button {
   margin: 30px;
+}
+
+.form-container {
+  color: white;
+  margin: 30px;
+}
+
+.form-container input,
+.form-container textarea {
+  margin: 20px 0px;
+  padding: 20px;
+  border-radius: 10px;
 }

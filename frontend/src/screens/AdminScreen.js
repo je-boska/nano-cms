@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { Link } from 'react-router-dom'
 import axios from 'axios'
 import '../App.css'
 
@@ -19,7 +20,11 @@ const AdminScreen = () => {
 
   return (
     <>
-      <button className='create-button'>CREATE POST</button>
+      <Link to='/admin/createpost'>
+        <button className='create-button'>
+          <h3>CREATE POST</h3>
+        </button>
+      </Link>
       {posts.map(post => (
         <div className='post post-list' key={post._id}>
           <h2>{post.title}</h2>
