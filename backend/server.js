@@ -2,9 +2,7 @@ import express from 'express'
 import dotenv from 'dotenv'
 import colors from 'colors'
 import connectDB from './config/db.js'
-import Post from './models/post.js'
-
-import { data } from './data.js'
+import postRoutes from './routes/postRoutes.js'
 
 dotenv.config()
 
@@ -14,23 +12,7 @@ const app = express()
 
 app.use(express.json())
 
-app.get('/api/posts', async (req, res) => {
-  const posts = await Post.find({})
-
-  res.json(posts)
-})
-
-app.post('/api/posts', async (req, res) => {
-  const { title, text } = req.body
-
-  const post = new Post({
-    title,
-    text,
-  })
-
-  const createdPost = await post.save()
-  res.status(201).json(createdPost)
-})
+app.use('/api/posts', postRoutes)
 
 const PORT = process.env.PORT || 5000
 
