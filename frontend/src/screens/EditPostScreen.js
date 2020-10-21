@@ -1,10 +1,25 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import '../App.css'
 import axios from 'axios'
+import { UserContext } from '../UserContext'
 
 const EditPostScreen = ({ match, history }) => {
   const [title, setTitle] = useState('')
   const [text, setText] = useState('')
+
+  const { user, setUser } = useContext(UserContext)
+
+  const localUser = sessionStorage.getItem('user')
+
+  useEffect(() => {
+    setUser(localUser)
+
+    if (!user) {
+      history.push('/login')
+    } else {
+      getPost()
+    }
+  }, [user, setUser, history, localUser])
 
   const getPost = async () => {
     const post = await axios.get(`/api/posts/${match.params.id}`)
@@ -12,10 +27,6 @@ const EditPostScreen = ({ match, history }) => {
     setTitle(title)
     setText(text)
   }
-
-  useEffect(() => {
-    getPost()
-  }, [])
 
   const submitHandler = async e => {
     e.preventDefault()

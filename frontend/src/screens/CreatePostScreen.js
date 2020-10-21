@@ -1,10 +1,23 @@
-import React, { useState } from 'react'
+import React, { useContext, useState, useEffect } from 'react'
 import '../App.css'
 import axios from 'axios'
+import { UserContext } from '../UserContext'
 
 const CreatePostScreen = ({ history }) => {
   const [title, setTitle] = useState('')
   const [text, setText] = useState('')
+
+  const { user, setUser } = useContext(UserContext)
+
+  const localUser = sessionStorage.getItem('user')
+
+  useEffect(() => {
+    setUser(localUser)
+
+    if (!user) {
+      history.push('/login')
+    }
+  }, [user, history, localUser, setUser])
 
   const submitHandler = async e => {
     e.preventDefault()

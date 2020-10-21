@@ -11,6 +11,7 @@ router.get('/', async (req, res) => {
 
   res.json(posts)
 })
+
 // @desc    Fetch post by ID
 // @route   GET /api/posts/:id
 // @access  Public
