@@ -1,14 +1,25 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import '../App.css'
 import axios from 'axios'
 
-const CreatePostScreen = ({ history }) => {
+const EditPostScreen = ({ match, history }) => {
   const [title, setTitle] = useState('')
   const [text, setText] = useState('')
 
+  const getPost = async () => {
+    const post = await axios.get(`/api/posts/${match.params.id}`)
+    const { title, text } = post.data
+    setTitle(title)
+    setText(text)
+  }
+
+  useEffect(() => {
+    getPost()
+  }, [])
+
   const submitHandler = async e => {
     e.preventDefault()
-    await axios.post('/api/posts', {
+    await axios.put(`/api/posts/${match.params.id}`, {
       title,
       text,
     })
@@ -44,7 +55,7 @@ const CreatePostScreen = ({ history }) => {
             <h3>CANCEL</h3>
           </button>
           <button type='submit'>
-            <h3>SUBMIT</h3>
+            <h3>SAVE</h3>
           </button>
         </form>
       </div>
@@ -52,4 +63,4 @@ const CreatePostScreen = ({ history }) => {
   )
 }
 
-export default CreatePostScreen
+export default EditPostScreen
