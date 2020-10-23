@@ -9,13 +9,11 @@ const AdminScreen = ({ history }) => {
 
   const { user, setUser } = useContext(UserContext)
 
-  const localUser = JSON.parse(sessionStorage.getItem('user'))
-
   useEffect(() => {
-    if (!user) {
-      history.push('/login')
-    } else {
+    if (user) {
       getPosts()
+    } else {
+      history.push('/login')
     }
   }, [user, history])
 

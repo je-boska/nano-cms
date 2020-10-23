@@ -1,5 +1,5 @@
 import React, { useMemo, useState } from 'react'
-import { UserContext } from './UserContext'
+import { UserProvider } from './UserContext'
 import { BrowserRouter as Router, Route } from 'react-router-dom'
 import HomeScreen from './screens/HomeScreen'
 import AdminScreen from './screens/AdminScreen'
@@ -16,13 +16,13 @@ function App() {
     <>
       <Router>
         <div className='container'>
-          <UserContext.Provider value={value}>
-            <Route path='/' component={HomeScreen} exact />
+          <Route path='/' component={HomeScreen} exact />
+          <UserProvider value={value}>
             <Route path='/login' component={LoginScreen} />
             <Route path='/admin' component={AdminScreen} exact />
             <Route path='/admin/createpost' component={CreatePostScreen} />
             <Route path='/admin/edit/:id' component={EditPostScreen} />
-          </UserContext.Provider>
+          </UserProvider>
         </div>
       </Router>
     </>

@@ -9,20 +9,20 @@ const EditPostScreen = ({ match, history }) => {
 
   const { user } = useContext(UserContext)
 
-  useEffect(() => {
-    if (!user) {
-      history.push('/login')
-    } else {
-      getPost()
-    }
-  }, [user, history])
-
   const getPost = async () => {
     const post = await axios.get(`/api/posts/${match.params.id}`)
     const { title, text } = post.data
     setTitle(title)
     setText(text)
   }
+
+  useEffect(() => {
+    if (!user) {
+      history.push('/login')
+    } else {
+      getPost()
+    }
+  }, [user, history, getPost])
 
   const submitHandler = async e => {
     e.preventDefault()
