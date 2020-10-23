@@ -7,24 +7,29 @@ const CreatePostScreen = ({ history }) => {
   const [title, setTitle] = useState('')
   const [text, setText] = useState('')
 
-  const { user, setUser } = useContext(UserContext)
-
-  const localUser = sessionStorage.getItem('user')
+  const { user } = useContext(UserContext)
 
   useEffect(() => {
-    setUser(localUser)
-
     if (!user) {
       history.push('/login')
     }
-  }, [user, history, localUser, setUser])
+  }, [user, history])
 
   const submitHandler = async e => {
     e.preventDefault()
-    await axios.post('/api/posts', {
-      title,
-      text,
-    })
+    await axios.post(
+      '/api/posts',
+      {
+        title,
+        text,
+      },
+      {
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${user.token}`,
+        },
+      }
+    )
     history.push('/admin')
   }
 

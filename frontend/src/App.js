@@ -15,13 +15,15 @@ function App() {
   return (
     <>
       <Router>
-        <Route path='/' component={HomeScreen} exact />
-        <UserContext.Provider value={value}>
-          <Route path='/login' component={LoginScreen} />
-          <Route path='/admin' component={AdminScreen} exact />
-          <Route path='/admin/createpost' component={CreatePostScreen} />
-          <Route path='/admin/edit/:id' component={EditPostScreen} />
-        </UserContext.Provider>
+        <div className='container'>
+          <UserContext.Provider value={value}>
+            <Route path='/' component={HomeScreen} exact />
+            <Route path='/login' component={LoginScreen} />
+            <Route path='/admin' component={AdminScreen} exact />
+            <Route path='/admin/createpost' component={CreatePostScreen} />
+            <Route path='/admin/edit/:id' component={EditPostScreen} />
+          </UserContext.Provider>
+        </div>
       </Router>
     </>
   )

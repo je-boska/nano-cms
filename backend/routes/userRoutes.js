@@ -1,7 +1,8 @@
-import express from 'express'
+import express, { response } from 'express'
 import asyncHandler from 'express-async-handler'
 import User from '../models/userModel.js'
 import generateToken from '../utils/generateToken.js'
+import { protect, admin } from '../middleware/authMiddleware.js'
 
 const router = express.Router()
 
@@ -10,6 +11,7 @@ const router = express.Router()
 // @access  Public
 router.get(
   '/',
+  protect,
   asyncHandler(async (req, res) => {
     const users = await User.find({})
 
@@ -47,6 +49,8 @@ router.post(
 // @access  Public
 router.post(
   '/',
+  protect,
+  admin,
   asyncHandler(async (req, res) => {
     const { name, email, password } = req.body
 
@@ -74,6 +78,23 @@ router.post(
     } else {
       res.status(400)
       throw new Error('Invalid user data')
+    }
+  })
+)
+
+router.delete(
+  '/:id',
+  protect,
+  admin,
+  asyncHandler(async (req, res) => {
+    const user = await User.findById(req.params.id)
+
+    if (user) {
+      await user.remove()
+      res.json({ message: 'User removed' })
+    } else {
+      res.status(404)
+      throw new Error('User not found')
     }
   })
 )

@@ -3,12 +3,6 @@ import '../App.css'
 import axios from 'axios'
 import { UserContext } from '../UserContext'
 
-const config = {
-  headers: {
-    'Content-Type': 'application/json',
-  },
-}
-
 const LoginScreen = ({ history }) => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
@@ -17,16 +11,20 @@ const LoginScreen = ({ history }) => {
 
   const submitHandler = async e => {
     e.preventDefault()
-    const loggedInUser = await axios.post(
+    const { data } = await axios.post(
       `/api/users/login`,
       {
         email,
         password,
       },
-      config
+      {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      }
     )
-    sessionStorage.setItem('user', JSON.stringify(loggedInUser.data))
-    setUser(loggedInUser.data)
+    sessionStorage.setItem('user', JSON.stringify(data))
+    setUser(data)
   }
 
   useEffect(() => {
@@ -51,6 +49,7 @@ const LoginScreen = ({ history }) => {
           </label>
           <input
             id='password'
+            type='password'
             value={password}
             onChange={e => setPassword(e.target.value)}></input>
           <br></br>

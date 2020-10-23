@@ -1,5 +1,6 @@
 import express, { Router } from 'express'
 import Post from '../models/postModel.js'
+import { protect, admin } from '../middleware/authMiddleware.js'
 
 const router = express.Router()
 
@@ -29,7 +30,7 @@ router.get('/:id', async (req, res) => {
 // @desc    Create a post
 // @route   POST /api/posts
 // @access  Public for now
-router.post('/', async (req, res) => {
+router.post('/', protect, async (req, res) => {
   const { title, text } = req.body
 
   const post = new Post({
@@ -44,7 +45,7 @@ router.post('/', async (req, res) => {
 // @desc    Delete a post
 // @route   DELETE /api/post
 // @access  Public
-router.delete('/:id', async (req, res) => {
+router.delete('/:id', protect, async (req, res) => {
   const post = await Post.findById(req.params.id)
 
   if (post) {
@@ -59,7 +60,7 @@ router.delete('/:id', async (req, res) => {
 // @desc    Update a post
 // @route   DELETE /api/post
 // @access  Public
-router.put('/:id', async (req, res) => {
+router.put('/:id', protect, async (req, res) => {
   const { title, text } = req.body
 
   const post = await Post.findById(req.params.id)

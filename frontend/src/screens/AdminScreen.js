@@ -9,17 +9,15 @@ const AdminScreen = ({ history }) => {
 
   const { user, setUser } = useContext(UserContext)
 
-  const localUser = sessionStorage.getItem('user')
+  const localUser = JSON.parse(sessionStorage.getItem('user'))
 
   useEffect(() => {
-    setUser(localUser)
-
     if (!user) {
       history.push('/login')
     } else {
       getPosts()
     }
-  }, [user, history, localUser, setUser])
+  }, [user, history])
 
   const getPosts = async () => {
     const { data } = await axios.get('/api/posts')
@@ -28,7 +26,11 @@ const AdminScreen = ({ history }) => {
 
   const deleteHandler = async id => {
     if (window.confirm('Are you sure?')) {
-      await axios.delete(`/api/posts/${id}`)
+      await axios.delete(`/api/posts/${id}`, {
+        headers: {
+          Authorization: `Bearer ${user.token}`,
+        },
+      })
     }
     getPosts()
   }
@@ -40,18 +42,20 @@ const AdminScreen = ({ history }) => {
 
   return (
     <>
-      <Link to='/admin/createpost'>
-        <button className='create-button'>
-          <h3>CREATE POST</h3>
+      <div className='admin-buttons'>
+        <Link to='/admin/createpost'>
+          <button className='create-button'>
+            <h3>CREATE POST</h3>
+          </button>
+        </Link>
+        <button onClick={logoutHandler}>
+          <h3>LOG OUT</h3>
         </button>
-      </Link>
-      <button onClick={logoutHandler}>
-        <h3>LOG OUT</h3>
-      </button>
+      </div>
       {posts.map(post => (
         <div className='post post-list' key={post._id}>
           <h2>{post.title}</h2>
-          <div className='buttons'>
+          <div>
             <button onClick={() => deleteHandler(post._id)}>
               <h3>DELETE</h3>
             </button>

@@ -7,19 +7,15 @@ const EditPostScreen = ({ match, history }) => {
   const [title, setTitle] = useState('')
   const [text, setText] = useState('')
 
-  const { user, setUser } = useContext(UserContext)
-
-  const localUser = sessionStorage.getItem('user')
+  const { user } = useContext(UserContext)
 
   useEffect(() => {
-    setUser(localUser)
-
     if (!user) {
       history.push('/login')
     } else {
       getPost()
     }
-  }, [user, setUser, history, localUser])
+  }, [user, history])
 
   const getPost = async () => {
     const post = await axios.get(`/api/posts/${match.params.id}`)
@@ -30,10 +26,19 @@ const EditPostScreen = ({ match, history }) => {
 
   const submitHandler = async e => {
     e.preventDefault()
-    await axios.put(`/api/posts/${match.params.id}`, {
-      title,
-      text,
-    })
+    await axios.put(
+      `/api/posts/${match.params.id}`,
+      {
+        title,
+        text,
+      },
+      {
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${user.token}`,
+        },
+      }
+    )
     history.push('/admin')
   }
 
@@ -45,6 +50,7 @@ const EditPostScreen = ({ match, history }) => {
             <h2>Title</h2>
           </label>
           <input
+            size='50'
             id='title'
             value={title}
             onChange={e => setTitle(e.target.value)}></input>
