@@ -31,11 +31,12 @@ router.get('/:id', async (req, res) => {
 // @route   POST /api/posts
 // @access  Public for now
 router.post('/', protect, async (req, res) => {
-  const { title, text } = req.body
+  const { title, text, image } = req.body
 
   const post = new Post({
     title,
     text,
+    image,
   })
 
   const createdPost = await post.save()

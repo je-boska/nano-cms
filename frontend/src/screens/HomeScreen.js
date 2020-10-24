@@ -16,6 +16,7 @@ const HomeScreen = () => {
     <>
       {posts.map(post => (
         <div className='post' key={post._id}>
+          <img src={post.image} alt={post.title} />
           <h1>{post.title}</h1>
           <p>{post.text}</p>
         </div>

@@ -6,6 +6,7 @@ import { UserContext } from '../UserContext'
 const CreatePostScreen = ({ history }) => {
   const [title, setTitle] = useState('')
   const [text, setText] = useState('')
+  const [image, setImage] = useState('')
 
   const { user } = useContext(UserContext)
 
@@ -17,11 +18,23 @@ const CreatePostScreen = ({ history }) => {
 
   const submitHandler = async e => {
     e.preventDefault()
+    const formData = new FormData()
+    formData.append('image', image)
+
+    const { data } = await axios.post('/api/upload', formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    })
+
+    console.log(data.data)
+
     await axios.post(
       '/api/posts',
       {
         title,
         text,
+        image: data.data,
       },
       {
         headers: {
@@ -30,6 +43,7 @@ const CreatePostScreen = ({ history }) => {
         },
       }
     )
+
     history.push('/admin')
   }
 
@@ -53,7 +67,14 @@ const CreatePostScreen = ({ history }) => {
             id='text'
             value={text}
             onChange={e => setText(e.target.value)}></textarea>
-          <br></br>
+          <br />
+          <input
+            type='file'
+            id='image'
+            accept='image/png, image/jpg, image/jpeg'
+            onChange={e => setImage(e.target.files[0])}
+          />
+          <br />
           <button
             onClick={e => {
               e.preventDefault()
