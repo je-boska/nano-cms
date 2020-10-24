@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react'
+import React, { useState, useEffect, useContext, useCallback } from 'react'
 import { Link } from 'react-router-dom'
 import axios from 'axios'
 import '../App.css'
@@ -9,18 +9,18 @@ const AdminScreen = ({ history }) => {
 
   const { user, setUser } = useContext(UserContext)
 
-  useEffect(() => {
-    if (user) {
-      getPosts()
-    } else {
-      history.push('/login')
-    }
-  }, [user, history])
-
-  const getPosts = async () => {
+  const getPosts = useCallback(async () => {
     const { data } = await axios.get('/api/posts')
     setPosts(data)
-  }
+  }, [])
+
+  useEffect(() => {
+    if (!user) {
+      history.push('/login')
+    } else {
+      getPosts()
+    }
+  }, [user, history, getPosts])
 
   const deleteHandler = async id => {
     if (window.confirm('Are you sure?')) {

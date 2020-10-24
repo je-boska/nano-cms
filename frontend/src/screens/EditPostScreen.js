@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react'
+import React, { useState, useEffect, useContext, useCallback } from 'react'
 import '../App.css'
 import axios from 'axios'
 import { UserContext } from '../UserContext'
@@ -9,12 +9,12 @@ const EditPostScreen = ({ match, history }) => {
 
   const { user } = useContext(UserContext)
 
-  const getPost = async () => {
+  const getPost = useCallback(async () => {
     const post = await axios.get(`/api/posts/${match.params.id}`)
     const { title, text } = post.data
     setTitle(title)
     setText(text)
-  }
+  }, [match])
 
   useEffect(() => {
     if (!user) {
