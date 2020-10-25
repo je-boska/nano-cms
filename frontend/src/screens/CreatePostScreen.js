@@ -66,6 +66,9 @@ const CreatePostScreen = ({ history }) => {
             value={text}
             onChange={e => setText(e.target.value)}></textarea>
           <br />
+          <label htmlFor='image'>
+            <h2>Image</h2>
+          </label>
           <input
             type='file'
             id='image'

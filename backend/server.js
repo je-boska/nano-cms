@@ -25,6 +25,7 @@ if (process.env.NODE_ENV === 'development') {
   app.use(morgan('dev'))
 }
 
+app.use('*', cloudinaryConfig)
 app.use('/api/posts', postRoutes)
 app.use('/api/users', userRoutes)
 
@@ -32,7 +33,6 @@ const __dirname = path.resolve()
 
 app.use('/api/upload', express.static(path.join(__dirname, '/uploads')))
 app.use(urlencoded({ extended: false }))
-app.use('*', cloudinaryConfig)
 
 app.get('*', (req, res) =>
   res.sendFile(path.resolve(__dirname, 'frontend', 'public', 'index.html'))

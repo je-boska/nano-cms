@@ -37,8 +37,6 @@ const EditPostScreen = ({ match, history }) => {
       },
     })
 
-    console.log(data.data)
-
     await axios.put(
       `/api/posts/${match.params.id}`,
       {
@@ -78,8 +76,9 @@ const EditPostScreen = ({ match, history }) => {
             value={text}
             onChange={e => setText(e.target.value)}></textarea>
           <br />
-          <img src={image} alt={title} style={{ maxWidth: '400px' }} />
-          <br />
+          <label htmlFor='image'>
+            <h2>Image</h2>
+          </label>
           <input
             type='file'
             id='image'

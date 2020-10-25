@@ -1,6 +1,7 @@
-import express, { Router } from 'express'
+import express from 'express'
 import Post from '../models/postModel.js'
-import { protect, admin } from '../middleware/authMiddleware.js'
+import { protect } from '../middleware/authMiddleware.js'
+import { uploader } from 'cloudinary'
 
 const router = express.Router()
 
@@ -48,6 +49,8 @@ router.post('/', protect, async (req, res) => {
 // @access  Public
 router.delete('/:id', protect, async (req, res) => {
   const post = await Post.findById(req.params.id)
+  const { image } = post
+  const imagePublicId = image.slice(-24, -4)
 
   if (post) {
     await post.remove()
@@ -56,6 +59,10 @@ router.delete('/:id', protect, async (req, res) => {
     res.status(404)
     throw new Error('Product not found')
   }
+
+  uploader.destroy(imagePublicId, (err, res) => {
+    console.log(res, err)
+  })
 })
 
 // @desc    Update a post
