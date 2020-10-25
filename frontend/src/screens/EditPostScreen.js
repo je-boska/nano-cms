@@ -6,14 +6,16 @@ import { UserContext } from '../UserContext'
 const EditPostScreen = ({ match, history }) => {
   const [title, setTitle] = useState('')
   const [text, setText] = useState('')
+  const [image, setImage] = useState('')
 
   const { user } = useContext(UserContext)
 
   const getPost = useCallback(async () => {
     const post = await axios.get(`/api/posts/${match.params.id}`)
-    const { title, text } = post.data
+    const { title, text, image } = post.data
     setTitle(title)
     setText(text)
+    setImage(image)
   }, [match])
 
   useEffect(() => {
@@ -26,11 +28,23 @@ const EditPostScreen = ({ match, history }) => {
 
   const submitHandler = async e => {
     e.preventDefault()
+    const formData = new FormData()
+    formData.append('image', image)
+
+    const { data } = await axios.post('/api/upload', formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    })
+
+    console.log(data.data)
+
     await axios.put(
       `/api/posts/${match.params.id}`,
       {
         title,
         text,
+        image: data.data,
       },
       {
         headers: {
@@ -63,7 +77,16 @@ const EditPostScreen = ({ match, history }) => {
             id='text'
             value={text}
             onChange={e => setText(e.target.value)}></textarea>
-          <br></br>
+          <br />
+          <img src={image} alt={title} style={{ maxWidth: '400px' }} />
+          <br />
+          <input
+            type='file'
+            id='image'
+            accept='image/png, image/jpg, image/jpeg'
+            onChange={e => setImage(e.target.files[0])}
+          />
+          <br />
           <button
             onClick={e => {
               e.preventDefault()

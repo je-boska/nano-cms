@@ -27,8 +27,6 @@ const CreatePostScreen = ({ history }) => {
       },
     })
 
-    console.log(data.data)
-
     await axios.post(
       '/api/posts',
       {

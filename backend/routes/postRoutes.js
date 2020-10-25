@@ -62,13 +62,14 @@ router.delete('/:id', protect, async (req, res) => {
 // @route   DELETE /api/post
 // @access  Public
 router.put('/:id', protect, async (req, res) => {
-  const { title, text } = req.body
+  const { title, text, image } = req.body
 
   const post = await Post.findById(req.params.id)
 
   if (post) {
     post.title = title
     post.text = text
+    post.image = image
 
     const updatedPost = await post.save()
     res.json(updatedPost)
