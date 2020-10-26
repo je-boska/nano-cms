@@ -52,6 +52,9 @@ const AdminScreen = ({ history }) => {
       </div>
       {posts.map(post => (
         <div className='post post-list' key={post._id}>
+          <div className='img-container'>
+            {post.image ? <img src={post.image} alt={post.title} /> : null}
+          </div>
           <h2>{post.title}</h2>
           <div>
             <button onClick={() => deleteHandler(post._id)}>

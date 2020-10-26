@@ -62,6 +62,10 @@ button:hover {
   align-items: center;
 }
 
+.img-container {
+  max-width: 80px;
+}
+
 .post img {
   max-width: 100%;
 }
