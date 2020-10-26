@@ -9,6 +9,7 @@ import userRoutes from './routes/userRoutes.js'
 import uploadRoutes from './routes/uploadRoutes.js'
 
 import { urlencoded, json } from 'body-parser'
+import { cloudinaryConfig } from './config/cloudinaryConfig.js'
 
 dotenv.config()
 
@@ -18,6 +19,7 @@ const app = express()
 
 app.use(json())
 app.use(urlencoded({ extended: false }))
+app.use('*', cloudinaryConfig)
 
 if (process.env.NODE_ENV === 'development') {
   app.use(morgan('dev'))

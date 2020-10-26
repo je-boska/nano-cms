@@ -7,6 +7,9 @@ const EditPostScreen = ({ match, history }) => {
   const [title, setTitle] = useState('')
   const [text, setText] = useState('')
   const [image, setImage] = useState('')
+  const [prevImage, setPrevImage] = useState('')
+  const [updateImage, setUpdateImage] = useState(false)
+  const [loading, setLoading] = useState(false)
 
   const { user } = useContext(UserContext)
 
@@ -28,21 +31,29 @@ const EditPostScreen = ({ match, history }) => {
 
   const submitHandler = async e => {
     e.preventDefault()
-    const formData = new FormData()
-    formData.append('image', image)
+    setLoading(true)
+    let newImage
+    if (updateImage) {
+      const formData = new FormData()
+      formData.append('image', image)
 
-    const { data } = await axios.post('/api/upload', formData, {
-      headers: {
-        'Content-Type': 'multipart/form-data',
-      },
-    })
+      const { data } = await axios.post('/api/upload', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+          Authorization: `Bearer ${user.token}`,
+        },
+      })
+      newImage = data.data
+    }
+    console.log(newImage)
+    console.log(prevImage)
 
     await axios.put(
       `/api/posts/${match.params.id}`,
       {
         title,
         text,
-        image: data.data,
+        image: updateImage ? newImage : image,
       },
       {
         headers: {
@@ -83,7 +94,11 @@ const EditPostScreen = ({ match, history }) => {
             type='file'
             id='image'
             accept='image/png, image/jpg, image/jpeg'
-            onChange={e => setImage(e.target.files[0])}
+            onChange={e => {
+              setUpdateImage(true)
+              setPrevImage(image)
+              setImage(e.target.files[0])
+            }}
           />
           <br />
           <button
@@ -93,7 +108,7 @@ const EditPostScreen = ({ match, history }) => {
             }}>
             <h3>CANCEL</h3>
           </button>
-          <button type='submit'>
+          <button type='submit' disabled={loading}>
             <h3>SAVE</h3>
           </button>
         </form>

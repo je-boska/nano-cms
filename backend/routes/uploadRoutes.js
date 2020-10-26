@@ -1,14 +1,14 @@
 import path from 'path'
 import express from 'express'
 
+import { protect } from '../middleware/authMiddleware.js'
+
 import { multerUploads, parser } from '../middleware/multer.js'
-import { uploader, cloudinaryConfig } from '../config/cloudinaryConfig.js'
+import { uploader } from '../config/cloudinaryConfig.js'
 
 const router = express.Router()
 
 const __dirname = path.resolve()
-
-router.use('*', cloudinaryConfig)
 
 router.use('/', express.static(path.join(__dirname, '/uploads')))
 
@@ -16,7 +16,10 @@ router.get('*', (req, res) =>
   res.sendFile(path.resolve(__dirname, 'frontend', 'public', 'index.html'))
 )
 
-router.post('/', multerUploads, (req, res) => {
+// @desc    Upload image
+// @route   POST /api/upload
+// @access  Private
+router.post('/', multerUploads, protect, (req, res) => {
   const file = parser.format(
     path.extname(req.file.originalname).toString(),
     req.file.buffer

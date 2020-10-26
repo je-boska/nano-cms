@@ -6,11 +6,13 @@ import { UserContext } from '../UserContext'
 const LoginScreen = ({ history }) => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  const [loading, setLoading] = useState(false)
 
   const { user, setUser } = useContext(UserContext)
 
   const submitHandler = async e => {
     e.preventDefault()
+    setLoading(true)
     const { data } = await axios.post(
       `/api/users/login`,
       {
@@ -23,7 +25,6 @@ const LoginScreen = ({ history }) => {
         },
       }
     )
-    sessionStorage.setItem('user', JSON.stringify(data))
     setUser(data)
   }
 
@@ -53,7 +54,7 @@ const LoginScreen = ({ history }) => {
             value={password}
             onChange={e => setPassword(e.target.value)}></input>
           <br></br>
-          <button type='submit'>
+          <button type='submit' disabled={loading}>
             <h3>LOG IN</h3>
           </button>
         </form>

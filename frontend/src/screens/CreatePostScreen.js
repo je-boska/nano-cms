@@ -7,6 +7,7 @@ const CreatePostScreen = ({ history }) => {
   const [title, setTitle] = useState('')
   const [text, setText] = useState('')
   const [image, setImage] = useState('')
+  const [loading, setLoading] = useState(false)
 
   const { user } = useContext(UserContext)
 
@@ -18,21 +19,27 @@ const CreatePostScreen = ({ history }) => {
 
   const submitHandler = async e => {
     e.preventDefault()
-    const formData = new FormData()
-    formData.append('image', image)
+    setLoading(true)
+    let newImage
+    if (image) {
+      const formData = new FormData()
+      formData.append('image', image)
 
-    const { data } = await axios.post('/api/upload', formData, {
-      headers: {
-        'Content-Type': 'multipart/form-data',
-      },
-    })
+      const { data } = await axios.post('/api/upload', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+          Authorization: `Bearer ${user.token}`,
+        },
+      })
+      newImage = data.data
+    }
 
     await axios.post(
       '/api/posts',
       {
         title,
         text,
-        image: data.data,
+        image: newImage ? newImage : null,
       },
       {
         headers: {
@@ -83,7 +90,7 @@ const CreatePostScreen = ({ history }) => {
             }}>
             <h3>CANCEL</h3>
           </button>
-          <button type='submit'>
+          <button type='submit' disabled={loading}>
             <h3>SUBMIT</h3>
           </button>
         </form>
