@@ -73,6 +73,9 @@ router.put('/:id', protect, async (req, res) => {
 
   const post = await Post.findById(req.params.id)
 
+  const prevImage = post.image
+  const prevImagePublicId = prevImage.slice(-24, -4)
+
   if (post) {
     post.title = title
     post.text = text
@@ -80,6 +83,10 @@ router.put('/:id', protect, async (req, res) => {
 
     const updatedPost = await post.save()
     res.json(updatedPost)
+
+    uploader.destroy(prevImagePublicId, (err, res) => {
+      console.log(res, err)
+    })
   } else {
     res.status(404)
     throw new Error('Product not found')
