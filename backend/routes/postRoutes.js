@@ -56,10 +56,9 @@ router.delete('/:id', protect, async (req, res) => {
     if (post.image) {
       const { image } = post
       const imagePublicId = image.slice(-24, -4)
-      const prevImage = post.image
-      const prevImagePublicId = prevImage.slice(-24, -4)
+
       uploader.destroy(imagePublicId, (err, res) => {
-        console.log(res, err)
+        console.log(err, res)
       })
     }
   } else {
@@ -77,13 +76,15 @@ router.put('/:id', protect, async (req, res) => {
   const post = await Post.findById(req.params.id)
 
   if (post) {
-    if (image !== post.image) {
+    if (post.image && image !== post.image) {
       const prevImage = post.image
       const prevImagePublicId = prevImage.slice(-24, -4)
 
       uploader.destroy(prevImagePublicId, (err, res) => {
         console.log(res, err)
       })
+      post.image = image
+    } else {
       post.image = image
     }
     post.title = title

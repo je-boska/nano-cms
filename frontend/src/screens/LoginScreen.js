@@ -7,25 +7,32 @@ const LoginScreen = ({ history }) => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [loading, setLoading] = useState(false)
+  const [error, setError] = useState(false)
 
   const { user, setUser } = useContext(UserContext)
 
   const submitHandler = async e => {
     e.preventDefault()
     setLoading(true)
-    const { data } = await axios.post(
-      `/api/users/login`,
-      {
-        email,
-        password,
-      },
-      {
-        headers: {
-          'Content-Type': 'application/json',
+    try {
+      const { data } = await axios.post(
+        `/api/users/login`,
+        {
+          email,
+          password,
         },
-      }
-    )
-    setUser(data)
+        {
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        }
+      )
+      setUser(data)
+      setLoading(false)
+    } catch (err) {
+      setError(true)
+      setLoading(false)
+    }
   }
 
   useEffect(() => {
@@ -54,6 +61,7 @@ const LoginScreen = ({ history }) => {
             value={password}
             onChange={e => setPassword(e.target.value)}></input>
           <br></br>
+          {error && <h2 style={{ color: 'red' }}>Invalid email or password</h2>}
           <button type='submit' disabled={loading}>
             <h3>LOG IN</h3>
           </button>

@@ -6,6 +6,7 @@ import { UserContext } from '../UserContext'
 
 const AdminScreen = ({ history }) => {
   const [posts, setPosts] = useState([])
+  const [loading, setLoading] = useState(false)
 
   const { user, setUser } = useContext(UserContext)
 
@@ -23,6 +24,7 @@ const AdminScreen = ({ history }) => {
   }, [user, history, getPosts])
 
   const deleteHandler = async id => {
+    setLoading(true)
     if (window.confirm('Are you sure?')) {
       await axios.delete(`/api/posts/${id}`, {
         headers: {
@@ -31,6 +33,28 @@ const AdminScreen = ({ history }) => {
       })
     }
     getPosts()
+    setLoading(false)
+  }
+
+  const createPostHandler = async () => {
+    const {
+      data: { _id },
+    } = await axios.post(
+      '/api/posts',
+      {
+        title: '',
+        text: '',
+        image: null,
+      },
+      {
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${user.token}`,
+        },
+      }
+    )
+
+    history.push(`/admin/edit/${_id}`)
   }
 
   const logoutHandler = () => {
@@ -41,11 +65,9 @@ const AdminScreen = ({ history }) => {
   return (
     <>
       <div className='admin-buttons'>
-        <Link to='/admin/createpost'>
-          <button className='create-button'>
-            <h3>CREATE POST</h3>
-          </button>
-        </Link>
+        <button className='create-button' onClick={createPostHandler}>
+          <h3>CREATE POST</h3>
+        </button>
         <button onClick={logoutHandler}>
           <h3>LOG OUT</h3>
         </button>
@@ -57,7 +79,7 @@ const AdminScreen = ({ history }) => {
           </div>
           <h2>{post.title}</h2>
           <div>
-            <button onClick={() => deleteHandler(post._id)}>
+            <button onClick={() => deleteHandler(post._id)} disabled={loading}>
               <h3>DELETE</h3>
             </button>
             <Link to={`/admin/edit/${post._id}`}>

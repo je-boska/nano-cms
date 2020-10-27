@@ -17,8 +17,8 @@ const HomeScreen = () => {
       {posts.map(post => (
         <div className='post' key={post._id}>
           {post.image ? <img src={post.image} alt={post.title} /> : null}
-          <h1>{post.title}</h1>
-          <p>{post.text}</p>
+          {post.title && <h1>{post.title}</h1>}
+          {post.text && <p>{post.text}</p>}
         </div>
       ))}
     </>

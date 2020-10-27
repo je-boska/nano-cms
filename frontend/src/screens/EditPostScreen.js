@@ -7,7 +7,6 @@ const EditPostScreen = ({ match, history }) => {
   const [title, setTitle] = useState('')
   const [text, setText] = useState('')
   const [image, setImage] = useState('')
-  const [prevImage, setPrevImage] = useState('')
   const [updateImage, setUpdateImage] = useState(false)
   const [loading, setLoading] = useState(false)
 
@@ -45,8 +44,6 @@ const EditPostScreen = ({ match, history }) => {
       })
       newImage = data.data
     }
-    console.log(newImage)
-    console.log(prevImage)
 
     await axios.put(
       `/api/posts/${match.params.id}`,
@@ -96,7 +93,6 @@ const EditPostScreen = ({ match, history }) => {
             accept='image/png, image/jpg, image/jpeg'
             onChange={e => {
               setUpdateImage(true)
-              setPrevImage(image)
               setImage(e.target.files[0])
             }}
           />
