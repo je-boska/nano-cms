@@ -54,7 +54,7 @@ const AdminScreen = ({ history }) => {
       }
     )
 
-    history.push(`/admin/edit/${_id}`)
+    history.push(`/admin/edit/${_id}?create=true`)
   }
 
   const logoutHandler = () => {

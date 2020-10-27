@@ -3,7 +3,7 @@ import '../App.css'
 import axios from 'axios'
 import { UserContext } from '../UserContext'
 
-const EditPostScreen = ({ match, history }) => {
+const EditPostScreen = ({ match, history, location }) => {
   const [title, setTitle] = useState('')
   const [text, setText] = useState('')
   const [image, setImage] = useState('')
@@ -62,6 +62,22 @@ const EditPostScreen = ({ match, history }) => {
     history.push('/admin')
   }
 
+  const cancelHandler = async e => {
+    e.preventDefault()
+    const urlParams = new URLSearchParams(window.location.search)
+    const createPost = urlParams.get('create')
+
+    if (createPost) {
+      await axios.delete(`/api/posts/${match.params.id}`, {
+        headers: {
+          Authorization: `Bearer ${user.token}`,
+        },
+      })
+    }
+
+    history.push('/admin')
+  }
+
   return (
     <>
       <div className='form-container'>
@@ -84,28 +100,27 @@ const EditPostScreen = ({ match, history }) => {
             value={text}
             onChange={e => setText(e.target.value)}></textarea>
           <br />
-          <label htmlFor='image'>
-            <h2>Image</h2>
-          </label>
-          <input
-            type='file'
-            id='image'
-            accept='image/png, image/jpg, image/jpeg'
-            onChange={e => {
-              setUpdateImage(true)
-              setImage(e.target.files[0])
-            }}
-          />
+          <h2>Image</h2>
+          <div className='image-upload-container'>
+            <label htmlFor='image-upload' className='image-upload-btn'>
+              {!image ? 'Choose file' : image.name ? image.name : image}
+              <input
+                type='file'
+                id='image-upload'
+                accept='image/png, image/jpg, image/jpeg'
+                onChange={e => {
+                  setUpdateImage(true)
+                  setImage(e.target.files[0])
+                }}
+              />
+            </label>
+          </div>
           <br />
-          <button
-            onClick={e => {
-              e.preventDefault()
-              history.push('/admin')
-            }}>
+          <button onClick={cancelHandler}>
             <h3>CANCEL</h3>
           </button>
           <button type='submit' disabled={loading}>
-            <h3>SAVE</h3>
+            <h3>{loading ? 'UPLOADING' : 'SAVE'}</h3>
           </button>
         </form>
       </div>
