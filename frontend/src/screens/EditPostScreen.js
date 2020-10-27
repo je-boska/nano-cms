@@ -117,13 +117,7 @@ const EditPostScreen = ({ match, history }) => {
           <h2>Image</h2>
           <div className='image-upload-container'>
             <label htmlFor='image-upload' className='image-upload-btn'>
-              {loading
-                ? 'UPLOADING'
-                : !image
-                ? 'Choose file'
-                : image.name
-                ? image.name
-                : image}
+              {loading ? 'UPLOADING' : !image ? 'Choose file' : image}
               <input
                 type='file'
                 id='image-upload'

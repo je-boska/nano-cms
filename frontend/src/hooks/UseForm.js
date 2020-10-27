@@ -10,7 +10,7 @@ const defaultValues = {
 }
 
 export default function useForm() {
-  const [values, setValues] = useState({ defaultValues })
+  const [values, setValues] = useState(defaultValues)
 
   function setTitle(title) {
     setValues(prev => ({
