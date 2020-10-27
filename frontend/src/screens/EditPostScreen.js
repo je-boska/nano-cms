@@ -1,56 +1,61 @@
-import React, { useState, useEffect, useContext, useCallback } from 'react'
+import React, { useEffect, useContext } from 'react'
 import '../App.css'
 import axios from 'axios'
 import { UserContext } from '../UserContext'
+import useForm from '../hooks/UseForm'
 
-const EditPostScreen = ({ match, history, location }) => {
-  const [title, setTitle] = useState('')
-  const [text, setText] = useState('')
-  const [image, setImage] = useState('')
-  const [updateImage, setUpdateImage] = useState(false)
-  const [loading, setLoading] = useState(false)
-
+const EditPostScreen = ({ match, history }) => {
   const { user } = useContext(UserContext)
 
-  const getPost = useCallback(async () => {
-    const post = await axios.get(`/api/posts/${match.params.id}`)
-    const { title, text, image } = post.data
-    setTitle(title)
-    setText(text)
-    setImage(image)
-  }, [match])
+  const {
+    values,
+    setTitle,
+    setText,
+    setImage,
+    setLoading,
+    setUpdateImage,
+    getPost,
+  } = useForm()
+  const { title, text, image, loading, updateImage } = values
+
+  useEffect(() => {
+    getPost(match.params.id)
+    // eslint-disable-next-line
+  }, [])
 
   useEffect(() => {
     if (!user) {
       history.push('/login')
-    } else {
-      getPost()
     }
-  }, [user, history, getPost])
+  }, [user, history])
+
+  const uploadHandler = async e => {
+    setLoading(true)
+    const imageUpload = e.target.files[0]
+
+    const formData = new FormData()
+    formData.append('image', imageUpload)
+
+    const { data } = await axios.post('/api/upload', formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+        Authorization: `Bearer ${user.token}`,
+      },
+    })
+
+    setImage(data.data)
+    setUpdateImage(true)
+    setLoading(false)
+  }
 
   const submitHandler = async e => {
     e.preventDefault()
-    setLoading(true)
-    let newImage
-    if (updateImage) {
-      const formData = new FormData()
-      formData.append('image', image)
-
-      const { data } = await axios.post('/api/upload', formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-          Authorization: `Bearer ${user.token}`,
-        },
-      })
-      newImage = data.data
-    }
-
     await axios.put(
       `/api/posts/${match.params.id}`,
       {
         title,
         text,
-        image: updateImage ? newImage : image,
+        image,
       },
       {
         headers: {
@@ -67,11 +72,20 @@ const EditPostScreen = ({ match, history, location }) => {
     const urlParams = new URLSearchParams(window.location.search)
     const createPost = urlParams.get('create')
 
+    const headers = {
+      Authorization: `Bearer ${user.token}`,
+    }
+
     if (createPost) {
       await axios.delete(`/api/posts/${match.params.id}`, {
-        headers: {
-          Authorization: `Bearer ${user.token}`,
-        },
+        headers,
+      })
+    }
+
+    if (updateImage) {
+      const imageId = image.slice(-24, -4)
+      axios.delete(`/api/upload/${imageId}`, {
+        headers,
       })
     }
 
@@ -103,15 +117,18 @@ const EditPostScreen = ({ match, history, location }) => {
           <h2>Image</h2>
           <div className='image-upload-container'>
             <label htmlFor='image-upload' className='image-upload-btn'>
-              {!image ? 'Choose file' : image.name ? image.name : image}
+              {loading
+                ? 'UPLOADING'
+                : !image
+                ? 'Choose file'
+                : image.name
+                ? image.name
+                : image}
               <input
                 type='file'
                 id='image-upload'
                 accept='image/png, image/jpg, image/jpeg'
-                onChange={e => {
-                  setUpdateImage(true)
-                  setImage(e.target.files[0])
-                }}
+                onChange={uploadHandler}
               />
             </label>
           </div>
@@ -120,7 +137,7 @@ const EditPostScreen = ({ match, history, location }) => {
             <h3>CANCEL</h3>
           </button>
           <button type='submit' disabled={loading}>
-            <h3>{loading ? 'UPLOADING' : 'SAVE'}</h3>
+            <h3>SAVE</h3>
           </button>
         </form>
       </div>

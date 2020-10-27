@@ -4,7 +4,7 @@ import express from 'express'
 import { protect } from '../middleware/authMiddleware.js'
 
 import { multerUploads, parser } from '../middleware/multer.js'
-import { uploader } from '../config/cloudinaryConfig.js'
+import { uploader } from 'cloudinary'
 
 const router = express.Router()
 
@@ -41,6 +41,15 @@ router.post('/', multerUploads, protect, (req, res) => {
         })
       )
   }
+})
+
+// @desc    Delete image
+// @route   DELETE /api/upload/:id
+// @access  Private
+router.delete('/:id', protect, (req, res) => {
+  uploader.destroy(req.params.id, (err, res) => {
+    console.log(res, err)
+  })
 })
 
 export default router
