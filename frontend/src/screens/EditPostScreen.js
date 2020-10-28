@@ -3,6 +3,7 @@ import '../App.css'
 import { UserContext } from '../UserContext'
 import useForm from '../hooks/UseForm'
 import { uploadImage, submitForm, cancelForm } from '../requests/EditRequests'
+import PostForm from '../components/PostForm'
 
 const EditPostScreen = ({ match, history }) => {
   const { user } = useContext(UserContext)
@@ -59,37 +60,15 @@ const EditPostScreen = ({ match, history }) => {
     <>
       <div className='form-container'>
         <form onSubmit={submitHandler}>
-          <label htmlFor='title'>
-            <h2>Title</h2>
-          </label>
-          <input
-            size='50'
-            id='title'
-            value={title}
-            onChange={e => setTitle(e.target.value)}></input>
-          <label htmlFor='text'>
-            <h2>Text</h2>
-          </label>
-          <textarea
-            rows='10'
-            cols='50'
-            id='text'
-            value={text}
-            onChange={e => setText(e.target.value)}></textarea>
-          <br />
-          <h2>Image</h2>
-          <div className='image-upload-container'>
-            <label htmlFor='image-upload' className='image-upload-btn'>
-              {loading ? 'UPLOADING' : !image ? 'Choose file' : image}
-              <input
-                type='file'
-                id='image-upload'
-                accept='image/png, image/jpg, image/jpeg'
-                onChange={uploadHandler}
-              />
-            </label>
-          </div>
-          <br />
+          <PostForm
+            title={title}
+            setTitle={setTitle}
+            text={text}
+            setText={setText}
+            loading={loading}
+            image={image}
+            uploadHandler={uploadHandler}
+          />
           <button onClick={cancelHandler}>
             <h3>CANCEL</h3>
           </button>
