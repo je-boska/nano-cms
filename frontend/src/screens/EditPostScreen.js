@@ -2,7 +2,7 @@ import React, { useEffect, useContext } from 'react'
 import '../App.css'
 import { UserContext } from '../UserContext'
 import useForm from '../hooks/UseForm'
-import { uploadImage, submitForm, cancelForm } from '../requests/EditRequests'
+import { submitForm, cancelForm } from '../requests/EditRequests'
 import PostForm from '../components/PostForm'
 
 const EditPostScreen = ({ match, history }) => {
@@ -13,11 +13,23 @@ const EditPostScreen = ({ match, history }) => {
     setTitle,
     setText,
     setImage,
+    setTitleTwo,
+    setTextTwo,
+    setImageTwo,
     setLoading,
     setUpdateImage,
     getPost,
   } = useForm()
-  const { title, text, image, loading, updateImage } = values
+  const {
+    title,
+    text,
+    image,
+    titleTwo,
+    textTwo,
+    imageTwo,
+    loading,
+    updateImage,
+  } = values
 
   useEffect(() => {
     getPost(match.params.id)
@@ -30,17 +42,16 @@ const EditPostScreen = ({ match, history }) => {
     }
   }, [user, history])
 
-  const uploadHandler = async e => {
-    setLoading(true)
-    const imageUrl = await uploadImage(e.target.files[0], user.token)
-    setImage(imageUrl)
-    setUpdateImage(true)
-    setLoading(false)
-  }
-
   const submitHandler = async e => {
     e.preventDefault()
-    await submitForm(match.params.id, user.token, { title, text, image })
+    await submitForm(match.params.id, user.token, {
+      title,
+      text,
+      image,
+      titleTwo,
+      textTwo,
+      imageTwo,
+    })
     history.push('/admin')
   }
 
@@ -61,13 +72,32 @@ const EditPostScreen = ({ match, history }) => {
       <div className='form-container'>
         <form onSubmit={submitHandler}>
           <PostForm
+            key={1}
+            section={1}
             title={title}
             setTitle={setTitle}
             text={text}
             setText={setText}
-            loading={loading}
             image={image}
-            uploadHandler={uploadHandler}
+            setImage={setImage}
+            setUpdateImage={setUpdateImage}
+            loading={loading}
+            setLoading={setLoading}
+            token={user.token}
+          />
+          <PostForm
+            key={2}
+            section={2}
+            title={titleTwo}
+            setTitle={setTitleTwo}
+            text={textTwo}
+            setText={setTextTwo}
+            image={imageTwo}
+            setImage={setImageTwo}
+            setUpdateImage={setUpdateImage}
+            loading={loading}
+            setLoading={setLoading}
+            token={user.token}
           />
           <button onClick={cancelHandler}>
             <h3>CANCEL</h3>

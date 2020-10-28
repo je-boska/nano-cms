@@ -24,7 +24,7 @@ router.get('/:id', async (req, res) => {
     res.json(post)
   } else {
     res.status(404)
-    throw new Error('Product not found')
+    throw new Error('Post not found')
   }
 })
 
@@ -32,12 +32,15 @@ router.get('/:id', async (req, res) => {
 // @route   POST /api/posts
 // @access  Public for now
 router.post('/', protect, async (req, res) => {
-  const { title, text, image } = req.body
+  const { title, text, image, titleTwo, textTwo, imageTwo } = req.body
 
   const post = new Post({
     title,
     text,
     image,
+    titleTwo,
+    textTwo,
+    imageTwo,
   })
 
   const createdPost = await post.save()
@@ -71,15 +74,12 @@ router.delete('/:id', protect, async (req, res) => {
 // @route   DELETE /api/post
 // @access  Public
 router.put('/:id', protect, async (req, res) => {
-  const { title, text, image } = req.body
-
+  const { title, text, image, titleTwo, textTwo, imageTwo } = req.body
   const post = await Post.findById(req.params.id)
 
   if (post) {
     if (post.image && image !== post.image) {
-      const prevImage = post.image
-      const prevImagePublicId = prevImage.slice(-24, -4)
-
+      const prevImagePublicId = post.image.slice(-24, -4)
       uploader.destroy(prevImagePublicId, (err, res) => {
         console.log(res, err)
       })
@@ -87,14 +87,28 @@ router.put('/:id', protect, async (req, res) => {
     } else {
       post.image = image
     }
+
     post.title = title
     post.text = text
+
+    if (post.imageTwo && imageTwo !== post.imageTwo) {
+      const prevImageTwoPublicId = post.imageTwo.slice(-24, -4)
+      uploader.destroy(prevImageTwoPublicId, (err, res) => {
+        console.log(res, err)
+      })
+      post.imageTwo = imageTwo
+    } else {
+      post.imageTwo = imageTwo
+    }
+
+    post.titleTwo = titleTwo
+    post.textTwo = textTwo
 
     const updatedPost = await post.save()
     res.json(updatedPost)
   } else {
     res.status(404)
-    throw new Error('Product not found')
+    throw new Error('Post not found')
   }
 })
 

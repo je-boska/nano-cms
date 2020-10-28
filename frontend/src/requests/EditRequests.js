@@ -2,8 +2,8 @@ import axios from 'axios'
 
 export async function getPostData(id) {
   const post = await axios.get(`/api/posts/${id}`)
-  const { text, title, image } = post.data
-  return { text, title, image }
+  const { text, title, image, titleTwo, textTwo, imageTwo } = post.data
+  return { text, title, image, titleTwo, textTwo, imageTwo }
 }
 
 export async function uploadImage(image, token) {

@@ -44,7 +44,10 @@ const AdminScreen = ({ history }) => {
       {
         title: '',
         text: '',
-        image: null,
+        image: '',
+        titleTwo: '',
+        textTwo: '',
+        imageTwo: '',
       },
       {
         headers: {
@@ -75,7 +78,8 @@ const AdminScreen = ({ history }) => {
       {posts.map(post => (
         <div className='post post-list' key={post._id}>
           <div className='img-container'>
-            {post.image ? <img src={post.image} alt={post.title} /> : null}
+            {post.image && <img src={post.image} alt={post.title} />}
+            {post.imageTwo && <img src={post.imageTwo} alt={post.title} />}
           </div>
           <h2>{post.title}</h2>
           <div>
