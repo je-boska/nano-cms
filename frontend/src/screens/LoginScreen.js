@@ -27,6 +27,7 @@ const LoginScreen = ({ history }) => {
           },
         }
       )
+      sessionStorage.setItem('user', data)
       setUser(data)
       setLoading(false)
     } catch (err) {
@@ -61,7 +62,11 @@ const LoginScreen = ({ history }) => {
             value={password}
             onChange={e => setPassword(e.target.value)}></input>
           <br></br>
-          {error && <h2 style={{ color: 'red' }}>Invalid email or password</h2>}
+          {error && (
+            <h3 className='error' style={{ color: 'red' }}>
+              Invalid email or password
+            </h3>
+          )}
           <button type='submit' disabled={loading}>
             <h3>LOG IN</h3>
           </button>

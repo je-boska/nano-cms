@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import axios from 'axios'
+import { getPostData } from '../requests/EditRequests'
 
 const defaultValues = {
   title: '',
@@ -48,8 +48,7 @@ export default function useForm() {
   }
 
   async function getPost(id) {
-    const post = await axios.get(`/api/posts/${id}`)
-    const { title, text, image } = post.data
+    const { text, title, image } = await getPostData(id)
     setValues(prev => ({
       ...prev,
       title,

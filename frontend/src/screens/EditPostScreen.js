@@ -1,8 +1,8 @@
 import React, { useEffect, useContext } from 'react'
 import '../App.css'
-import axios from 'axios'
 import { UserContext } from '../UserContext'
 import useForm from '../hooks/UseForm'
+import { uploadImage, submitForm, cancelForm } from '../requests/EditRequests'
 
 const EditPostScreen = ({ match, history }) => {
   const { user } = useContext(UserContext)
@@ -31,64 +31,27 @@ const EditPostScreen = ({ match, history }) => {
 
   const uploadHandler = async e => {
     setLoading(true)
-    const imageUpload = e.target.files[0]
-
-    const formData = new FormData()
-    formData.append('image', imageUpload)
-
-    const { data } = await axios.post('/api/upload', formData, {
-      headers: {
-        'Content-Type': 'multipart/form-data',
-        Authorization: `Bearer ${user.token}`,
-      },
-    })
-
-    setImage(data.data)
+    const imageUrl = await uploadImage(e.target.files[0], user.token)
+    setImage(imageUrl)
     setUpdateImage(true)
     setLoading(false)
   }
 
   const submitHandler = async e => {
     e.preventDefault()
-    await axios.put(
-      `/api/posts/${match.params.id}`,
-      {
-        title,
-        text,
-        image,
-      },
-      {
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${user.token}`,
-        },
-      }
-    )
+    await submitForm(match.params.id, user.token, { title, text, image })
     history.push('/admin')
   }
 
   const cancelHandler = async e => {
     e.preventDefault()
-    const urlParams = new URLSearchParams(window.location.search)
-    const createPost = urlParams.get('create')
-
-    const headers = {
-      Authorization: `Bearer ${user.token}`,
-    }
-
-    if (createPost) {
-      await axios.delete(`/api/posts/${match.params.id}`, {
-        headers,
-      })
-    }
-
-    if (updateImage) {
-      const imageId = image.slice(-24, -4)
-      axios.delete(`/api/upload/${imageId}`, {
-        headers,
-      })
-    }
-
+    await cancelForm(
+      window.location.search,
+      user.token,
+      match.params.id,
+      updateImage,
+      image
+    )
     history.push('/admin')
   }
 

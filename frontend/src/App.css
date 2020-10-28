@@ -47,6 +47,10 @@ button:hover {
   text-align: center;
 }
 
+.error {
+  margin: 20px 0px;
+}
+
 .post {
   max-width: 600px;
   border-radius: 10px;
