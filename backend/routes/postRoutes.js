@@ -64,6 +64,14 @@ router.delete('/:id', protect, async (req, res) => {
         console.log(err, res)
       })
     }
+    if (post.imageTwo) {
+      const { imageTwo } = post
+      const imagePublicId = imageTwo.slice(-24, -4)
+
+      uploader.destroy(imagePublicId, (err, res) => {
+        console.log(err, res)
+      })
+    }
   } else {
     res.status(404)
     throw new Error('Post not found')
