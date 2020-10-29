@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { getPostData } from '../requests/EditRequests'
 
 const defaultValues = {
+  sections: 1,
   title: '',
   text: '',
   image: '',
@@ -14,6 +15,13 @@ const defaultValues = {
 
 export default function useForm() {
   const [values, setValues] = useState(defaultValues)
+
+  function setSections(sections) {
+    setValues(prev => ({
+      ...prev,
+      sections,
+    }))
+  }
 
   function setTitle(title) {
     setValues(prev => ({
@@ -92,6 +100,7 @@ export default function useForm() {
 
   return {
     values,
+    setSections,
     setTitle,
     setText,
     setImage,

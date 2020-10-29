@@ -1,7 +1,8 @@
-import React from 'react'
-import { uploadImage } from '../requests/EditRequests'
+import React, { useContext } from 'react'
+import { UserContext } from '../UserContext'
+import { uploadImage, deleteImage } from '../requests/EditRequests'
 
-const PostForm = ({
+const PostSectionForm = ({
   section,
   title,
   setTitle,
@@ -14,6 +15,8 @@ const PostForm = ({
   setUpdateImage,
   token,
 }) => {
+  const { user } = useContext(UserContext)
+
   const uploadHandler = async e => {
     setLoading(true)
     const imageUrl = await uploadImage(e.target.files[0], token)
@@ -22,35 +25,44 @@ const PostForm = ({
     setLoading(false)
   }
 
+  const removeImageHandler = e => {
+    e.preventDefault()
+    deleteImage(image, user.token)
+    setImage('')
+    setUpdateImage(false)
+  }
+
   return (
     <>
-      <label htmlFor='title'>
-        <h2>Title</h2>
-      </label>
+      <h1>Section {section}</h1>
       <input
         size='50'
         id='title'
         value={title}
+        placeholder='Title'
         onChange={e => setTitle(e.target.value)}></input>
-      <label htmlFor='text'>
-        <h2>Text</h2>
-      </label>
+      <br />
       <textarea
         rows='10'
         cols='50'
         id='text'
         value={text}
+        placeholder='Text'
         onChange={e => setText(e.target.value)}></textarea>
       <br />
-      <h2>Image</h2>
       {image && (
-        <div className='img-container admin-thumbs'>
+        <button onClick={removeImageHandler}>
+          <h3>- REMOVE IMAGE</h3>
+        </button>
+      )}
+      {image && (
+        <div className='admin-thumbs'>
           <img src={image} alt={title} />
         </div>
       )}
       <div className='image-upload-container'>
         <label className='image-upload-btn'>
-          {loading ? 'UPLOADING' : !image ? 'Choose file' : image}
+          {loading ? 'UPLOADING' : !image ? 'Choose image file' : image}
           <input
             type='file'
             accept='image/png, image/jpg, image/jpeg'
@@ -63,4 +75,4 @@ const PostForm = ({
   )
 }
 
-export default PostForm
+export default PostSectionForm

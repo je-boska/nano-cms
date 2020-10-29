@@ -28,6 +28,15 @@ export async function submitForm(id, token, data) {
   await axios.put(`/api/posts/${id}`, data, { headers })
 }
 
+export function deleteImage(image, token) {
+  const imageId = image.slice(-24, -4)
+  axios.delete(`/api/upload/${imageId}`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  })
+}
+
 export async function cancelForm(queryString, token, id, updateImage, image) {
   const urlParams = new URLSearchParams(queryString)
   const createPost = urlParams.get('create')
@@ -42,9 +51,6 @@ export async function cancelForm(queryString, token, id, updateImage, image) {
   }
 
   if (updateImage) {
-    const imageId = image.slice(-24, -4)
-    axios.delete(`/api/upload/${imageId}`, {
-      headers,
-    })
+    deleteImage(image, token)
   }
 }
