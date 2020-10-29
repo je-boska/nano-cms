@@ -2,8 +2,16 @@ import axios from 'axios'
 
 export async function getPostData(id) {
   const post = await axios.get(`/api/posts/${id}`)
-  const { text, title, image, titleTwo, textTwo, imageTwo } = post.data
-  return { text, title, image, titleTwo, textTwo, imageTwo }
+  const {
+    sections,
+    text,
+    title,
+    image,
+    titleTwo,
+    textTwo,
+    imageTwo,
+  } = post.data
+  return { sections, text, title, image, titleTwo, textTwo, imageTwo }
 }
 
 export async function uploadImage(image, token) {
@@ -37,7 +45,15 @@ export function deleteImage(image, token) {
   })
 }
 
-export async function cancelForm(queryString, token, id, updateImage, image) {
+export async function cancelForm(
+  queryString,
+  token,
+  id,
+  updateImage,
+  updateImageTwo,
+  image,
+  imageTwo
+) {
   const urlParams = new URLSearchParams(queryString)
   const createPost = urlParams.get('create')
   const headers = {
@@ -50,7 +66,6 @@ export async function cancelForm(queryString, token, id, updateImage, image) {
     })
   }
 
-  if (updateImage) {
-    deleteImage(image, token)
-  }
+  updateImage && deleteImage(image, token)
+  updateImageTwo && deleteImage(imageTwo, token)
 }

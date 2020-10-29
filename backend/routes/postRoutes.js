@@ -30,7 +30,7 @@ router.get('/:id', async (req, res) => {
 
 // @desc    Create a post
 // @route   POST /api/posts
-// @access  Public for now
+// @access  Private
 router.post('/', protect, async (req, res) => {
   const { title, text, image, titleTwo, textTwo, imageTwo } = req.body
 
@@ -47,9 +47,9 @@ router.post('/', protect, async (req, res) => {
   res.status(201).json(createdPost)
 })
 
-// @desc    Delete a post
+// @desc    Delete a post, and delete images from Cloudinary
 // @route   DELETE /api/post
-// @access  Public
+// @access  Private
 router.delete('/:id', protect, async (req, res) => {
   const post = await Post.findById(req.params.id)
 
@@ -78,11 +78,11 @@ router.delete('/:id', protect, async (req, res) => {
   }
 })
 
-// @desc    Update a post
+// @desc    Update a post, delete old images from Cloudinary if changed
 // @route   DELETE /api/post
-// @access  Public
+// @access  Private
 router.put('/:id', protect, async (req, res) => {
-  const { title, text, image, titleTwo, textTwo, imageTwo } = req.body
+  const { sections, title, text, image, titleTwo, textTwo, imageTwo } = req.body
   const post = await Post.findById(req.params.id)
 
   if (post) {
@@ -112,6 +112,7 @@ router.put('/:id', protect, async (req, res) => {
     post.titleTwo = titleTwo
     post.textTwo = textTwo
 
+    post.sections = sections
     const updatedPost = await post.save()
     res.json(updatedPost)
   } else {

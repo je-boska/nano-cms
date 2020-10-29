@@ -1,6 +1,5 @@
-import React, { useContext } from 'react'
-import { UserContext } from '../UserContext'
-import { uploadImage, deleteImage } from '../requests/EditRequests'
+import React from 'react'
+import { uploadImage, deleteImage } from '../requests/EditPostRequests'
 
 const PostSectionForm = ({
   section,
@@ -11,12 +10,10 @@ const PostSectionForm = ({
   loading,
   image,
   setImage,
-  setLoading,
   setUpdateImage,
+  setLoading,
   token,
 }) => {
-  const { user } = useContext(UserContext)
-
   const uploadHandler = async e => {
     setLoading(true)
     const imageUrl = await uploadImage(e.target.files[0], token)
@@ -27,7 +24,7 @@ const PostSectionForm = ({
 
   const removeImageHandler = e => {
     e.preventDefault()
-    deleteImage(image, user.token)
+    deleteImage(image, token)
     setImage('')
     setUpdateImage(false)
   }

@@ -2,7 +2,7 @@ import React, { useEffect, useContext } from 'react'
 import '../App.css'
 import { UserContext } from '../UserContext'
 import useForm from '../hooks/UseForm'
-import { submitForm, cancelForm } from '../requests/EditRequests'
+import { submitForm, cancelForm } from '../requests/EditPostRequests'
 import PostSectionForm from '../components/PostSectionForm'
 
 const EditPostScreen = ({ match, history }) => {
@@ -17,8 +17,9 @@ const EditPostScreen = ({ match, history }) => {
     setTitleTwo,
     setTextTwo,
     setImageTwo,
-    setLoading,
     setUpdateImage,
+    setUpdateImageTwo,
+    setLoading,
     getPost,
   } = useForm()
   const {
@@ -31,16 +32,8 @@ const EditPostScreen = ({ match, history }) => {
     imageTwo,
     loading,
     updateImage,
+    updateImageTwo,
   } = values
-
-  function setInitialSections() {
-    imageTwo && setSections(2)
-  }
-
-  useEffect(() => {
-    setInitialSections()
-    // eslint-disable-next-line
-  }, [imageTwo])
 
   useEffect(() => {
     getPost(match.params.id)
@@ -56,6 +49,7 @@ const EditPostScreen = ({ match, history }) => {
   const submitHandler = async e => {
     e.preventDefault()
     await submitForm(match.params.id, user.token, {
+      sections,
       title,
       text,
       image,
@@ -68,13 +62,14 @@ const EditPostScreen = ({ match, history }) => {
 
   const cancelHandler = async e => {
     e.preventDefault()
-    setUpdateImage(true)
     await cancelForm(
       window.location.search,
       user.token,
       match.params.id,
       updateImage,
-      image
+      updateImageTwo,
+      image,
+      imageTwo
     )
     history.push('/admin')
   }
@@ -113,7 +108,7 @@ const EditPostScreen = ({ match, history }) => {
               setText={setTextTwo}
               image={imageTwo}
               setImage={setImageTwo}
-              setUpdateImage={setUpdateImage}
+              setUpdateImage={setUpdateImageTwo}
               loading={loading}
               setLoading={setLoading}
               token={user.token}

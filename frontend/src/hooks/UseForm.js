@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { getPostData } from '../requests/EditRequests'
+import { getPostData } from '../requests/EditPostRequests'
 
 const defaultValues = {
   sections: 1,
@@ -10,6 +10,7 @@ const defaultValues = {
   textTwo: '',
   imageTwo: '',
   updateImage: false,
+  updateImageTwo: false,
   loading: false,
 }
 
@@ -78,8 +79,16 @@ export default function useForm() {
     }))
   }
 
+  function setUpdateImageTwo(updateImageTwo) {
+    setValues(prev => ({
+      ...prev,
+      updateImageTwo,
+    }))
+  }
+
   async function getPost(id) {
     const {
+      sections,
       text,
       title,
       image,
@@ -89,6 +98,7 @@ export default function useForm() {
     } = await getPostData(id)
     setValues(prev => ({
       ...prev,
+      sections,
       title,
       text,
       image,
@@ -109,6 +119,7 @@ export default function useForm() {
     setImageTwo,
     setLoading,
     setUpdateImage,
+    setUpdateImageTwo,
     getPost,
   }
 }
