@@ -78,10 +78,14 @@ const AdminScreen = ({ history }) => {
       {posts.map(post => (
         <div className='post post-list' key={post._id}>
           <div className='img-container'>
-            {post.image && <img src={post.image} alt={post.title} />}
-            {post.imageTwo && <img src={post.imageTwo} alt={post.title} />}
+            {post.sections.map(
+              section =>
+                section.image && <img src={section.image} alt={section.title} />
+            )}
           </div>
-          <h2>{post.title}</h2>
+          {post.sections.map(section => (
+            <h2>{section.title}</h2>
+          ))}
           <div>
             <button onClick={() => deleteHandler(post._id)} disabled={loading}>
               <h3>DELETE</h3>

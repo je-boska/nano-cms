@@ -2,13 +2,7 @@ import mongoose from 'mongoose'
 
 const postSchema = mongoose.Schema(
   {
-    sections: Number,
-    title: String,
-    text: String,
-    image: String,
-    titleTwo: String,
-    textTwo: String,
-    imageTwo: String,
+    sections: Array,
   },
   {
     timestamps: true,
