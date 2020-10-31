@@ -17,13 +17,13 @@ const HomeScreen = () => {
   return (
     <>
       {posts.map(post => (
-        <>
+        <div key={post._id} className='post'>
           {post.sections.length === 2 ? (
             <TwoLayout post={post} />
           ) : post.sections.length === 3 ? (
             <ThreeLayout post={post} />
           ) : null}
-        </>
+        </div>
       ))}
     </>
   )

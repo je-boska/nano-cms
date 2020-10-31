@@ -13,10 +13,17 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  max-height: 100%;
   background-color: black;
   position: relative;
   overflow: hidden;
+}
+
+.centered-text {
+  z-index: 1;
+}
+
+.section p {
+  max-width: 400px;
 }
 
 .three-layout {
