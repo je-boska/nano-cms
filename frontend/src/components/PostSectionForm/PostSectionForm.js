@@ -1,17 +1,10 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { uploadImage, deleteImage } from '../../requests/EditPostRequests'
 import useForm from '../../hooks/UseForm'
 
 const PostSectionForm = ({ sections, setSections, token, cleanupImage }) => {
-  const {
-    values,
-    setSectionNumber,
-    setTitle,
-    setText,
-    setImage,
-    setLoading,
-  } = useForm()
-  const { sectionNumber, title, text, image, loading } = values
+  const { values, setTitle, setText, setImage, setLoading } = useForm()
+  const { title, text, image, loading } = values
 
   useEffect(() => {
     if (image && cleanupImage) {
@@ -21,8 +14,15 @@ const PostSectionForm = ({ sections, setSections, token, cleanupImage }) => {
 
   const submitSectionHandler = e => {
     e.preventDefault()
-    setSections([...sections, { sectionNumber, title, text, image }])
-    setSectionNumber(sectionNumber + 1)
+    setSections([
+      ...sections,
+      {
+        sectionNumber: Math.random().toString(36).substring(2, 9),
+        title,
+        text,
+        image,
+      },
+    ])
     setTitle('')
     setText('')
     setImage('')

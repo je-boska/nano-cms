@@ -11,8 +11,8 @@ function App() {
   return (
     <>
       <Router>
+        <Route path='/' component={HomeScreen} exact />
         <div className='container'>
-          <Route path='/' component={HomeScreen} exact />
           <UserProvider>
             <Route path='/login' component={LoginScreen} />
             <Route path='/admin' component={AdminScreen} exact />

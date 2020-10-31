@@ -25,13 +25,6 @@ export default function useForm() {
     }))
   }
 
-  function setSectionNumber(sectionNumber) {
-    setValues(prev => ({
-      ...prev,
-      sectionNumber,
-    }))
-  }
-
   function setTitle(title) {
     setValues(prev => ({
       ...prev,
@@ -78,7 +71,6 @@ export default function useForm() {
   return {
     values,
     setSections,
-    setSectionNumber,
     setTitle,
     setText,
     setImage,
