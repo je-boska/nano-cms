@@ -10,11 +10,22 @@
 }
 
 .section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   max-height: 100%;
-  width: 33.3%;
+  width: 50%;
   background-color: black;
   position: relative;
   overflow: hidden;
+}
+
+.two-layout {
+  width: 50%;
+}
+
+.section p {
+  max-width: 400px;
 }
 
 .section img {

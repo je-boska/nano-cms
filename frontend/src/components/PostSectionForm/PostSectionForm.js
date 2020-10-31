@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { uploadImage, deleteImage } from '../../requests/EditPostRequests'
 import useForm from '../../hooks/UseForm'
 
