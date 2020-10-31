@@ -1,21 +1,28 @@
-import React from 'react'
-import { uploadImage, deleteImage } from '../requests/EditPostRequests'
-import useForm from '../hooks/UseForm'
+import React, { useEffect } from 'react'
+import { uploadImage, deleteImage } from '../../requests/EditPostRequests'
+import useForm from '../../hooks/UseForm'
 
-const PostSectionForm = ({
-  sections,
-  setSections,
-  image,
-  setImage,
-  setUpdateImage,
-  token,
-}) => {
-  const { values, setTitle, setText, setLoading } = useForm()
-  const { title, text, loading } = values
+const PostSectionForm = ({ sections, setSections, token, cleanupImage }) => {
+  const {
+    values,
+    setSectionNumber,
+    setTitle,
+    setText,
+    setImage,
+    setLoading,
+  } = useForm()
+  const { sectionNumber, title, text, image, loading } = values
+
+  useEffect(() => {
+    if (image && cleanupImage) {
+      deleteImage(image, token)
+    }
+  }, [cleanupImage, image, token])
 
   const submitSectionHandler = e => {
     e.preventDefault()
-    setSections([...sections, { title, text, image }])
+    setSections([...sections, { sectionNumber, title, text, image }])
+    setSectionNumber(sectionNumber + 1)
     setTitle('')
     setText('')
     setImage('')
@@ -25,7 +32,6 @@ const PostSectionForm = ({
     setLoading(true)
     const imageUrl = await uploadImage(e.target.files[0], token)
     setImage(imageUrl)
-    setUpdateImage(true)
     setLoading(false)
   }
 
@@ -33,7 +39,6 @@ const PostSectionForm = ({
     e.preventDefault()
     deleteImage(image, token)
     setImage('')
-    setUpdateImage(false)
   }
 
   return (
@@ -74,8 +79,6 @@ const PostSectionForm = ({
             />
           </label>
         </div>
-        <br />
-
         <button type='submit' disabled={loading}>
           <h3>SAVE</h3>
         </button>

@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react'
 import '../App.css'
-import axios from 'axios'
 import { UserContext } from '../UserContext'
+import { authUser } from '../requests/LoginRequests'
 
 const LoginScreen = ({ history }) => {
   const [email, setEmail] = useState('')
@@ -15,18 +15,7 @@ const LoginScreen = ({ history }) => {
     e.preventDefault()
     setLoading(true)
     try {
-      const { data } = await axios.post(
-        `/api/users/login`,
-        {
-          email,
-          password,
-        },
-        {
-          headers: {
-            'Content-Type': 'application/json',
-          },
-        }
-      )
+      const data = await authUser(email, password)
       sessionStorage.setItem('user', data)
       setUser(data)
       setLoading(false)

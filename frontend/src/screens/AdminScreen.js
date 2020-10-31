@@ -1,8 +1,9 @@
 import React, { useState, useEffect, useContext, useCallback } from 'react'
 import { Link } from 'react-router-dom'
-import axios from 'axios'
-import '../App.css'
+import './AdminScreen.css'
 import { UserContext } from '../UserContext'
+import { createPost, deletePost, getAllPosts } from '../requests/AdminRequests'
+import SectionPreview from '../components/SectionPreview/SectionPreview'
 
 const AdminScreen = ({ history }) => {
   const [posts, setPosts] = useState([])
@@ -11,7 +12,7 @@ const AdminScreen = ({ history }) => {
   const { user, setUser } = useContext(UserContext)
 
   const getPosts = useCallback(async () => {
-    const { data } = await axios.get('/api/posts')
+    const data = await getAllPosts()
     setPosts(data)
   }, [])
 
@@ -23,44 +24,21 @@ const AdminScreen = ({ history }) => {
     }
   }, [user, history, getPosts])
 
-  const deleteHandler = async id => {
+  async function deleteHandler(id) {
     setLoading(true)
     if (window.confirm('Are you sure?')) {
-      await axios.delete(`/api/posts/${id}`, {
-        headers: {
-          Authorization: `Bearer ${user.token}`,
-        },
-      })
+      await deletePost(user.token, id)
     }
     getPosts()
     setLoading(false)
   }
 
-  const createPostHandler = async () => {
-    const {
-      data: { _id },
-    } = await axios.post(
-      '/api/posts',
-      {
-        title: '',
-        text: '',
-        image: '',
-        titleTwo: '',
-        textTwo: '',
-        imageTwo: '',
-      },
-      {
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${user.token}`,
-        },
-      }
-    )
-
-    history.push(`/admin/edit/${_id}?create=true`)
+  async function createPostHandler() {
+    const id = await createPost(user.token)
+    history.push(`/admin/edit/${id}?create=true`)
   }
 
-  const logoutHandler = () => {
+  function logoutHandler() {
     setUser(null)
     sessionStorage.removeItem('user')
   }
@@ -68,7 +46,7 @@ const AdminScreen = ({ history }) => {
   return (
     <>
       <div className='admin-buttons'>
-        <button className='create-button' onClick={createPostHandler}>
+        <button onClick={createPostHandler}>
           <h3>CREATE POST</h3>
         </button>
         <button onClick={logoutHandler}>
@@ -77,16 +55,12 @@ const AdminScreen = ({ history }) => {
       </div>
       {posts.map(post => (
         <div className='post post-list' key={post._id}>
-          <div className='img-container'>
-            {post.sections.map(
-              section =>
-                section.image && <img src={section.image} alt={section.title} />
-            )}
+          <div className='section-previews'>
+            {post.sections.map(section => (
+              <SectionPreview key={section.sectionNumber} section={section} />
+            ))}
           </div>
-          {post.sections.map(section => (
-            <h2>{section.title}</h2>
-          ))}
-          <div>
+          <div className='delete-edit-buttons'>
             <button onClick={() => deleteHandler(post._id)} disabled={loading}>
               <h3>DELETE</h3>
             </button>

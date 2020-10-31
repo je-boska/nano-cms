@@ -37,7 +37,7 @@ export function deleteImage(image, token) {
   })
 }
 
-export async function cancelForm(queryString, token, id, updateImage, image) {
+export async function cancelForm(queryString, token, id, sections) {
   const urlParams = new URLSearchParams(queryString)
   const createPost = urlParams.get('create')
   const headers = {
@@ -48,7 +48,10 @@ export async function cancelForm(queryString, token, id, updateImage, image) {
     await axios.delete(`/api/posts/${id}`, {
       headers,
     })
+    for (let i = 0; i < sections.length; i++) {
+      if (sections[i].image) {
+        deleteImage(sections[i].image, token)
+      }
+    }
   }
-
-  updateImage && deleteImage(image, token)
 }

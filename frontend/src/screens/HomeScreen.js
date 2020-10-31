@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
+import './HomeScreen.css'
 
 const HomeScreen = () => {
   const [posts, setPosts] = useState([])
@@ -16,12 +17,13 @@ const HomeScreen = () => {
     <>
       {posts.map(post => (
         <div className='post' key={post._id}>
-          {post.image && <img src={post.image} alt={post.title} />}
-          {post.title && <h1>{post.title}</h1>}
-          {post.text && <p>{post.text}</p>}
-          {post.imageTwo && <img src={post.imageTwo} alt={post.title} />}
-          {post.titleTwo && <h1>{post.titleTwo}</h1>}
-          {post.textTwo && <p>{post.textTwo}</p>}
+          {post.sections.map(section => (
+            <div key={section.sectionNumber}>
+              {section.image && <img src={section.image} alt={section.title} />}
+              {section.title && <h1>{section.title}</h1>}
+              {section.text && <p>{section.text}</p>}
+            </div>
+          ))}
         </div>
       ))}
     </>

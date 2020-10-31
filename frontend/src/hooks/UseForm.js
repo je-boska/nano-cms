@@ -2,11 +2,16 @@ import { useState } from 'react'
 import { getPostData } from '../requests/EditPostRequests'
 
 const defaultValues = {
-  sections: [{}],
+  sections: [
+    {
+      sectionNumber: 0,
+    },
+  ],
+  sectionNumber: 0,
   title: '',
   text: '',
   image: '',
-  updateImage: false,
+  cleanupImage: false,
   loading: false,
 }
 
@@ -17,6 +22,13 @@ export default function useForm() {
     setValues(prev => ({
       ...prev,
       sections,
+    }))
+  }
+
+  function setSectionNumber(sectionNumber) {
+    setValues(prev => ({
+      ...prev,
+      sectionNumber,
     }))
   }
 
@@ -41,17 +53,17 @@ export default function useForm() {
     }))
   }
 
+  function setCleanupImage(cleanupImage) {
+    setValues(prev => ({
+      ...prev,
+      cleanupImage,
+    }))
+  }
+
   function setLoading(loading) {
     setValues(prev => ({
       ...prev,
       loading,
-    }))
-  }
-
-  function setUpdateImage(updateImage) {
-    setValues(prev => ({
-      ...prev,
-      updateImage,
     }))
   }
 
@@ -66,11 +78,12 @@ export default function useForm() {
   return {
     values,
     setSections,
+    setSectionNumber,
     setTitle,
     setText,
     setImage,
     setLoading,
-    setUpdateImage,
+    setCleanupImage,
     getPost,
   }
 }
