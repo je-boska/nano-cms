@@ -12,11 +12,23 @@ const EditPostScreen = ({ match, history }) => {
   const {
     values,
     setSections,
+    setTitle,
+    setText,
+    setImage,
+    setLoading,
     setCleanupImage,
     setSectionSaved,
     getPost,
   } = useForm()
-  const { sections, loading, cleanupImage, sectionSaved } = values
+  const {
+    sections,
+    title,
+    text,
+    image,
+    loading,
+    cleanupImage,
+    sectionSaved,
+  } = values
 
   useEffect(() => {
     getPost(match.params.id)
@@ -62,12 +74,27 @@ const EditPostScreen = ({ match, history }) => {
         </div>
         <div className='section-previews'>
           {sections.map(section => (
-            <SectionPreview key={section.sectionNumber} section={section} />
+            <SectionPreview
+              setTitle={setTitle}
+              setText={setText}
+              setImage={setImage}
+              key={section.sectionNumber}
+              section={section}
+              editPostScreen={true}
+            />
           ))}
         </div>
         <PostSectionForm
           cleanupImage={cleanupImage}
           sections={sections}
+          title={title}
+          setTitle={setTitle}
+          text={text}
+          setText={setText}
+          image={image}
+          setImage={setImage}
+          loading={loading}
+          setLoading={setLoading}
           setSections={setSections}
           sectionSaved={sectionSaved}
           setSectionSaved={setSectionSaved}

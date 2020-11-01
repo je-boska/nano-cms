@@ -3,25 +3,27 @@
   position: relative;
   text-align: center;
   background-color: black;
+  color: white;
   width: 100px;
   height: 80px;
   border-radius: 5px;
   margin: 20px 10px 20px 0px;
   overflow: hidden;
-  box-shadow: 0px 5px 17px rgba(0, 0, 0, 0.12);
 }
 
 .section-preview img {
   width: 100%;
 }
 
-.section-preview h5 {
-  color: white;
-}
-
-.preview-title {
+.preview-title-text h5,
+.preview-title-text p {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+}
+
+.preview-title-text p {
+  font-size: 6px;
+  margin: 0px;
 }

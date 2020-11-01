@@ -1,18 +1,21 @@
 import React, { useEffect } from 'react'
 import { uploadImage, deleteImage } from '../../requests/EditPostRequests'
-import useForm from '../../hooks/UseForm'
 
 const PostSectionForm = ({
   sections,
+  title,
+  setTitle,
+  text,
+  setText,
+  image,
+  setImage,
+  loading,
+  setLoading,
   setSections,
   token,
   cleanupImage,
-  sectionSaved,
   setSectionSaved,
 }) => {
-  const { values, setTitle, setText, setImage, setLoading } = useForm()
-  const { title, text, image, loading } = values
-
   useEffect(() => {
     if (image && cleanupImage) {
       deleteImage(image, token)
