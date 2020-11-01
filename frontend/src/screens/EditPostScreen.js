@@ -9,8 +9,14 @@ import SectionPreview from '../components/SectionPreview/SectionPreview'
 const EditPostScreen = ({ match, history }) => {
   const { user } = useContext(UserContext)
 
-  const { values, setSections, setCleanupImage, getPost } = useForm()
-  const { sections, loading, cleanupImage } = values
+  const {
+    values,
+    setSections,
+    setCleanupImage,
+    setSectionSaved,
+    getPost,
+  } = useForm()
+  const { sections, loading, cleanupImage, sectionSaved } = values
 
   useEffect(() => {
     getPost(match.params.id)
@@ -50,7 +56,7 @@ const EditPostScreen = ({ match, history }) => {
           <button onClick={cancelHandler}>
             <h3>CANCEL</h3>
           </button>
-          <button onClick={submitHandler} disabled={loading}>
+          <button onClick={submitHandler} disabled={loading || !sectionSaved}>
             <h3>PUBLISH</h3>
           </button>
         </div>
@@ -63,6 +69,8 @@ const EditPostScreen = ({ match, history }) => {
           cleanupImage={cleanupImage}
           sections={sections}
           setSections={setSections}
+          sectionSaved={sectionSaved}
+          setSectionSaved={setSectionSaved}
           token={user.token}
         />
       </div>

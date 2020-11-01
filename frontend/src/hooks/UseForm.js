@@ -13,6 +13,7 @@ const defaultValues = {
   image: '',
   cleanupImage: false,
   loading: false,
+  sectionSaved: false,
 }
 
 export default function useForm() {
@@ -60,6 +61,13 @@ export default function useForm() {
     }))
   }
 
+  function setSectionSaved(sectionSaved) {
+    setValues(prev => ({
+      ...prev,
+      sectionSaved,
+    }))
+  }
+
   async function getPost(id) {
     const { sections } = await getPostData(id)
     setValues(prev => ({
@@ -76,6 +84,7 @@ export default function useForm() {
     setImage,
     setLoading,
     setCleanupImage,
+    setSectionSaved,
     getPost,
   }
 }

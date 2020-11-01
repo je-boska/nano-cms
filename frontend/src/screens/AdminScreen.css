@@ -38,7 +38,8 @@ button:hover {
 }
 
 .delete-edit-buttons {
-  width: 180px;
+  width: 160px;
+  text-align: right;
 }
 
 .error {
@@ -46,7 +47,7 @@ button:hover {
 }
 
 .post-list {
-  max-width: 900px;
+  max-width: 700px;
   border-radius: 10px;
   border: 1px solid rgba(0, 0, 0, 0.2);
   margin: 30px auto;

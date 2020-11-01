@@ -2,7 +2,14 @@ import React, { useEffect } from 'react'
 import { uploadImage, deleteImage } from '../../requests/EditPostRequests'
 import useForm from '../../hooks/UseForm'
 
-const PostSectionForm = ({ sections, setSections, token, cleanupImage }) => {
+const PostSectionForm = ({
+  sections,
+  setSections,
+  token,
+  cleanupImage,
+  sectionSaved,
+  setSectionSaved,
+}) => {
   const { values, setTitle, setText, setImage, setLoading } = useForm()
   const { title, text, image, loading } = values
 
@@ -14,18 +21,23 @@ const PostSectionForm = ({ sections, setSections, token, cleanupImage }) => {
 
   const submitSectionHandler = e => {
     e.preventDefault()
-    setSections([
-      ...sections,
-      {
-        sectionNumber: Math.random().toString(36).substring(2, 9),
-        title,
-        text,
-        image,
-      },
-    ])
-    setTitle('')
-    setText('')
-    setImage('')
+    if (sections.length < 4) {
+      setSections([
+        ...sections,
+        {
+          sectionNumber: Math.random().toString(36).substring(2, 9),
+          title,
+          text,
+          image,
+        },
+      ])
+      setTitle('')
+      setText('')
+      setImage('')
+      setSectionSaved(true)
+    } else {
+      alert('Post is already full')
+    }
   }
 
   const uploadHandler = async e => {
@@ -44,6 +56,10 @@ const PostSectionForm = ({ sections, setSections, token, cleanupImage }) => {
   return (
     <>
       <form onSubmit={submitSectionHandler}>
+        <button type='submit' disabled={loading}>
+          <h3>SAVE</h3>
+        </button>
+        <br />
         <input
           size='50'
           id='title'
@@ -79,9 +95,6 @@ const PostSectionForm = ({ sections, setSections, token, cleanupImage }) => {
             />
           </label>
         </div>
-        <button type='submit' disabled={loading}>
-          <h3>SAVE</h3>
-        </button>
       </form>
     </>
   )
