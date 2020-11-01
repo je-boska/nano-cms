@@ -1,11 +1,11 @@
 import React from 'react'
-import './TwoLayout.css'
+import './Section.css'
 
-const TwoLayout = ({ post }) => {
+const Layout = ({ post, layout }) => {
   return (
     <>
       {post.sections.map(section => (
-        <div key={section.sectionNumber} className='section two-layout'>
+        <div key={section.sectionNumber} className={`section ${layout}`}>
           {section.image && <img src={section.image} alt={section.title} />}
           {section.title || section.text ? (
             <div className='centered-text'>
@@ -19,4 +19,4 @@ const TwoLayout = ({ post }) => {
   )
 }
 
-export default TwoLayout
+export default Layout

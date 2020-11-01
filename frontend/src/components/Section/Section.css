@@ -2,6 +2,8 @@
   height: 100vh;
   width: 100%;
   display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
   background-color: black;
   color: white;
   text-align: center;
@@ -26,10 +28,6 @@
   max-width: 400px;
 }
 
-.three-layout {
-  width: 33.3%;
-}
-
 .section img {
   display: block;
   max-height: 100%;
@@ -39,4 +37,20 @@
   min-height: 100%;
   min-width: 100%;
   transform: translate(-50%, -50%);
+}
+
+.one-layout {
+  width: 100%;
+}
+
+.two-layout {
+  width: 50%;
+}
+
+.three-layout {
+  width: 33.3%;
+}
+
+.four-layout {
+  width: 50%;
 }

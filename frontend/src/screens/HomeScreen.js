@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
-import TwoLayout from '../components/TwoLayout/TwoLayout'
-import ThreeLayout from '../components/ThreeLayout/ThreeLayout'
+import Section from '../components/Section/Section'
 
 const HomeScreen = () => {
   const [posts, setPosts] = useState([])
@@ -18,10 +17,14 @@ const HomeScreen = () => {
     <>
       {posts.map(post => (
         <div key={post._id} className='post'>
-          {post.sections.length === 2 ? (
-            <TwoLayout post={post} />
+          {post.sections.length === 1 ? (
+            <Section post={post} layout='one-layout' />
+          ) : post.sections.length === 2 ? (
+            <Section post={post} layout='two-layout' />
           ) : post.sections.length === 3 ? (
-            <ThreeLayout post={post} />
+            <Section post={post} layout='three-layout' />
+          ) : post.sections.length === 4 ? (
+            <Section post={post} layout='four-layout' />
           ) : null}
         </div>
       ))}
