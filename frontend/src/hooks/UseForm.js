@@ -11,7 +11,6 @@ const defaultValues = {
   title: '',
   text: '',
   image: '',
-  cleanupImage: false,
   loading: false,
   sectionSaved: false,
 }
@@ -47,13 +46,6 @@ export default function useForm() {
     }))
   }
 
-  function setCleanupImage(cleanupImage) {
-    setValues(prev => ({
-      ...prev,
-      cleanupImage,
-    }))
-  }
-
   function setLoading(loading) {
     setValues(prev => ({
       ...prev,
@@ -83,7 +75,6 @@ export default function useForm() {
     setText,
     setImage,
     setLoading,
-    setCleanupImage,
     setSectionSaved,
     getPost,
   }

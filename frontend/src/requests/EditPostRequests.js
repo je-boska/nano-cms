@@ -49,6 +49,9 @@ export async function cancelForm(queryString, token, id, sections, image) {
       headers,
     })
     // If post was made using Create Post, delete all images
+    if (image) {
+      deleteImage(image, token)
+    }
     for (let i = 0; i < sections.length; i++) {
       if (sections[i].image) {
         deleteImage(sections[i].image, token)

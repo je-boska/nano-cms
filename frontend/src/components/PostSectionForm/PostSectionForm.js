@@ -13,16 +13,8 @@ const PostSectionForm = ({
   setLoading,
   setSections,
   token,
-  cleanupImage,
   setSectionSaved,
 }) => {
-  /*
-  useEffect(() => {
-    if (image && cleanupImage) {
-      deleteImage(image, token)
-    }
-  }, [image, token])
-  */
   const submitSectionHandler = e => {
     e.preventDefault()
     if (sections.length < 4) {

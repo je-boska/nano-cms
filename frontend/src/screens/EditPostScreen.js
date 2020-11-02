@@ -16,19 +16,10 @@ const EditPostScreen = ({ match, history }) => {
     setText,
     setImage,
     setLoading,
-    setCleanupImage,
     setSectionSaved,
     getPost,
   } = useForm()
-  const {
-    sections,
-    title,
-    text,
-    image,
-    loading,
-    cleanupImage,
-    sectionSaved,
-  } = values
+  const { sections, title, text, image, loading, sectionSaved } = values
 
   useEffect(() => {
     getPost(match.params.id)
@@ -51,7 +42,6 @@ const EditPostScreen = ({ match, history }) => {
 
   const cancelHandler = async e => {
     e.preventDefault()
-    //setCleanupImage(true)
     await cancelForm(
       window.location.search,
       user.token,
@@ -86,7 +76,6 @@ const EditPostScreen = ({ match, history }) => {
           ))}
         </div>
         <PostSectionForm
-          cleanupImage={cleanupImage}
           sections={sections}
           title={title}
           setTitle={setTitle}
