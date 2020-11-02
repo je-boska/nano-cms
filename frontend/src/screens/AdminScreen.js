@@ -57,7 +57,7 @@ const AdminScreen = ({ history }) => {
         <div className='post-list' key={post._id}>
           <div className='section-previews'>
             {post.sections.map(section => (
-              <SectionPreview key={section.sectionNumber} section={section} />
+              <SectionPreview key={section.sectionId} section={section} />
             ))}
           </div>
           <div className='delete-edit-buttons'>

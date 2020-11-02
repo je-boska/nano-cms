@@ -20,7 +20,7 @@ const EditPostScreen = ({ match, history }) => {
     setTitle,
     setText,
     setImage,
-    setSectionNumber,
+    setSectionId,
     setLoading,
     setSectionSaved,
     setImagesToRemove,
@@ -31,7 +31,7 @@ const EditPostScreen = ({ match, history }) => {
     title,
     text,
     image,
-    sectionNumber,
+    sectionId,
     loading,
     sectionSaved,
     imagesToRemove,
@@ -72,7 +72,7 @@ const EditPostScreen = ({ match, history }) => {
     history.push('/admin')
   }
 
-  const changeSection = async (newTitle, newText, newImage, sectionNumber) => {
+  const changeSection = async (newTitle, newText, newImage, sectionId) => {
     const urlParams = new URLSearchParams(window.location.search)
     const createPost = urlParams.get('create')
     if (!createPost && !sectionSaved) {
@@ -84,7 +84,7 @@ const EditPostScreen = ({ match, history }) => {
     setTitle(newTitle)
     setText(newText)
     setImage(newImage)
-    setSectionNumber(sectionNumber)
+    setSectionId(sectionId)
   }
 
   return (
@@ -101,11 +101,11 @@ const EditPostScreen = ({ match, history }) => {
         <div className='section-previews'>
           {sections.map(section => (
             <SectionPreview
-              key={section.sectionNumber}
+              key={section.sectionId}
               changeSection={changeSection}
               section={section}
               editPostScreen={true}
-              editing={section.sectionNumber === sectionNumber ? true : false}
+              editing={section.sectionId === sectionId ? true : false}
             />
           ))}
         </div>
@@ -117,8 +117,8 @@ const EditPostScreen = ({ match, history }) => {
           setText={setText}
           image={image}
           setImage={setImage}
-          sectionNumber={sectionNumber}
-          setSectionNumber={setSectionNumber}
+          sectionId={sectionId}
+          setSectionId={setSectionId}
           loading={loading}
           setLoading={setLoading}
           setSections={setSections}

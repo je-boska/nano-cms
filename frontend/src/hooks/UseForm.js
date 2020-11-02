@@ -4,10 +4,10 @@ import { getPostData } from '../requests/EditPostRequests'
 const defaultValues = {
   sections: [
     {
-      sectionNumber: 0,
+      sectionId: 0,
     },
   ],
-  sectionNumber: '',
+  sectionId: '',
   title: '',
   text: '',
   image: '',
@@ -47,10 +47,10 @@ export default function useForm() {
     }))
   }
 
-  function setSectionNumber(sectionNumber) {
+  function setSectionId(sectionId) {
     setValues(prev => ({
       ...prev,
-      sectionNumber,
+      sectionId,
     }))
   }
 
@@ -89,7 +89,7 @@ export default function useForm() {
     setTitle,
     setText,
     setImage,
-    setSectionNumber,
+    setSectionId,
     setLoading,
     setSectionSaved,
     setImagesToRemove,

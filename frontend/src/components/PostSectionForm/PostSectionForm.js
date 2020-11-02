@@ -9,8 +9,8 @@ const PostSectionForm = ({
   setText,
   image,
   setImage,
-  sectionNumber,
-  setSectionNumber,
+  sectionId,
+  setSectionId,
   loading,
   setLoading,
   setSections,
@@ -21,13 +21,13 @@ const PostSectionForm = ({
 }) => {
   const submitSectionHandler = e => {
     e.preventDefault()
-    if (sectionNumber) {
+    if (sectionId) {
       const sectionToReplaceIndex = sections.findIndex(
-        section => section.sectionNumber === sectionNumber
+        section => section.sectionId === sectionId
       )
       const newSections = sections
       newSections[sectionToReplaceIndex] = {
-        sectionNumber,
+        sectionId,
         title,
         text,
         image,
@@ -36,14 +36,14 @@ const PostSectionForm = ({
       setTitle('')
       setText('')
       setImage('')
-      setSectionNumber('')
+      setSectionId('')
       setSectionSaved(true)
     } else {
       if (sections.length < 4) {
         setSections([
           ...sections,
           {
-            sectionNumber: Math.random().toString(36).substring(2, 9),
+            sectionId: Math.random().toString(36).substring(2, 9),
             title,
             text,
             image,
@@ -53,7 +53,7 @@ const PostSectionForm = ({
         setTitle('')
         setText('')
         setImage('')
-        setSectionNumber('')
+        setSectionId('')
         setSectionSaved(true)
       } else {
         alert('Post is already full')
@@ -77,7 +77,7 @@ const PostSectionForm = ({
 
   function addSectionHandler(e) {
     e.preventDefault()
-    setSectionNumber('')
+    setSectionId('')
     setTitle('')
     setText('')
     setImage('')
@@ -86,17 +86,17 @@ const PostSectionForm = ({
 
   function deleteSectionHandler(e) {
     e.preventDefault()
-    if (sectionNumber) {
+    if (sectionId) {
       const imageToRemove = sections.find(
-        section => section.sectionNumber === sectionNumber
+        section => section.sectionId === sectionId
       ).image
       setImagesToRemove(imagesToRemove.concat(imageToRemove))
 
       const newSections = sections.filter(
-        section => section.sectionNumber !== sectionNumber
+        section => section.sectionId !== sectionId
       )
       setSections(newSections)
-      setSectionNumber('')
+      setSectionId('')
       setTitle('')
       setText('')
       setImage('')
