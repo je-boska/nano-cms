@@ -86,20 +86,22 @@ const PostSectionForm = ({
 
   function deleteSectionHandler(e) {
     e.preventDefault()
-    const imageToRemove = sections.find(
-      section => section.sectionNumber === sectionNumber
-    ).image
-    setImagesToRemove(imagesToRemove.concat(imageToRemove))
+    if (sectionNumber) {
+      const imageToRemove = sections.find(
+        section => section.sectionNumber === sectionNumber
+      ).image
+      setImagesToRemove(imagesToRemove.concat(imageToRemove))
 
-    const newSections = sections.filter(
-      section => section.sectionNumber !== sectionNumber
-    )
-    setSections(newSections)
-    setSectionNumber('')
-    setTitle('')
-    setText('')
-    setImage('')
-    setSectionSaved(true)
+      const newSections = sections.filter(
+        section => section.sectionNumber !== sectionNumber
+      )
+      setSections(newSections)
+      setSectionNumber('')
+      setTitle('')
+      setText('')
+      setImage('')
+      setSectionSaved(true)
+    }
   }
 
   return (
