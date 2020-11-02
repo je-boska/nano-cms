@@ -11,9 +11,11 @@ const SectionPreview = ({
   const { title, text, image } = section
 
   const selectSectionHandler = () => {
-    setTitle(title)
-    setText(text)
-    setImage(image)
+    if (editPostScreen) {
+      setTitle(title)
+      setText(text)
+      setImage(image)
+    }
   }
 
   return (

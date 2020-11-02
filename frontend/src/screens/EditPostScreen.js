@@ -51,12 +51,13 @@ const EditPostScreen = ({ match, history }) => {
 
   const cancelHandler = async e => {
     e.preventDefault()
-    setCleanupImage(true)
+    //setCleanupImage(true)
     await cancelForm(
       window.location.search,
       user.token,
       match.params.id,
-      sections
+      sections,
+      image
     )
     history.push('/admin')
   }
