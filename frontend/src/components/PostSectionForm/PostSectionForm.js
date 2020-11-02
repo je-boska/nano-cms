@@ -9,6 +9,8 @@ const PostSectionForm = ({
   setText,
   image,
   setImage,
+  sectionNumber,
+  setSectionNumber,
   loading,
   setLoading,
   setSections,
@@ -17,22 +19,43 @@ const PostSectionForm = ({
 }) => {
   const submitSectionHandler = e => {
     e.preventDefault()
-    if (sections.length < 4) {
-      setSections([
-        ...sections,
-        {
-          sectionNumber: Math.random().toString(36).substring(2, 9),
-          title,
-          text,
-          image,
-        },
-      ])
+    if (sectionNumber) {
+      const sectionToReplaceIndex = sections.findIndex(
+        section => section.sectionNumber === sectionNumber
+      )
+      const newSections = sections
+      newSections[sectionToReplaceIndex] = {
+        sectionNumber,
+        title,
+        text,
+        image,
+      }
+      setSections(newSections)
       setTitle('')
       setText('')
       setImage('')
+      setSectionNumber('')
       setSectionSaved(true)
     } else {
-      alert('Post is already full')
+      if (sections.length < 4) {
+        setSections([
+          ...sections,
+          {
+            sectionNumber: Math.random().toString(36).substring(2, 9),
+            title,
+            text,
+            image,
+          },
+        ])
+
+        setTitle('')
+        setText('')
+        setImage('')
+        setSectionNumber('')
+        setSectionSaved(true)
+      } else {
+        alert('Post is already full')
+      }
     }
   }
 

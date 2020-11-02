@@ -2,11 +2,11 @@ import React from 'react'
 import './SectionPreview.css'
 
 const SectionPreview = ({ section, changeSection, editPostScreen }) => {
-  const { title, text, image } = section
+  const { title, text, image, sectionNumber } = section
 
   const selectSectionHandler = () => {
     if (editPostScreen) {
-      changeSection(title, text, image)
+      changeSection(title, text, image, sectionNumber)
     }
   }
 

@@ -7,7 +7,7 @@ const defaultValues = {
       sectionNumber: 0,
     },
   ],
-  sectionNumber: 0,
+  sectionNumber: '',
   title: '',
   text: '',
   image: '',
@@ -46,6 +46,13 @@ export default function useForm() {
     }))
   }
 
+  function setSectionNumber(sectionNumber) {
+    setValues(prev => ({
+      ...prev,
+      sectionNumber,
+    }))
+  }
+
   function setLoading(loading) {
     setValues(prev => ({
       ...prev,
@@ -74,6 +81,7 @@ export default function useForm() {
     setTitle,
     setText,
     setImage,
+    setSectionNumber,
     setLoading,
     setSectionSaved,
     getPost,

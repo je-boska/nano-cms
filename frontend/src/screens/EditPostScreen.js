@@ -20,11 +20,20 @@ const EditPostScreen = ({ match, history }) => {
     setTitle,
     setText,
     setImage,
+    setSectionNumber,
     setLoading,
     setSectionSaved,
     getPost,
   } = useForm()
-  const { sections, title, text, image, loading, sectionSaved } = values
+  const {
+    sections,
+    title,
+    text,
+    image,
+    sectionNumber,
+    loading,
+    sectionSaved,
+  } = values
 
   useEffect(() => {
     getPost(match.params.id)
@@ -58,7 +67,7 @@ const EditPostScreen = ({ match, history }) => {
     history.push('/admin')
   }
 
-  const changeSection = async (newTitle, newText, newImage) => {
+  const changeSection = async (newTitle, newText, newImage, sectionNumber) => {
     const urlParams = new URLSearchParams(window.location.search)
     const createPost = urlParams.get('create')
     if (!createPost && !sectionSaved) {
@@ -70,6 +79,7 @@ const EditPostScreen = ({ match, history }) => {
     setTitle(newTitle)
     setText(newText)
     setImage(newImage)
+    setSectionNumber(sectionNumber)
   }
 
   return (
@@ -101,6 +111,8 @@ const EditPostScreen = ({ match, history }) => {
           setText={setText}
           image={image}
           setImage={setImage}
+          sectionNumber={sectionNumber}
+          setSectionNumber={setSectionNumber}
           loading={loading}
           setLoading={setLoading}
           setSections={setSections}
