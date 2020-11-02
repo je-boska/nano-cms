@@ -47,6 +47,7 @@ const EditPostScreen = ({ match, history }) => {
 
   const cancelHandler = async e => {
     e.preventDefault()
+    setLoading(true)
     await cancelForm(
       window.location.search,
       user.token,
@@ -60,7 +61,7 @@ const EditPostScreen = ({ match, history }) => {
   const changeSection = async (newTitle, newText, newImage) => {
     const urlParams = new URLSearchParams(window.location.search)
     const createPost = urlParams.get('create')
-    if (!createPost) {
+    if (!createPost && !sectionSaved) {
       const imageInDb = await checkImageInDatabase(image, match.params.id)
       if (image && !imageInDb) {
         deleteImage(image, user.token)
@@ -75,7 +76,7 @@ const EditPostScreen = ({ match, history }) => {
     <>
       <div className='form-container'>
         <div className='cancel-save-buttons'>
-          <button onClick={cancelHandler}>
+          <button onClick={cancelHandler} disabled={loading}>
             <h3>CANCEL</h3>
           </button>
           <button onClick={submitHandler} disabled={loading || !sectionSaved}>

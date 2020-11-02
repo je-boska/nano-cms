@@ -53,11 +53,11 @@ export async function checkImageInDatabase(image, id) {
 export async function cancelForm(queryString, token, id, sections, image) {
   const urlParams = new URLSearchParams(queryString)
   const createPost = urlParams.get('create')
-  const headers = {
-    Authorization: `Bearer ${token}`,
-  }
 
   if (createPost) {
+    const headers = {
+      Authorization: `Bearer ${token}`,
+    }
     await axios.delete(`/api/posts/${id}`, {
       headers,
     })
@@ -75,9 +75,11 @@ export async function cancelForm(queryString, token, id, sections, image) {
     // Compare post in database to current images,
     // Delete images not in database post
     for (let i = 0; i < sections.length; i++) {
-      const imageInDb = await checkImageInDatabase(sections[i].image, id)
-      if (!imageInDb) {
-        deleteImage(sections[i].image, token)
+      if (sections[i].image) {
+        const imageInDb = await checkImageInDatabase(sections[i].image, id)
+        if (!imageInDb) {
+          deleteImage(sections[i].image, token)
+        }
       }
     }
     // Cleanup current image as well, if not in DB

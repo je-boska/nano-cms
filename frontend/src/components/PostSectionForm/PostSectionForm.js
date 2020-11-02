@@ -41,6 +41,7 @@ const PostSectionForm = ({
     const imageUrl = await uploadImage(e.target.files[0], token)
     setImage(imageUrl)
     setLoading(false)
+    setSectionSaved(false)
   }
 
   const removeImageHandler = e => {
@@ -61,7 +62,10 @@ const PostSectionForm = ({
           id='title'
           placeholder='Title'
           value={title}
-          onChange={e => setTitle(e.target.value)}></input>
+          onChange={e => {
+            setTitle(e.target.value)
+            setSectionSaved(false)
+          }}></input>
         <br />
         <textarea
           rows='10'
@@ -69,7 +73,10 @@ const PostSectionForm = ({
           id='text'
           placeholder='Text'
           value={text}
-          onChange={e => setText(e.target.value)}></textarea>
+          onChange={e => {
+            setText(e.target.value)
+            setSectionSaved(false)
+          }}></textarea>
         <br />
         {image && (
           <button onClick={removeImageHandler}>
