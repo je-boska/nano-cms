@@ -2,7 +2,12 @@ import React, { useEffect, useContext } from 'react'
 import '../App.css'
 import { UserContext } from '../UserContext'
 import useForm from '../hooks/UseForm'
-import { submitForm, cancelForm } from '../requests/EditPostRequests'
+import {
+  submitForm,
+  cancelForm,
+  checkImageInDatabase,
+  deleteImage,
+} from '../requests/EditPostRequests'
 import PostSectionForm from '../components/PostSectionForm/PostSectionForm'
 import SectionPreview from '../components/SectionPreview/SectionPreview'
 
@@ -52,6 +57,20 @@ const EditPostScreen = ({ match, history }) => {
     history.push('/admin')
   }
 
+  const changeSection = async (newTitle, newText, newImage) => {
+    const urlParams = new URLSearchParams(window.location.search)
+    const createPost = urlParams.get('create')
+    if (!createPost) {
+      const imageInDb = await checkImageInDatabase(image, match.params.id)
+      if (image && !imageInDb) {
+        deleteImage(image, user.token)
+      }
+    }
+    setTitle(newTitle)
+    setText(newText)
+    setImage(newImage)
+  }
+
   return (
     <>
       <div className='form-container'>
@@ -66,10 +85,8 @@ const EditPostScreen = ({ match, history }) => {
         <div className='section-previews'>
           {sections.map(section => (
             <SectionPreview
-              setTitle={setTitle}
-              setText={setText}
-              setImage={setImage}
               key={section.sectionNumber}
+              changeSection={changeSection}
               section={section}
               editPostScreen={true}
             />

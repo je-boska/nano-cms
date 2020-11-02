@@ -1,20 +1,12 @@
 import React from 'react'
 import './SectionPreview.css'
 
-const SectionPreview = ({
-  section,
-  setTitle,
-  setText,
-  setImage,
-  editPostScreen,
-}) => {
+const SectionPreview = ({ section, changeSection, editPostScreen }) => {
   const { title, text, image } = section
 
   const selectSectionHandler = () => {
     if (editPostScreen) {
-      setTitle(title)
-      setText(text)
-      setImage(image)
+      changeSection(title, text, image)
     }
   }
 

@@ -37,6 +37,19 @@ export function deleteImage(image, token) {
   })
 }
 
+export async function checkImageInDatabase(image, id) {
+  const data = await getPostData(id)
+  const postImages = []
+  for (let i = 0; i < data.sections.length; i++) {
+    postImages.push(data.sections[i].image)
+  }
+  if (postImages.includes(image)) {
+    return true
+  } else {
+    return false
+  }
+}
+
 export async function cancelForm(queryString, token, id, sections, image) {
   const urlParams = new URLSearchParams(queryString)
   const createPost = urlParams.get('create')
@@ -49,30 +62,27 @@ export async function cancelForm(queryString, token, id, sections, image) {
       headers,
     })
     // If post was made using Create Post, delete all images
-    if (image) {
-      deleteImage(image, token)
-    }
     for (let i = 0; i < sections.length; i++) {
       if (sections[i].image) {
         deleteImage(sections[i].image, token)
       }
     }
+    if (image) {
+      deleteImage(image, token)
+    }
   } else {
     // If post existed and is being edited,
     // Compare post in database to current images,
     // Delete images not in database post
-    const data = await getPostData(id)
-    const postImages = []
-    for (let i = 0; i < data.sections.length; i++) {
-      postImages.push(data.sections[i].image)
-    }
-    for (let j = 0; j < sections.length; j++) {
-      if (!postImages.includes(sections[j].image)) {
-        deleteImage(sections[j].image, token)
+    for (let i = 0; i < sections.length; i++) {
+      const imageInDb = await checkImageInDatabase(sections[i].image, id)
+      if (!imageInDb) {
+        deleteImage(sections[i].image, token)
       }
     }
     // Cleanup current image as well, if not in DB
-    if (image && !postImages.includes(image)) {
+    const imageInDb = await checkImageInDatabase(image, id)
+    if (image && !imageInDb) {
       deleteImage(image, token)
     }
   }
