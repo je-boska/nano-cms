@@ -5,7 +5,7 @@ const Layout = ({ post, layout }) => {
   return (
     <>
       {post.sections.map(section => (
-        <div key={section.sectionNumber} className={`section ${layout}`}>
+        <div key={section.sectionId} className={`section ${layout}`}>
           {section.image && <img src={section.image} alt={section.title} />}
           {section.title || section.text ? (
             <div className='centered-text'>
