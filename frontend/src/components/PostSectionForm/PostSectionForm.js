@@ -16,6 +16,8 @@ const PostSectionForm = ({
   setSections,
   token,
   setSectionSaved,
+  imagesToRemove,
+  setImagesToRemove,
 }) => {
   const submitSectionHandler = e => {
     e.preventDefault()
@@ -67,15 +69,48 @@ const PostSectionForm = ({
     setSectionSaved(false)
   }
 
-  const removeImageHandler = e => {
+  function removeImageHandler(e) {
     e.preventDefault()
     deleteImage(image, token)
     setImage('')
   }
 
+  function addSectionHandler(e) {
+    e.preventDefault()
+    setSectionNumber('')
+    setTitle('')
+    setText('')
+    setImage('')
+    setSectionSaved(false)
+  }
+
+  function deleteSectionHandler(e) {
+    e.preventDefault()
+    const imageToRemove = sections.find(
+      section => section.sectionNumber === sectionNumber
+    ).image
+    setImagesToRemove(imagesToRemove.concat(imageToRemove))
+
+    const newSections = sections.filter(
+      section => section.sectionNumber !== sectionNumber
+    )
+    setSections(newSections)
+    setSectionNumber('')
+    setTitle('')
+    setText('')
+    setImage('')
+    setSectionSaved(true)
+  }
+
   return (
     <>
       <form onSubmit={submitSectionHandler}>
+        <button onClick={addSectionHandler}>
+          <h3>+</h3>
+        </button>
+        <button onClick={deleteSectionHandler}>
+          <h3>-</h3>
+        </button>
         <button type='submit' disabled={loading}>
           <h3>SAVE</h3>
         </button>

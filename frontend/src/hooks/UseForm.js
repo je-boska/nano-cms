@@ -13,6 +13,7 @@ const defaultValues = {
   image: '',
   loading: false,
   sectionSaved: false,
+  imagesToRemove: [],
 }
 
 export default function useForm() {
@@ -67,6 +68,13 @@ export default function useForm() {
     }))
   }
 
+  function setImagesToRemove(imagesToRemove) {
+    setValues(prev => ({
+      ...prev,
+      imagesToRemove,
+    }))
+  }
+
   async function getPost(id) {
     const { sections } = await getPostData(id)
     setValues(prev => ({
@@ -84,6 +92,7 @@ export default function useForm() {
     setSectionNumber,
     setLoading,
     setSectionSaved,
+    setImagesToRemove,
     getPost,
   }
 }

@@ -69,20 +69,10 @@ router.delete('/:id', protect, async (req, res) => {
 // @route   DELETE /api/post
 // @access  Private
 router.put('/:id', protect, async (req, res) => {
-  const { sections, image } = req.body
+  const { sections } = req.body
   const post = await Post.findById(req.params.id)
 
   if (post) {
-    if (post.image && image !== post.image) {
-      const prevImagePublicId = post.image.slice(-24, -4)
-      uploader.destroy(prevImagePublicId, (err, res) => {
-        console.log(res, err)
-      })
-      post.image = image
-    } else {
-      post.image = image
-    }
-
     post.sections = sections
     const updatedPost = await post.save()
     res.json(updatedPost)

@@ -23,6 +23,7 @@ const EditPostScreen = ({ match, history }) => {
     setSectionNumber,
     setLoading,
     setSectionSaved,
+    setImagesToRemove,
     getPost,
   } = useForm()
   const {
@@ -33,6 +34,7 @@ const EditPostScreen = ({ match, history }) => {
     sectionNumber,
     loading,
     sectionSaved,
+    imagesToRemove,
   } = values
 
   useEffect(() => {
@@ -48,6 +50,9 @@ const EditPostScreen = ({ match, history }) => {
 
   const submitHandler = async e => {
     e.preventDefault()
+    for (let i = 0; i < imagesToRemove.length; i++) {
+      deleteImage(imagesToRemove[i], user.token)
+    }
     await submitForm(match.params.id, user.token, {
       sections,
     })
@@ -100,6 +105,7 @@ const EditPostScreen = ({ match, history }) => {
               changeSection={changeSection}
               section={section}
               editPostScreen={true}
+              editing={section.sectionNumber === sectionNumber ? true : false}
             />
           ))}
         </div>
@@ -118,6 +124,8 @@ const EditPostScreen = ({ match, history }) => {
           setSections={setSections}
           sectionSaved={sectionSaved}
           setSectionSaved={setSectionSaved}
+          imagesToRemove={imagesToRemove}
+          setImagesToRemove={setImagesToRemove}
           token={user.token}
         />
       </div>

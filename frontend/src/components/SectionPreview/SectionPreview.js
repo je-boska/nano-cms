@@ -1,7 +1,12 @@
 import React from 'react'
 import './SectionPreview.css'
 
-const SectionPreview = ({ section, changeSection, editPostScreen }) => {
+const SectionPreview = ({
+  section,
+  changeSection,
+  editing,
+  editPostScreen,
+}) => {
   const { title, text, image, sectionNumber } = section
 
   const selectSectionHandler = () => {
@@ -12,7 +17,7 @@ const SectionPreview = ({ section, changeSection, editPostScreen }) => {
 
   return (
     <div
-      className='section-preview'
+      className={`section-preview ${editing && 'editing'}`}
       onClick={selectSectionHandler}
       style={editPostScreen && { cursor: 'pointer' }}>
       {image && <img src={image} alt={title}></img>}

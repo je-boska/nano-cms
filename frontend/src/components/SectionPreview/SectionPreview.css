@@ -27,3 +27,8 @@
   font-size: 6px;
   margin: 0px;
 }
+
+.editing {
+  opacity: 0.7;
+  box-shadow: 0 0 2px 2px black;
+}
