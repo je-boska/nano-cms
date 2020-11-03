@@ -25,6 +25,7 @@ const EditPostScreen = ({ match, history }) => {
     setSectionSaved,
     setImagesToRemove,
     getPost,
+    getPostsLength,
   } = useForm()
   const {
     sections,
@@ -35,10 +36,12 @@ const EditPostScreen = ({ match, history }) => {
     loading,
     sectionSaved,
     imagesToRemove,
+    postsLength,
   } = values
 
   useEffect(() => {
     getPost(match.params.id)
+    getPostsLength()
     // eslint-disable-next-line
   }, [])
 
@@ -55,6 +58,7 @@ const EditPostScreen = ({ match, history }) => {
     }
     await submitForm(match.params.id, user.token, {
       sections,
+      position: postsLength,
     })
     history.push('/admin')
   }

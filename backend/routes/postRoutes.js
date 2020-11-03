@@ -32,10 +32,11 @@ router.get('/:id', async (req, res) => {
 // @route   POST /api/posts
 // @access  Private
 router.post('/', protect, async (req, res) => {
-  const { sections } = req.body
+  const { sections, position } = req.body
 
   const post = new Post({
     sections,
+    position,
   })
 
   const createdPost = await post.save()
@@ -69,11 +70,12 @@ router.delete('/:id', protect, async (req, res) => {
 // @route   DELETE /api/post
 // @access  Private
 router.put('/:id', protect, async (req, res) => {
-  const { sections } = req.body
+  const { sections, position } = req.body
   const post = await Post.findById(req.params.id)
 
   if (post) {
     post.sections = sections
+    post.position = position
     const updatedPost = await post.save()
     res.json(updatedPost)
   } else {

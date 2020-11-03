@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { getAllPosts } from '../requests/AdminRequests'
 import { getPostData } from '../requests/EditPostRequests'
 
 const defaultValues = {
@@ -14,6 +15,8 @@ const defaultValues = {
   loading: false,
   sectionSaved: false,
   imagesToRemove: [],
+  position: 0,
+  postsLength: 0,
 }
 
 export default function useForm() {
@@ -76,10 +79,19 @@ export default function useForm() {
   }
 
   async function getPost(id) {
-    const { sections } = await getPostData(id)
+    const { sections, position } = await getPostData(id)
     setValues(prev => ({
       ...prev,
       sections,
+      position,
+    }))
+  }
+
+  async function getPostsLength() {
+    const data = await getAllPosts()
+    setValues(prev => ({
+      ...prev,
+      postsLength: data.length,
     }))
   }
 
@@ -94,5 +106,6 @@ export default function useForm() {
     setSectionSaved,
     setImagesToRemove,
     getPost,
+    getPostsLength,
   }
 }
