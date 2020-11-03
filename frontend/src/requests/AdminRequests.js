@@ -36,6 +36,5 @@ export async function deletePost(token, id) {
 export async function getAllPosts() {
   const { data } = await axios.get('/api/posts')
   const sortedData = data.sort((a, b) => (a.position < b.position ? 1 : -1))
-  console.log(sortedData)
   return sortedData
 }

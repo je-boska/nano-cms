@@ -16,6 +16,7 @@ const EditPostScreen = ({ match, history }) => {
 
   const {
     values,
+    position,
     setSections,
     setTitle,
     setText,
@@ -52,13 +53,15 @@ const EditPostScreen = ({ match, history }) => {
   }, [user, history])
 
   const submitHandler = async e => {
+    const urlParams = new URLSearchParams(window.location.search)
+    const createPost = urlParams.get('create')
     e.preventDefault()
     for (let i = 0; i < imagesToRemove.length; i++) {
       deleteImage(imagesToRemove[i], user.token)
     }
     await submitForm(match.params.id, user.token, {
       sections,
-      position: postsLength,
+      position: createPost ? postsLength : position,
     })
     history.push('/admin')
   }

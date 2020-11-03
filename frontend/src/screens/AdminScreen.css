@@ -116,3 +116,13 @@ button:hover {
 .image-upload-container {
   margin: 40px 0px;
 }
+
+.up-down-arrows button {
+  color: black;
+  background-color: transparent;
+  border: none;
+}
+
+.up-down-arrows button:focus {
+  outline: 0;
+}

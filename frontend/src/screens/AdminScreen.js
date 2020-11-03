@@ -43,6 +43,36 @@ const AdminScreen = ({ history }) => {
     sessionStorage.removeItem('user')
   }
 
+  function movePostUpHandler(position) {
+    const rearrangedPosts = posts.map(post => {
+      return {
+        ...post,
+        position:
+          post.position === position && post.position < posts.length
+            ? post.position + 1
+            : post.position === position + 1
+            ? post.position - 1
+            : post.position,
+      }
+    })
+    setPosts(rearrangedPosts)
+  }
+
+  function movePostDownHandler(position) {
+    const rearrangedPosts = posts.map(post => {
+      return {
+        ...post,
+        position:
+          post.position === position && post.position > 1
+            ? post.position - 1
+            : post.position === position - 1
+            ? post.position + 1
+            : post.position,
+      }
+    })
+    setPosts(rearrangedPosts)
+  }
+
   return (
     <>
       <div className='admin-buttons'>
@@ -53,25 +83,37 @@ const AdminScreen = ({ history }) => {
           <h3>LOG OUT</h3>
         </button>
       </div>
-      {posts.map(post => (
-        <div className='post-list' key={post._id}>
-          <div className='section-previews'>
-            {post.sections.map(section => (
-              <SectionPreview key={section.sectionId} section={section} />
-            ))}
-          </div>
-          <div className='delete-edit-buttons'>
-            <button onClick={() => deleteHandler(post._id)} disabled={loading}>
-              <h3>DELETE</h3>
-            </button>
-            <Link to={`/admin/edit/${post._id}`}>
-              <button>
-                <h3>EDIT</h3>
+      {posts
+        .sort((a, b) => (a.position < b.position ? 1 : -1))
+        .map(post => (
+          <div className='post-list' key={post._id}>
+            <div className='up-down-arrows'>
+              <button onClick={() => movePostUpHandler(post.position)}>
+                <h3>↑</h3>
               </button>
-            </Link>
+              <button onClick={() => movePostDownHandler(post.position)}>
+                <h3>↓</h3>
+              </button>
+            </div>
+            <div className='section-previews'>
+              {post.sections.map(section => (
+                <SectionPreview key={section.sectionId} section={section} />
+              ))}
+            </div>
+            <div className='delete-edit-buttons'>
+              <button
+                onClick={() => deleteHandler(post._id)}
+                disabled={loading}>
+                <h3>DELETE</h3>
+              </button>
+              <Link to={`/admin/edit/${post._id}`}>
+                <button>
+                  <h3>EDIT</h3>
+                </button>
+              </Link>
+            </div>
           </div>
-        </div>
-      ))}
+        ))}
     </>
   )
 }
