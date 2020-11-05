@@ -24,12 +24,22 @@ const AdminScreen = ({ history }) => {
     }
   }, [user, history, getPosts])
 
-  async function deleteHandler(id) {
+  async function deleteHandler(id, deletePosition) {
     setLoading(true)
     if (window.confirm('Are you sure?')) {
       await deletePost(user.token, id)
     }
-    getPosts()
+    const rearrangedPosts = posts
+      .filter(post => post.position !== deletePosition)
+      .map(post => {
+        return {
+          ...post,
+          position:
+            post.position > deletePosition ? post.position - 1 : post.position,
+        }
+      })
+    console.log(rearrangedPosts)
+    setPosts(rearrangedPosts)
     setLoading(false)
   }
 
@@ -51,7 +61,7 @@ const AdminScreen = ({ history }) => {
           post.position === position && post.position < posts.length
             ? post.position + 1
             : post.position === position + 1
-            ? post.position - 1
+            ? position
             : post.position,
       }
     })
@@ -102,7 +112,7 @@ const AdminScreen = ({ history }) => {
             </div>
             <div className='delete-edit-buttons'>
               <button
-                onClick={() => deleteHandler(post._id)}
+                onClick={() => deleteHandler(post._id, post.position)}
                 disabled={loading}>
                 <h3>DELETE</h3>
               </button>

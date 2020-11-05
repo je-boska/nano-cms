@@ -16,7 +16,6 @@ const EditPostScreen = ({ match, history }) => {
 
   const {
     values,
-    position,
     setSections,
     setTitle,
     setText,
@@ -30,6 +29,7 @@ const EditPostScreen = ({ match, history }) => {
   } = useForm()
   const {
     sections,
+    position,
     title,
     text,
     image,
@@ -53,9 +53,9 @@ const EditPostScreen = ({ match, history }) => {
   }, [user, history])
 
   const submitHandler = async e => {
+    e.preventDefault()
     const urlParams = new URLSearchParams(window.location.search)
     const createPost = urlParams.get('create')
-    e.preventDefault()
     for (let i = 0; i < imagesToRemove.length; i++) {
       deleteImage(imagesToRemove[i], user.token)
     }
