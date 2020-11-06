@@ -15,19 +15,21 @@ const HomeScreen = () => {
 
   return (
     <>
-      {posts.map(post => (
-        <div key={post._id} className='post'>
-          {post.sections.length === 1 ? (
-            <Section post={post} layout='one-layout' />
-          ) : post.sections.length === 2 ? (
-            <Section post={post} layout='two-layout' />
-          ) : post.sections.length === 3 ? (
-            <Section post={post} layout='three-layout' />
-          ) : post.sections.length === 4 ? (
-            <Section post={post} layout='four-layout' />
-          ) : null}
-        </div>
-      ))}
+      {posts
+        .sort((a, b) => (a.position > b.position ? -1 : 1))
+        .map(post => (
+          <div key={post._id} className='post'>
+            {post.sections.length === 1 ? (
+              <Section post={post} layout='one-layout' />
+            ) : post.sections.length === 2 ? (
+              <Section post={post} layout='two-layout' />
+            ) : post.sections.length === 3 ? (
+              <Section post={post} layout='three-layout' />
+            ) : post.sections.length === 4 ? (
+              <Section post={post} layout='four-layout' />
+            ) : null}
+          </div>
+        ))}
     </>
   )
 }
