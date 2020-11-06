@@ -23,7 +23,7 @@ const EditPostScreen = ({ match, history }) => {
     setSectionId,
     setLoading,
     setSectionSaved,
-    setImagesToRemove,
+    setImageCleanupPublish,
     getPost,
     getPostsLength,
   } = useForm()
@@ -36,7 +36,7 @@ const EditPostScreen = ({ match, history }) => {
     sectionId,
     loading,
     sectionSaved,
-    imagesToRemove,
+    imageCleanupPublish,
     postsLength,
   } = values
 
@@ -56,8 +56,8 @@ const EditPostScreen = ({ match, history }) => {
     e.preventDefault()
     const urlParams = new URLSearchParams(window.location.search)
     const createPost = urlParams.get('create')
-    for (let i = 0; i < imagesToRemove.length; i++) {
-      deleteImage(imagesToRemove[i], user.token)
+    for (let i = 0; i < imageCleanupPublish.length; i++) {
+      deleteImage(imageCleanupPublish[i], user.token)
     }
     await submitForm(match.params.id, user.token, {
       sections,
@@ -82,10 +82,24 @@ const EditPostScreen = ({ match, history }) => {
   const changeSection = async (newTitle, newText, newImage, sectionId) => {
     const urlParams = new URLSearchParams(window.location.search)
     const createPost = urlParams.get('create')
-    if (!createPost && !sectionSaved) {
+    // When editing post, delete image only if image not in db
+    if (image && !createPost && !sectionSaved) {
       const imageInDb = await checkImageInDatabase(image, match.params.id)
-      if (image && !imageInDb) {
+      if (!imageInDb) {
         deleteImage(image, user.token)
+      }
+      // When creating post, delete image if not saved
+    } else if (createPost && !sectionSaved) {
+      if (image) {
+        let imageSaved = false
+        for (let i = 0; i < sections.length; i++) {
+          if (image === sections[i].image) {
+            imageSaved = true
+          }
+        }
+        if (!imageSaved) {
+          deleteImage(image, user.token)
+        }
       }
     }
     setTitle(newTitle)
@@ -131,8 +145,8 @@ const EditPostScreen = ({ match, history }) => {
           setSections={setSections}
           sectionSaved={sectionSaved}
           setSectionSaved={setSectionSaved}
-          imagesToRemove={imagesToRemove}
-          setImagesToRemove={setImagesToRemove}
+          imageCleanupPublish={imageCleanupPublish}
+          setImageCleanupPublish={setImageCleanupPublish}
           token={user.token}
         />
       </div>

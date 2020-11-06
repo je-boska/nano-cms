@@ -16,8 +16,8 @@ const PostSectionForm = ({
   setSections,
   token,
   setSectionSaved,
-  imagesToRemove,
-  setImagesToRemove,
+  imageCleanupPublish,
+  setImageCleanupPublish,
 }) => {
   const submitSectionHandler = e => {
     e.preventDefault()
@@ -49,7 +49,6 @@ const PostSectionForm = ({
             image,
           },
         ])
-
         setTitle('')
         setText('')
         setImage('')
@@ -62,6 +61,11 @@ const PostSectionForm = ({
   }
 
   const uploadHandler = async e => {
+    if (image && !sectionId) {
+      deleteImage(image, token)
+    } else if (image && sectionId) {
+      setImageCleanupPublish(imageCleanupPublish.concat(image))
+    }
     setLoading(true)
     const imageUrl = await uploadImage(e.target.files[0], token)
     setImage(imageUrl)
@@ -71,12 +75,19 @@ const PostSectionForm = ({
 
   function removeImageHandler(e) {
     e.preventDefault()
-    deleteImage(image, token)
+    if (!sectionId) {
+      deleteImage(image, token)
+    } else {
+      setImageCleanupPublish(imageCleanupPublish.concat(image))
+    }
     setImage('')
   }
 
   function addSectionHandler(e) {
     e.preventDefault()
+    if (!sectionId && image) {
+      deleteImage(image, token)
+    }
     setSectionId('')
     setTitle('')
     setText('')
@@ -90,7 +101,7 @@ const PostSectionForm = ({
       const imageToRemove = sections.find(
         section => section.sectionId === sectionId
       ).image
-      setImagesToRemove(imagesToRemove.concat(imageToRemove))
+      setImageCleanupPublish(imageCleanupPublish.concat(imageToRemove))
 
       const newSections = sections.filter(
         section => section.sectionId !== sectionId
@@ -138,12 +149,12 @@ const PostSectionForm = ({
             setSectionSaved(false)
           }}></textarea>
         <br />
-        {image && (
+        {image && !loading && (
           <button onClick={removeImageHandler}>
             <h3>- REMOVE IMAGE</h3>
           </button>
         )}
-        {image && (
+        {image && !loading && (
           <div className='admin-thumbs'>
             <img src={image} alt={title} />
           </div>

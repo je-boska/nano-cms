@@ -14,7 +14,7 @@ const defaultValues = {
   image: '',
   loading: false,
   sectionSaved: false,
-  imagesToRemove: [],
+  imageCleanupPublish: [],
   position: 0,
   postsLength: 0,
 }
@@ -71,10 +71,10 @@ export default function useForm() {
     }))
   }
 
-  function setImagesToRemove(imagesToRemove) {
+  function setImageCleanupPublish(imageCleanupPublish) {
     setValues(prev => ({
       ...prev,
-      imagesToRemove,
+      imageCleanupPublish,
     }))
   }
 
@@ -104,7 +104,7 @@ export default function useForm() {
     setSectionId,
     setLoading,
     setSectionSaved,
-    setImagesToRemove,
+    setImageCleanupPublish,
     getPost,
     getPostsLength,
   }

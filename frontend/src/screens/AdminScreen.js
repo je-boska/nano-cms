@@ -4,6 +4,7 @@ import './AdminScreen.css'
 import { UserContext } from '../UserContext'
 import { createPost, deletePost, getAllPosts } from '../requests/AdminRequests'
 import SectionPreview from '../components/SectionPreview/SectionPreview'
+import { submitForm } from '../requests/EditPostRequests'
 
 const AdminScreen = ({ history }) => {
   const [posts, setPosts] = useState([])
@@ -38,7 +39,11 @@ const AdminScreen = ({ history }) => {
             post.position > deletePosition ? post.position - 1 : post.position,
         }
       })
-    console.log(rearrangedPosts)
+    for (let i = 0; i < rearrangedPosts.length; i++) {
+      if (rearrangedPosts[i].position >= deletePosition) {
+        submitForm(rearrangedPosts[i]._id, user.token, rearrangedPosts[i])
+      }
+    }
     setPosts(rearrangedPosts)
     setLoading(false)
   }
@@ -65,6 +70,14 @@ const AdminScreen = ({ history }) => {
             : post.position,
       }
     })
+    for (let i = 0; i < rearrangedPosts.length; i++) {
+      if (
+        rearrangedPosts[i].position === position ||
+        rearrangedPosts[i].position === position + 1
+      ) {
+        submitForm(rearrangedPosts[i]._id, user.token, rearrangedPosts[i])
+      }
+    }
     setPosts(rearrangedPosts)
   }
 
@@ -80,6 +93,14 @@ const AdminScreen = ({ history }) => {
             : post.position,
       }
     })
+    for (let i = 0; i < rearrangedPosts.length; i++) {
+      if (
+        rearrangedPosts[i].position === position ||
+        rearrangedPosts[i].position === position - 1
+      ) {
+        submitForm(rearrangedPosts[i]._id, user.token, rearrangedPosts[i])
+      }
+    }
     setPosts(rearrangedPosts)
   }
 
