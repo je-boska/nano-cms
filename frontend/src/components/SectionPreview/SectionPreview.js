@@ -7,11 +7,11 @@ const SectionPreview = ({
   editing,
   editPostScreen,
 }) => {
-  const { title, text, image, sectionId } = section
+  const { font, title, text, image, sectionId } = section
 
   const selectSectionHandler = () => {
     if (editPostScreen) {
-      changeSection(title, text, image, sectionId)
+      changeSection(font, title, text, image, sectionId)
     }
   }
 
@@ -23,7 +23,7 @@ const SectionPreview = ({
       {image && <img src={image} alt={title}></img>}
       {title ? (
         <div className='preview-title-text'>
-          <h5>{title}</h5>
+          <h5 style={{ fontFamily: font }}>{title}</h5>
         </div>
       ) : text ? (
         <div className='preview-title-text'>

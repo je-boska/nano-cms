@@ -3,6 +3,8 @@ import { uploadImage, deleteImage } from '../../requests/EditPostRequests'
 
 const PostSectionForm = ({
   sections,
+  font,
+  setFont,
   title,
   setTitle,
   text,
@@ -28,11 +30,13 @@ const PostSectionForm = ({
       const newSections = sections
       newSections[sectionToReplaceIndex] = {
         sectionId,
+        font,
         title,
         text,
         image,
       }
       setSections(newSections)
+      setFont('Georgia')
       setTitle('')
       setText('')
       setImage('')
@@ -44,11 +48,13 @@ const PostSectionForm = ({
           ...sections,
           {
             sectionId: Math.random().toString(36).substring(2, 9),
+            font,
             title,
             text,
             image,
           },
         ])
+        setFont('Georgia')
         setTitle('')
         setText('')
         setImage('')
@@ -58,6 +64,10 @@ const PostSectionForm = ({
         alert('Post is already full')
       }
     }
+  }
+
+  const fontHandler = e => {
+    setFont(e.target.value)
   }
 
   const uploadHandler = async e => {
@@ -127,6 +137,12 @@ const PostSectionForm = ({
         <button type='submit' disabled={loading}>
           <h3>SAVE</h3>
         </button>
+        <br />
+        <select className='font-select' value={font} onChange={fontHandler}>
+          <option value='backout'>BackOut</option>
+          <option value='cirrus-cumulus'>Cirrus Cumulus</option>
+          <option value='cantiquenormal'>Cantique-Normal</option>
+        </select>
         <br />
         <input
           size='50'

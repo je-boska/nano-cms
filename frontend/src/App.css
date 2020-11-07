@@ -5,5 +5,28 @@
 }
 
 body {
-  font-family: monospace, sans-serif;
+  font-family: Helvetica, sans-serif;
+}
+
+@font-face {
+  font-family: 'backout';
+  src: url('../src/fonts/BackOut.woff2') format('woff2'),
+    url('../src/fonts/BackOut.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'cantiquenormal';
+  src: url('../src/fonts/Cantique-Normal.woff2') format('woff2'),
+    url('../src/fonts/Cantique-Normal.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'cirrus-cumulus';
+  src: url('../src/fonts/CirrusCumulus.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
 }

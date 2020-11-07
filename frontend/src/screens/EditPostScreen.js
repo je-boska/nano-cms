@@ -17,6 +17,7 @@ const EditPostScreen = ({ match, history }) => {
   const {
     values,
     setSections,
+    setFont,
     setTitle,
     setText,
     setImage,
@@ -30,6 +31,7 @@ const EditPostScreen = ({ match, history }) => {
   const {
     sections,
     position,
+    font,
     title,
     text,
     image,
@@ -79,7 +81,13 @@ const EditPostScreen = ({ match, history }) => {
     history.push('/admin')
   }
 
-  const changeSection = async (newTitle, newText, newImage, sectionId) => {
+  const changeSection = async (
+    newFont,
+    newTitle,
+    newText,
+    newImage,
+    sectionId
+  ) => {
     const urlParams = new URLSearchParams(window.location.search)
     const createPost = urlParams.get('create')
     // When editing post, delete image only if image not in db
@@ -102,6 +110,7 @@ const EditPostScreen = ({ match, history }) => {
         }
       }
     }
+    setFont(newFont)
     setTitle(newTitle)
     setText(newText)
     setImage(newImage)
@@ -132,6 +141,8 @@ const EditPostScreen = ({ match, history }) => {
         </div>
         <PostSectionForm
           sections={sections}
+          font={font}
+          setFont={setFont}
           title={title}
           setTitle={setTitle}
           text={text}

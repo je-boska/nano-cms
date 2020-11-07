@@ -100,7 +100,9 @@ button:hover {
 
 .form-container input,
 .form-container textarea,
-.image-upload-btn {
+.image-upload-btn,
+.font-select,
+.font-select option {
   font-family: monospace, sans-serif;
   margin: 20px 0px;
   padding: 20px;

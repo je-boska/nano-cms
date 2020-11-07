@@ -9,6 +9,7 @@ const defaultValues = {
     },
   ],
   sectionId: '',
+  font: 'backout',
   title: '',
   text: '',
   image: '',
@@ -26,6 +27,13 @@ export default function useForm() {
     setValues(prev => ({
       ...prev,
       sections,
+    }))
+  }
+
+  function setFont(font) {
+    setValues(prev => ({
+      ...prev,
+      font,
     }))
   }
 
@@ -98,6 +106,7 @@ export default function useForm() {
   return {
     values,
     setSections,
+    setFont,
     setTitle,
     setText,
     setImage,
