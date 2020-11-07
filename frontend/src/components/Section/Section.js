@@ -1,5 +1,8 @@
 import React from 'react'
 import './Section.css'
+import MarkdownIt from 'markdown-it'
+
+const md = new MarkdownIt()
 
 const Layout = ({ post, layout }) => {
   return (
@@ -12,7 +15,12 @@ const Layout = ({ post, layout }) => {
               {section.title ? (
                 <h1 style={{ fontFamily: section.font }}>{section.title}</h1>
               ) : null}
-              {section.text ? <p>{section.text}</p> : null}
+              {section.text ? (
+                <div
+                  dangerouslySetInnerHTML={{
+                    __html: md.render(section.text),
+                  }}></div>
+              ) : null}
             </div>
           ) : null}
         </div>
