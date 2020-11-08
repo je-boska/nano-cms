@@ -54,10 +54,15 @@ const EditPostScreen = ({ match, history }) => {
     }
   }, [user, history])
 
-  const submitHandler = async e => {
-    e.preventDefault()
+  function isCreatePost() {
     const urlParams = new URLSearchParams(window.location.search)
     const createPost = urlParams.get('create')
+    return createPost
+  }
+
+  const submitHandler = async e => {
+    e.preventDefault()
+    const createPost = isCreatePost()
     for (let i = 0; i < imageCleanupPublish.length; i++) {
       deleteImage(imageCleanupPublish[i], user.token)
     }
@@ -88,8 +93,7 @@ const EditPostScreen = ({ match, history }) => {
     newImage,
     sectionId
   ) => {
-    const urlParams = new URLSearchParams(window.location.search)
-    const createPost = urlParams.get('create')
+    const createPost = isCreatePost()
     // When editing post, delete image only if image not in db
     if (image && !createPost && !sectionSaved) {
       const imageInDb = await checkImageInDatabase(image, match.params.id)
@@ -117,8 +121,42 @@ const EditPostScreen = ({ match, history }) => {
     setSectionId(sectionId)
   }
 
+  function addSectionHandler(e) {
+    e.preventDefault()
+    if (!sectionId && image) {
+      deleteImage(image, user.token)
+    }
+    setSectionId('')
+    setTitle('')
+    setText('')
+    setImage('')
+    setSectionSaved(false)
+  }
+
+  function deleteSectionHandler(e) {
+    e.preventDefault()
+    if (sectionId) {
+      const imageToRemove = sections.find(
+        section => section.sectionId === sectionId
+      ).image
+      if (imageToRemove) {
+        setImageCleanupPublish(imageCleanupPublish.concat(imageToRemove))
+      }
+
+      const newSections = sections.filter(
+        section => section.sectionId !== sectionId
+      )
+      setSections(newSections)
+      setSectionId('')
+      setTitle('')
+      setText('')
+      setImage('')
+      setSectionSaved(true)
+    }
+  }
+
   return (
-    <>
+    <div className='container'>
       <div className='form-container'>
         <div className='cancel-save-buttons'>
           <button onClick={cancelHandler} disabled={loading}>
@@ -133,11 +171,18 @@ const EditPostScreen = ({ match, history }) => {
             <SectionPreview
               key={section.sectionId}
               changeSection={changeSection}
+              deleteSectionHandler={deleteSectionHandler}
               section={section}
+              sections={sections}
               editPostScreen={true}
               editing={section.sectionId === sectionId ? true : false}
             />
           ))}
+          {sections.length < 4 && (
+            <button onClick={addSectionHandler} className='add-section-button'>
+              <h3>+</h3>
+            </button>
+          )}
         </div>
         <PostSectionForm
           sections={sections}
@@ -161,7 +206,7 @@ const EditPostScreen = ({ match, history }) => {
           token={user.token}
         />
       </div>
-    </>
+    </div>
   )
 }
 

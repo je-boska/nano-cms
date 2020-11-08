@@ -1,10 +1,9 @@
 .post {
-  height: 100vh;
+  background-color: black;
   width: 100%;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  background-color: black;
   color: white;
   text-align: center;
   margin: 0;
@@ -41,16 +40,31 @@
 
 .one-layout {
   width: 100%;
+  height: 100vh;
 }
 
 .two-layout {
-  width: 50%;
+  width: 100%;
+  height: 50vh;
 }
 
 .three-layout {
-  width: 33.3%;
+  width: 100%;
+  height: 100vh;
 }
 
 .four-layout {
   width: 50%;
+  height: 50vh;
+}
+
+@media only screen and (min-width: 500px) {
+  .two-layout {
+    width: 50%;
+    height: 100vh;
+  }
+
+  .three-layout {
+    width: 33.3%;
+  }
 }

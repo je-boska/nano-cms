@@ -36,12 +36,6 @@ const PostSectionForm = ({
         image,
       }
       setSections(newSections)
-      setFont('Georgia')
-      setTitle('')
-      setText('')
-      setImage('')
-      setSectionId('')
-      setSectionSaved(true)
     } else {
       if (sections.length < 4) {
         setSections([
@@ -54,20 +48,32 @@ const PostSectionForm = ({
             image,
           },
         ])
-        setFont('Georgia')
-        setTitle('')
-        setText('')
-        setImage('')
-        setSectionId('')
-        setSectionSaved(true)
       } else {
         alert('Post is already full')
+        return
       }
     }
+    setFont('Georgia')
+    setTitle('')
+    setText('')
+    setImage('')
+    setSectionId('')
+    setSectionSaved(true)
   }
 
   const fontHandler = e => {
     setFont(e.target.value)
+    setSectionSaved(false)
+  }
+
+  const titleHandler = e => {
+    setTitle(e.target.value)
+    setSectionSaved(false)
+  }
+
+  const textHandler = e => {
+    setText(e.target.value)
+    setSectionSaved(false)
   }
 
   const uploadHandler = async e => {
@@ -93,47 +99,9 @@ const PostSectionForm = ({
     setImage('')
   }
 
-  function addSectionHandler(e) {
-    e.preventDefault()
-    if (!sectionId && image) {
-      deleteImage(image, token)
-    }
-    setSectionId('')
-    setTitle('')
-    setText('')
-    setImage('')
-    setSectionSaved(false)
-  }
-
-  function deleteSectionHandler(e) {
-    e.preventDefault()
-    if (sectionId) {
-      const imageToRemove = sections.find(
-        section => section.sectionId === sectionId
-      ).image
-      setImageCleanupPublish(imageCleanupPublish.concat(imageToRemove))
-
-      const newSections = sections.filter(
-        section => section.sectionId !== sectionId
-      )
-      setSections(newSections)
-      setSectionId('')
-      setTitle('')
-      setText('')
-      setImage('')
-      setSectionSaved(true)
-    }
-  }
-
   return (
     <>
       <form onSubmit={submitSectionHandler}>
-        <button onClick={addSectionHandler}>
-          <h3>+</h3>
-        </button>
-        <button onClick={deleteSectionHandler}>
-          <h3>-</h3>
-        </button>
         <button type='submit' disabled={loading}>
           <h3>SAVE</h3>
         </button>
@@ -149,10 +117,7 @@ const PostSectionForm = ({
           id='title'
           placeholder='Title'
           value={title}
-          onChange={e => {
-            setTitle(e.target.value)
-            setSectionSaved(false)
-          }}></input>
+          onChange={titleHandler}></input>
         <br />
         <textarea
           rows='10'
@@ -160,10 +125,7 @@ const PostSectionForm = ({
           id='text'
           placeholder='Text'
           value={text}
-          onChange={e => {
-            setText(e.target.value)
-            setSectionSaved(false)
-          }}></textarea>
+          onChange={textHandler}></textarea>
         <br />
         {image && !loading && (
           <button onClick={removeImageHandler}>

@@ -4,6 +4,7 @@ import './SectionPreview.css'
 const SectionPreview = ({
   section,
   changeSection,
+  deleteSectionHandler,
   editing,
   editPostScreen,
 }) => {
@@ -30,6 +31,13 @@ const SectionPreview = ({
           <p>{text}</p>
         </div>
       ) : null}
+      {editPostScreen && editing && (
+        <button
+          className='delete-section-button'
+          onClick={deleteSectionHandler}>
+          <h3>-</h3>
+        </button>
+      )}
     </div>
   )
 }
