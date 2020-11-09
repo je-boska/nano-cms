@@ -1,6 +1,6 @@
-# nano-cms
+# Nano CMS
 
-## Description
+### Description
 
 This project was built to provide a simple UI for a specific client's portfolio website. The admin panel allows the user to create and organise posts. Each post is subdivided into sections.
 
