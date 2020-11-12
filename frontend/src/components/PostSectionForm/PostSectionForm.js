@@ -3,6 +3,7 @@ import { uploadImage, deleteImage } from '../../requests/EditPostRequests'
 
 const PostSectionForm = ({
   sections,
+  setSections,
   font,
   setFont,
   title,
@@ -15,7 +16,6 @@ const PostSectionForm = ({
   setSectionId,
   loading,
   setLoading,
-  setSections,
   token,
   setSectionSaved,
   imageCleanupPublish,
