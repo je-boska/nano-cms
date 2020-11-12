@@ -39,6 +39,7 @@ const LoginScreen = ({ history }) => {
             <h2>Email</h2>
           </label>
           <input
+            name='email'
             id='email'
             value={email}
             onChange={e => setEmail(e.target.value)}></input>
@@ -46,6 +47,7 @@ const LoginScreen = ({ history }) => {
             <h2>Password</h2>
           </label>
           <input
+            name='password'
             id='password'
             type='password'
             value={password}
