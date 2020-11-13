@@ -23,6 +23,11 @@
   z-index: 1;
 }
 
+.centered-text p {
+  margin-bottom: 20px;
+  padding: 20px;
+}
+
 .section p {
   max-width: 400px;
 }

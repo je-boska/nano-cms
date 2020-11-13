@@ -1,10 +1,10 @@
 import React from 'react'
 import { UserProvider } from './UserContext'
 import { BrowserRouter as Router, Route } from 'react-router-dom'
-import HomeScreen from './screens/HomeScreen'
-import AdminScreen from './screens/AdminScreen'
-import EditPostScreen from './screens/EditPostScreen'
-import LoginScreen from './screens/LoginScreen'
+import HomeScreen from './screens/HomeScreen/HomeScreen'
+import AdminScreen from './screens/AdminScreen/AdminScreen'
+import EditPostScreen from './screens/EditPostScreen/EditPostScreen'
+import LoginScreen from './screens/LoginScreen/LoginScreen'
 import './App.css'
 
 function App() {
@@ -12,13 +12,11 @@ function App() {
     <>
       <Router>
         <Route path='/' component={HomeScreen} exact />
-        <div className='container'>
-          <UserProvider>
-            <Route path='/login' component={LoginScreen} />
-            <Route path='/admin' component={AdminScreen} exact />
-            <Route path='/admin/edit/:id' component={EditPostScreen} />
-          </UserProvider>
-        </div>
+        <UserProvider>
+          <Route path='/login' component={LoginScreen} />
+          <Route path='/admin' component={AdminScreen} exact />
+          <Route path='/admin/edit/:id' component={EditPostScreen} />
+        </UserProvider>
       </Router>
     </>
   )

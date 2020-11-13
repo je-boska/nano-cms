@@ -1,10 +1,14 @@
 import React, { useState, useEffect, useContext, useCallback } from 'react'
-import { Link } from 'react-router-dom'
 import './AdminScreen.css'
-import { UserContext } from '../UserContext'
-import { createPost, deletePost, getAllPosts } from '../requests/AdminRequests'
-import SectionPreview from '../components/SectionPreview/SectionPreview'
-import { submitForm } from '../requests/EditPostRequests'
+import { Link } from 'react-router-dom'
+import { UserContext } from '../../UserContext'
+import {
+  createPost,
+  deletePost,
+  getAllPosts,
+} from '../../requests/AdminRequests'
+import SectionPreview from '../../components/SectionPreview/SectionPreview'
+import { submitForm } from '../../requests/EditPostRequests'
 
 const AdminScreen = ({ history }) => {
   const [posts, setPosts] = useState([])

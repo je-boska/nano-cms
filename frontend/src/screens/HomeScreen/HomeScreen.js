@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
-import Section from '../components/Section/Section'
+import Section from '../../components/Section/Section'
 
 const HomeScreen = () => {
   const [posts, setPosts] = useState([])
@@ -18,7 +18,7 @@ const HomeScreen = () => {
       {posts
         .sort((a, b) => (a.position > b.position ? -1 : 1))
         .map(post => (
-          <div key={post._id} className='post'>
+          <section key={post._id} className='post'>
             {post.sections.length === 1 ? (
               <Section post={post} layout='one-layout' />
             ) : post.sections.length === 2 ? (
@@ -28,7 +28,7 @@ const HomeScreen = () => {
             ) : post.sections.length === 4 ? (
               <Section post={post} layout='four-layout' />
             ) : null}
-          </div>
+          </section>
         ))}
     </>
   )

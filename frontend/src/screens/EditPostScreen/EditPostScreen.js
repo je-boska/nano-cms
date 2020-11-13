@@ -1,15 +1,14 @@
 import React, { useEffect, useContext } from 'react'
-import '../App.css'
-import { UserContext } from '../UserContext'
-import useForm from '../hooks/UseForm'
+import { UserContext } from '../../UserContext'
+import useForm from '../../hooks/UseForm'
 import {
   submitForm,
   cancelForm,
   checkImageInDatabase,
   deleteImage,
-} from '../requests/EditPostRequests'
-import PostSectionForm from '../components/PostSectionForm/PostSectionForm'
-import SectionPreview from '../components/SectionPreview/SectionPreview'
+} from '../../requests/EditPostRequests'
+import PostSectionForm from '../../components/PostSectionForm/PostSectionForm'
+import SectionPreview from '../../components/SectionPreview/SectionPreview'
 
 const EditPostScreen = ({ match, history }) => {
   const { user } = useContext(UserContext)
@@ -156,56 +155,54 @@ const EditPostScreen = ({ match, history }) => {
   }
 
   return (
-    <div className='container'>
-      <div className='form-container'>
-        <div className='cancel-save-buttons'>
-          <button onClick={cancelHandler} disabled={loading}>
-            <h3>CANCEL</h3>
-          </button>
-          <button onClick={submitHandler} disabled={loading || !sectionSaved}>
-            <h3>PUBLISH</h3>
-          </button>
-        </div>
-        <div className='section-previews'>
-          {sections.map(section => (
-            <SectionPreview
-              key={section.sectionId}
-              changeSection={changeSection}
-              deleteSectionHandler={deleteSectionHandler}
-              section={section}
-              sections={sections}
-              editPostScreen={true}
-              editing={section.sectionId === sectionId ? true : false}
-            />
-          ))}
-          {sections.length < 4 && (
-            <button onClick={addSectionHandler} className='add-section-button'>
-              <h3>+</h3>
-            </button>
-          )}
-        </div>
-        <PostSectionForm
-          sections={sections}
-          font={font}
-          setFont={setFont}
-          title={title}
-          setTitle={setTitle}
-          text={text}
-          setText={setText}
-          image={image}
-          setImage={setImage}
-          sectionId={sectionId}
-          setSectionId={setSectionId}
-          loading={loading}
-          setLoading={setLoading}
-          setSections={setSections}
-          sectionSaved={sectionSaved}
-          setSectionSaved={setSectionSaved}
-          imageCleanupPublish={imageCleanupPublish}
-          setImageCleanupPublish={setImageCleanupPublish}
-          token={user.token}
-        />
+    <div className='form-container'>
+      <div className='cancel-save-buttons'>
+        <button onClick={cancelHandler} disabled={loading}>
+          <h3>CANCEL</h3>
+        </button>
+        <button onClick={submitHandler} disabled={loading || !sectionSaved}>
+          <h3>PUBLISH</h3>
+        </button>
       </div>
+      <div className='section-previews'>
+        {sections.map(section => (
+          <SectionPreview
+            key={section.sectionId}
+            changeSection={changeSection}
+            deleteSectionHandler={deleteSectionHandler}
+            section={section}
+            sections={sections}
+            editPostScreen={true}
+            editing={section.sectionId === sectionId ? true : false}
+          />
+        ))}
+        {sections.length < 4 && (
+          <button onClick={addSectionHandler} className='add-section-button'>
+            <h3>+</h3>
+          </button>
+        )}
+      </div>
+      <PostSectionForm
+        sections={sections}
+        font={font}
+        setFont={setFont}
+        title={title}
+        setTitle={setTitle}
+        text={text}
+        setText={setText}
+        image={image}
+        setImage={setImage}
+        sectionId={sectionId}
+        setSectionId={setSectionId}
+        loading={loading}
+        setLoading={setLoading}
+        setSections={setSections}
+        sectionSaved={sectionSaved}
+        setSectionSaved={setSectionSaved}
+        imageCleanupPublish={imageCleanupPublish}
+        setImageCleanupPublish={setImageCleanupPublish}
+        token={user.token}
+      />
     </div>
   )
 }

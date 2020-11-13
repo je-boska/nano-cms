@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react'
-import '../App.css'
-import { UserContext } from '../UserContext'
-import { authUser } from '../requests/LoginRequests'
+import { UserContext } from '../../UserContext'
+import { authUser } from '../../requests/LoginRequests'
 
 const LoginScreen = ({ history }) => {
   const [email, setEmail] = useState('')
