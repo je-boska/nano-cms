@@ -1,8 +1,3 @@
-/*
-h1 {
-  margin: 30px 0px;
-}
-*/
 button {
   font-family: monospace, sans-serif;
   background-color: black;
@@ -27,6 +22,10 @@ button:hover {
   opacity: 0.75;
 }
 
+button:focus {
+  opacity: 0.4;
+}
+
 .admin-buttons {
   margin: 30px auto;
   text-align: center;
@@ -37,11 +36,7 @@ button:hover {
   text-align: right;
 }
 
-.error {
-  margin: 20px 0px;
-}
-
-.post-list {
+.post-card {
   max-width: 700px;
   border-radius: 10px;
   border: 1px solid rgba(0, 0, 0, 0.2);
@@ -53,82 +48,11 @@ button:hover {
   align-items: center;
 }
 
-.post-list img {
-  max-width: 100%;
-}
-
-.post-list p {
-  margin: 30px 0px;
-}
-
-.img-container {
-  width: 60px;
-  height: 60px;
-  display: flex;
-}
-
-.img-container img {
-  width: 100%;
-  margin: 2px;
-  border-radius: 50%;
-}
-
-.admin-thumbs {
-  margin: 20px 0px;
-  max-width: 400px;
-}
-
-.admin-thumbs img {
-  width: 100%;
-}
-
 .section-previews {
   width: 500px;
   display: flex;
   justify-content: right;
   align-items: center;
-}
-
-.add-section-button {
-  color: black;
-  background-color: transparent;
-  width: 100px;
-  height: 80px;
-  margin: 20px 0px;
-  padding: 20px;
-  border-radius: 5px;
-  border: 1px solid rgba(0, 0, 0, 0.2);
-}
-
-.add-section-button:focus {
-  outline: none;
-  opacity: 0.7;
-  box-shadow: 0 0 2px 2px black;
-}
-
-.form-container {
-  margin: 30px;
-}
-
-.form-container input,
-.form-container textarea,
-.image-upload-btn,
-.font-select,
-.font-select option {
-  font-family: monospace, sans-serif;
-  margin: 20px 0px;
-  padding: 20px;
-  border-radius: 10px;
-  border: 1px solid rgba(0, 0, 0, 0.2);
-  box-shadow: 0px 5px 17px rgba(0, 0, 0, 0.12);
-}
-
-.form-container input[type='file'] {
-  display: none;
-}
-
-.image-upload-container {
-  margin: 40px 0px;
 }
 
 .up-down-arrows button {

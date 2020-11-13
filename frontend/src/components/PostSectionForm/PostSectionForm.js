@@ -106,13 +106,18 @@ const PostSectionForm = ({
           <h3>SAVE</h3>
         </button>
         <br />
-        <select className='font-select' value={font} onChange={fontHandler}>
+        <select
+          name='font-select'
+          className='font-select'
+          value={font}
+          onChange={fontHandler}>
           <option value='backout'>BackOut</option>
           <option value='cirrus-cumulus'>Cirrus Cumulus</option>
           <option value='cantiquenormal'>Cantique-Normal</option>
         </select>
         <br />
         <input
+          name='title'
           size='50'
           id='title'
           placeholder='Title'
@@ -120,6 +125,7 @@ const PostSectionForm = ({
           onChange={titleHandler}></input>
         <br />
         <textarea
+          name='text'
           rows='10'
           cols='50'
           id='text'
@@ -133,7 +139,7 @@ const PostSectionForm = ({
           </button>
         )}
         {image && !loading && (
-          <div className='admin-thumbs'>
+          <div className='image-preview'>
             <img src={image} alt={title} />
           </div>
         )}

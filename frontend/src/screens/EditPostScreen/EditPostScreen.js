@@ -1,4 +1,5 @@
 import React, { useEffect, useContext } from 'react'
+import './EditPostScreen.css'
 import { UserContext } from '../../UserContext'
 import useForm from '../../hooks/UseForm'
 import {

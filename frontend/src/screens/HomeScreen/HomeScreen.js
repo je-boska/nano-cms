@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import './HomeScreen.css'
 import axios from 'axios'
 import Section from '../../components/Section/Section'
 

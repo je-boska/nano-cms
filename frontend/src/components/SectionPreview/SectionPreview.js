@@ -18,7 +18,7 @@ const SectionPreview = ({
 
   return (
     <div
-      className={`section-preview ${editing && 'editing'}`}
+      className={`section-preview ${editing ? 'editing' : 'not-editing'}`}
       onClick={selectSectionHandler}
       style={editPostScreen && { cursor: 'pointer' }}>
       {image && <img src={image} alt={title}></img>}

@@ -1,0 +1,14 @@
+h2 {
+  font-family: monospace, sans-serif;
+}
+
+.error {
+  background-color: rgb(253, 206, 206);
+  border: 1px solid rgb(255, 184, 184);
+  border-radius: 5px;
+  padding: 20px;
+  display: inline-block;
+  margin: 20px 0px;
+  font-size: 1rem;
+  font-family: monospace, sans-serif;
+}

@@ -121,7 +121,7 @@ const AdminScreen = ({ history }) => {
       {posts
         .sort((a, b) => (a.position < b.position ? 1 : -1))
         .map(post => (
-          <div className='post-list' key={post._id}>
+          <div className='post-card' key={post._id}>
             <div className='up-down-arrows'>
               <button onClick={() => movePostUpHandler(post.position)}>
                 <h3>↑</h3>

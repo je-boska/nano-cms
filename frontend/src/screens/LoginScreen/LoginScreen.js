@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react'
+import './LoginScreen.css'
 import { UserContext } from '../../UserContext'
 import { authUser } from '../../requests/LoginRequests'
 
@@ -51,12 +52,9 @@ const LoginScreen = ({ history }) => {
             type='password'
             value={password}
             onChange={e => setPassword(e.target.value)}></input>
-          <br></br>
-          {error && (
-            <h3 className='error' style={{ color: 'red' }}>
-              Invalid email or password
-            </h3>
-          )}
+          <br />
+          {error && <h3 className='error'>Invalid email or password</h3>}
+          <br />
           <button type='submit' disabled={loading}>
             <h3>LOG IN</h3>
           </button>
