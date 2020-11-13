@@ -16,7 +16,9 @@
 }
 
 .form-container {
-  margin: 30px;
+  width: 600px;
+  margin: 30px 50%;
+  transform: translateX(-50%);
 }
 
 .form-container input,
