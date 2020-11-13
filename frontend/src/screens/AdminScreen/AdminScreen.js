@@ -111,10 +111,10 @@ const AdminScreen = ({ history }) => {
   return (
     <>
       <div className='admin-buttons'>
-        <button onClick={createPostHandler} className='create-post'>
+        <button onClick={createPostHandler} className='create-post-button'>
           <h3>CREATE POST</h3>
         </button>
-        <button onClick={logoutHandler} className='logout'>
+        <button onClick={logoutHandler} className='logout-button'>
           <h3>LOG OUT</h3>
         </button>
       </div>

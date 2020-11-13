@@ -157,11 +157,17 @@ const EditPostScreen = ({ match, history }) => {
 
   return (
     <div className='form-container'>
-      <div className='cancel-save-buttons'>
-        <button onClick={cancelHandler} disabled={loading}>
+      <div className='cancel-publish-buttons'>
+        <button
+          className='cancel-button'
+          onClick={cancelHandler}
+          disabled={loading}>
           <h3>CANCEL</h3>
         </button>
-        <button onClick={submitHandler} disabled={loading || !sectionSaved}>
+        <button
+          className='publish-button'
+          onClick={submitHandler}
+          disabled={loading || !sectionSaved}>
           <h3>PUBLISH</h3>
         </button>
       </div>

@@ -102,7 +102,7 @@ const PostSectionForm = ({
   return (
     <>
       <form onSubmit={submitSectionHandler}>
-        <button type='submit' disabled={loading}>
+        <button className='save-button' type='submit' disabled={loading}>
           <h3>SAVE</h3>
         </button>
         <br />

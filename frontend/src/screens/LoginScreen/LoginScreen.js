@@ -55,7 +55,7 @@ const LoginScreen = ({ history }) => {
           <br />
           {error && <h3 className='error'>Invalid email or password</h3>}
           <br />
-          <button type='submit' disabled={loading}>
+          <button className='login-button' type='submit' disabled={loading}>
             <h3>LOG IN</h3>
           </button>
         </form>
