@@ -28,4 +28,17 @@ Cypress.Commands.add('login', (email, password) => {
   cy.get('input[name="email"]').type(email)
   cy.get('input[name="password"]').type(password)
   cy.get('.login-button').click()
+
+  /* BELOW CODE CURRENTLY DOES NOT WORK
+  cy.request({
+    method: 'POST',
+    url: 'http://localhost:3000/api/users/login',
+    body: {
+      email,
+      password,
+    },
+  }).then(res => {
+    window.sessionStorage.setItem('user', res.body.data)
+  })
+  */
 })

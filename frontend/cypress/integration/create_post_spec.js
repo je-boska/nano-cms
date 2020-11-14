@@ -26,16 +26,14 @@ describe('Create post', () => {
   })
 
   it('Checks for newly created post', () => {
-    cy.wait(1000)
     cy.reload()
+
     cy.get('.post-card').first().should('contain', 'Test post')
   })
 
   it('Deletes newly created post', () => {
     cy.get('.delete-button').first().click()
     cy.on('window:confirm', () => true)
-
-    cy.wait(1000)
     cy.reload()
 
     cy.get('.post-card').first().should('not.contain', 'Test post')
