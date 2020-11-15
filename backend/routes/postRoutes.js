@@ -1,7 +1,8 @@
 import express from 'express'
 import Post from '../models/postModel.js'
 import { protect } from '../middleware/authMiddleware.js'
-import { uploader } from 'cloudinary'
+import pkg from 'cloudinary'
+const { uploader } = pkg
 
 const router = express.Router()
 

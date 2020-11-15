@@ -4,7 +4,8 @@ import express from 'express'
 import { protect } from '../middleware/authMiddleware.js'
 
 import { multerUploads, parser } from '../middleware/multer.js'
-import { uploader } from 'cloudinary'
+import pkg from 'cloudinary'
+const { uploader } = pkg
 
 const router = express.Router()
 
