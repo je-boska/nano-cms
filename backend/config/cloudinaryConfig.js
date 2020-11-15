@@ -1,4 +1,5 @@
-import { config, uploader } from 'cloudinary'
+import pkg from 'cloudinary'
+const { config, uploader } = pkg
 import dotenv from 'dotenv'
 
 dotenv.config()
