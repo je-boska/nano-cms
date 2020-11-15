@@ -3,6 +3,8 @@ import './LoginScreen.css'
 import { UserContext } from '../../UserContext'
 import { authUser } from '../../requests/LoginRequests'
 
+// This comment is a test
+
 const LoginScreen = ({ history }) => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
