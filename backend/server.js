@@ -9,7 +9,8 @@ import postRoutes from './routes/postRoutes.js'
 import userRoutes from './routes/userRoutes.js'
 import uploadRoutes from './routes/uploadRoutes.js'
 
-import { urlencoded, json } from 'body-parser'
+import pkg from 'body-parser'
+const { urlencoded, json } = pkg
 import { cloudinaryConfig } from './config/cloudinaryConfig.js'
 
 dotenv.config()
