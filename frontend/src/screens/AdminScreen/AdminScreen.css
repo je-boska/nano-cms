@@ -4,8 +4,8 @@ button {
   color: white;
   border: 2px solid rgba(0, 0, 0, 0.2);
   border-radius: 5px;
-  padding: 6px;
-  margin: 5px 10px 5px 0px;
+  padding: 4px 6px;
+  margin: 5px 0px;
   cursor: pointer;
 }
 
@@ -26,6 +26,10 @@ button:active {
   opacity: 0.4;
 }
 
+.create-post-button {
+  margin-right: 10px;
+}
+
 .admin-buttons {
   margin: 30px auto;
   text-align: center;
@@ -34,15 +38,16 @@ button:active {
 .delete-edit-buttons {
   /* width: 160px; */
   text-align: right;
+  margin: 5px 0px 5px 0px;
 }
 
 .post-card {
   max-width: 700px;
   border-radius: 10px;
   border: 1px solid rgba(0, 0, 0, 0.2);
-  margin: 30px 10px;
-  padding: 10px;
-  box-shadow: 0px 5px 17px rgba(0, 0, 0, 0.12);
+  margin: 30px 5px;
+  padding: 8px;
+  /* box-shadow: 0px 5px 17px rgba(0, 0, 0, 0.12); */
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -55,8 +60,12 @@ button:active {
   align-items: center;
 }
 
+.up-down-arrows {
+  width: 20px;
+}
+
 .up-down-arrows button {
-  margin: 5px 0px;
+  margin: 0px;
   color: black;
   background-color: transparent;
   border: none;
@@ -69,6 +78,7 @@ button:active {
 @media only screen and (min-width: 565px) {
   button {
     padding: 8px;
+    margin: 5px 10px 5px 0px;
   }
 
   .post-card {
@@ -80,7 +90,11 @@ button:active {
     width: 500px;
   }
 
+  .up-down-arrows {
+    width: 50px;
+  }
+
   .up-down-arrows button {
-    margin: 5px 10px 5px 0px;
+    margin: 5px 0px;
   }
 }

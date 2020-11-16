@@ -1,8 +1,8 @@
 .add-section-button {
   color: black;
   background-color: transparent;
-  width: 70px;
-  height: 56px;
+  width: 60px;
+  height: 48px;
   margin: 20px 0px;
   padding: 20px;
   border-radius: 5px;
@@ -16,7 +16,11 @@
 }
 
 .form-container {
-  margin: 30px;
+  margin: 30px 10px;
+}
+
+.cancel-button {
+  margin-right: 10px;
 }
 
 .form-container input,
@@ -27,9 +31,10 @@
   font-family: monospace, sans-serif;
   margin: 20px 0px;
   padding: 20px;
+  width: 340px;
   border-radius: 10px;
   border: 1px solid rgba(0, 0, 0, 0.2);
-  box-shadow: 0px 5px 17px rgba(0, 0, 0, 0.12);
+  /* box-shadow: 0px 5px 17px rgba(0, 0, 0, 0.12); */
 }
 
 .form-container input[type='file'] {
