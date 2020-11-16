@@ -33,7 +33,7 @@ const LoginScreen = ({ history }) => {
 
   return (
     <>
-      <div className='form-container'>
+      <div className='form-container login'>
         <form onSubmit={submitHandler}>
           <label htmlFor='email'>
             <h2>Email</h2>
