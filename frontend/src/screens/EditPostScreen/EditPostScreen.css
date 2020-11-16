@@ -1,8 +1,8 @@
 .add-section-button {
   color: black;
   background-color: transparent;
-  width: 100px;
-  height: 80px;
+  width: 70px;
+  height: 56px;
   margin: 20px 0px;
   padding: 20px;
   border-radius: 5px;
@@ -16,9 +16,7 @@
 }
 
 .form-container {
-  width: 600px;
-  margin: 30px 50%;
-  transform: translateX(-50%);
+  margin: 30px;
 }
 
 .form-container input,
@@ -49,4 +47,17 @@
 
 .image-preview img {
   width: 100%;
+}
+
+@media only screen and (min-width: 600px) {
+  .add-section-button {
+    width: 100px;
+    height: 80px;
+  }
+
+  .form-container {
+    width: 600px;
+    margin: 30px 50%;
+    transform: translateX(-50%);
+  }
 }

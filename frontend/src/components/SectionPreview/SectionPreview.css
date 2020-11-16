@@ -4,10 +4,10 @@
   text-align: center;
   background-color: black;
   color: white;
-  width: 100px;
-  height: 80px;
+  width: 70px;
+  height: 56px;
   border-radius: 5px;
-  margin: 20px 10px 20px 0px;
+  margin: 20px 5px 20px 0px;
   overflow: hidden;
 }
 
@@ -44,4 +44,12 @@
 
 .delete-section-button:hover {
   opacity: 1;
+}
+
+@media only screen and (min-width: 565px) {
+  .section-preview {
+    width: 100px;
+    height: 80px;
+    margin: 20px 10px 20px 0px;
+  }
 }
