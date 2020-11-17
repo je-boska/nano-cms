@@ -137,14 +137,14 @@ const AdminScreen = ({ history }) => {
             </div>
             <div className='delete-edit-buttons'>
               <button
-                className='delete-button'
+                className='delete-edit-button'
                 onClick={() => deleteHandler(post._id, post.position)}
                 disabled={loading}>
-                <h3>DELETE</h3>
+                <i className='fas fa-trash-alt' />
               </button>
               <Link to={`/admin/edit/${post._id}`}>
-                <button className='edit-button'>
-                  <h3>EDIT</h3>
+                <button className='delete-edit-button'>
+                  <i className='fas fa-edit' />
                 </button>
               </Link>
             </div>
