@@ -11,7 +11,7 @@ const SectionPreview = ({
   const { font, title, text, image, sectionId } = section
 
   const selectSectionHandler = () => {
-    if (editPostScreen) {
+    if (!editing && editPostScreen) {
       changeSection(font, title, text, image, sectionId)
     }
   }

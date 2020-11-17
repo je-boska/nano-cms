@@ -121,15 +121,19 @@ const EditPostScreen = ({ match, history }) => {
     setSectionId(sectionId)
   }
 
+  function resetForm() {
+    setSectionId('')
+    setTitle('')
+    setText('')
+    setImage('')
+  }
+
   function addSectionHandler(e) {
     e.preventDefault()
     if (!sectionId && image) {
       deleteImage(image, user.token)
     }
-    setSectionId('')
-    setTitle('')
-    setText('')
-    setImage('')
+    resetForm()
     setSectionSaved(false)
   }
 
@@ -147,10 +151,7 @@ const EditPostScreen = ({ match, history }) => {
         section => section.sectionId !== sectionId
       )
       setSections(newSections)
-      setSectionId('')
-      setTitle('')
-      setText('')
-      setImage('')
+      resetForm()
       setSectionSaved(true)
     }
   }
