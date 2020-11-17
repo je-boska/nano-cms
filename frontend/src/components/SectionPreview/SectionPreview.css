@@ -4,8 +4,8 @@
   text-align: center;
   background-color: black;
   color: white;
-  width: 60px;
-  height: 48px;
+  flex-basis: 70px;
+  height: 56px;
   border-radius: 5px;
   margin: 20px 5px 20px 0px;
   overflow: hidden;
@@ -13,7 +13,7 @@
 
 .section-preview img {
   width: 100%;
-  height: 100%;
+  height: 56px;
   object-fit: cover;
 }
 
@@ -54,9 +54,13 @@
 
 @media only screen and (min-width: 565px) {
   .section-preview {
-    width: 100px;
+    flex-basis: 100px;
     height: 80px;
     margin: 20px 10px 20px 0px;
+  }
+
+  .section-preview img {
+    height: 80px;
   }
 
   .preview-title-text h5 {

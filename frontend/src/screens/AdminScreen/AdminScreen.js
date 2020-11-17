@@ -126,6 +126,7 @@ const AdminScreen = ({ history }) => {
               <button onClick={() => movePostUpHandler(post.position)}>
                 <h3>↑</h3>
               </button>
+              <br />
               <button onClick={() => movePostDownHandler(post.position)}>
                 <h3>↓</h3>
               </button>

@@ -86,7 +86,7 @@ const EditPostScreen = ({ match, history }) => {
     history.push('/admin')
   }
 
-  const changeSection = async (
+  const changeSectionHandler = async (
     newFont,
     newTitle,
     newText,
@@ -175,7 +175,7 @@ const EditPostScreen = ({ match, history }) => {
         {sections.map(section => (
           <SectionPreview
             key={section.sectionId}
-            changeSection={changeSection}
+            changeSection={changeSectionHandler}
             deleteSectionHandler={deleteSectionHandler}
             section={section}
             sections={sections}
