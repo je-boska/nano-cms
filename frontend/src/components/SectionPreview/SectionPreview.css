@@ -13,6 +13,7 @@
 
 .section-preview img {
   width: 100%;
+  object-fit: cover;
 }
 
 .preview-title-text h5,
