@@ -24,7 +24,6 @@
 
 .form-container input,
 .form-container textarea,
-.image-upload-btn,
 .font-select,
 .font-select option {
   font-family: monospace, sans-serif;
@@ -41,7 +40,20 @@
 }
 
 .image-upload-container {
-  margin: 40px 0px;
+  margin: 20px 0px;
+  display: inline-block;
+}
+
+.image-upload-btn {
+  color: white;
+  background-color: black;
+  font-family: monospace, sans-serif;
+  border: 2px solid rgba(0, 0, 0, 0.2);
+  padding: 8px;
+  border-radius: 5px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
 }
 
 .image-preview {
@@ -63,5 +75,10 @@
     width: 600px;
     margin: 30px 50%;
     transform: translateX(-50%);
+  }
+
+  .image-upload-btn {
+    font-size: 16px;
+    font-weight: 600;
   }
 }

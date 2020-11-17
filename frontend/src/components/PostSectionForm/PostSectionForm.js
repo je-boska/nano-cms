@@ -134,18 +134,13 @@ const PostSectionForm = ({
           onChange={textHandler}></textarea>
         <br />
         {image && !loading && (
-          <button onClick={removeImageHandler}>
+          <button onClick={removeImageHandler} id='remove-img-button'>
             <h3>- REMOVE IMAGE</h3>
           </button>
         )}
-        {image && !loading && (
-          <div className='image-preview'>
-            <img src={image} alt={title} />
-          </div>
-        )}
         <div className='image-upload-container'>
           <label className='image-upload-btn'>
-            {loading ? 'UPLOADING' : !image ? 'Choose image file' : image}
+            {loading ? 'UPLOADING' : !image ? '+ ADD IMAGE' : '+ REPLACE IMAGE'}
             <input
               type='file'
               accept='image/png, image/jpg, image/jpeg'
@@ -153,6 +148,11 @@ const PostSectionForm = ({
             />
           </label>
         </div>
+        {image && !loading && (
+          <div className='image-preview'>
+            <img src={image} alt={title} />
+          </div>
+        )}
       </form>
     </>
   )
