@@ -1,5 +1,6 @@
 import React from 'react'
 import { uploadImage, deleteImage } from '../../requests/EditPostRequests'
+import Loader from '../Loader/Loader'
 
 const PostSectionForm = ({
   sections,
@@ -103,7 +104,7 @@ const PostSectionForm = ({
     <>
       <form onSubmit={submitSectionHandler}>
         <button className='save-button' type='submit' disabled={loading}>
-          <h3>SAVE</h3>
+          {loading ? <Loader /> : <h3>SAVE</h3>}
         </button>
         <br />
         <select
@@ -140,7 +141,7 @@ const PostSectionForm = ({
         )}
         <div className='image-upload-container'>
           <label className='image-upload-btn'>
-            {loading ? 'UPLOADING' : !image ? '+ ADD IMAGE' : '+ REPLACE IMAGE'}
+            {loading ? <Loader /> : !image ? '+ ADD IMAGE' : '+ REPLACE IMAGE'}
             <input
               type='file'
               accept='image/png, image/jpg, image/jpeg'
