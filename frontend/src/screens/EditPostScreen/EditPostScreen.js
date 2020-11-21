@@ -10,6 +10,7 @@ import {
 } from '../../requests/EditPostRequests'
 import PostSectionForm from '../../components/PostSectionForm/PostSectionForm'
 import SectionPreview from '../../components/SectionPreview/SectionPreview'
+import Loader from '../../components/Loader/Loader'
 
 const EditPostScreen = ({ match, history }) => {
   const { user } = useContext(UserContext)
@@ -169,7 +170,7 @@ const EditPostScreen = ({ match, history }) => {
           className='publish-button'
           onClick={submitHandler}
           disabled={loading || !sectionSaved}>
-          <h3>PUBLISH</h3>
+          {loading ? <Loader /> : <h3>PUBLISH</h3>}
         </button>
       </div>
       <div className='section-previews'>

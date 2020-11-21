@@ -33,22 +33,24 @@ const AdminScreen = ({ history }) => {
     setLoading(true)
     if (window.confirm('Are you sure?')) {
       await deletePost(user.token, id)
-    }
-    const rearrangedPosts = posts
-      .filter(post => post.position !== deletePosition)
-      .map(post => {
-        return {
-          ...post,
-          position:
-            post.position > deletePosition ? post.position - 1 : post.position,
+      const rearrangedPosts = posts
+        .filter(post => post.position !== deletePosition)
+        .map(post => {
+          return {
+            ...post,
+            position:
+              post.position > deletePosition
+                ? post.position - 1
+                : post.position,
+          }
+        })
+      for (let i = 0; i < rearrangedPosts.length; i++) {
+        if (rearrangedPosts[i].position >= deletePosition) {
+          submitForm(rearrangedPosts[i]._id, user.token, rearrangedPosts[i])
         }
-      })
-    for (let i = 0; i < rearrangedPosts.length; i++) {
-      if (rearrangedPosts[i].position >= deletePosition) {
-        submitForm(rearrangedPosts[i]._id, user.token, rearrangedPosts[i])
       }
+      setPosts(rearrangedPosts)
     }
-    setPosts(rearrangedPosts)
     setLoading(false)
   }
 
