@@ -1,4 +1,5 @@
 import React from 'react'
+import './PostSectionForm.css'
 import { uploadImage, deleteImage } from '../../requests/EditPostRequests'
 import Loader from '../Loader/Loader'
 
@@ -140,7 +141,7 @@ const PostSectionForm = ({
           </button>
         )}
         <div className='image-upload-container'>
-          <label className='image-upload-btn'>
+          <label className={`image-upload-btn ${loading && 'disabled'}`}>
             {loading ? <Loader /> : !image ? '+ ADD IMAGE' : '+ REPLACE IMAGE'}
             <input
               type='file'
