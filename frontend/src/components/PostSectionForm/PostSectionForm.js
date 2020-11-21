@@ -113,9 +113,9 @@ const PostSectionForm = ({
           className='font-select'
           value={font}
           onChange={fontHandler}>
-          <option value='backout'>BackOut</option>
+          <option value='format1452'>Format 1452</option>
           <option value='cirrus-cumulus'>Cirrus Cumulus</option>
-          <option value='cantiquenormal'>Cantique-Normal</option>
+          <option value='solide-mirage'>Solide Mirage</option>
         </select>
         <br />
         <input

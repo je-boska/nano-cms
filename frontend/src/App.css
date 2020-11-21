@@ -5,7 +5,7 @@
 }
 
 body {
-  font-family: Helvetica, sans-serif;
+  font-family: lack, sans-serif;
 }
 
 h3 {
@@ -30,7 +30,32 @@ h3 {
 
 @font-face {
   font-family: 'cirrus-cumulus';
-  src: url('../src/fonts/CirrusCumulus.ttf') format('truetype');
+  src: url('../src/fonts/CirrusCumulus.ttf') format('truetype'),
+    url('../src/fonts/CirrusCumulus.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'lack';
+  src: url('../src/fonts/Lack-Regular.woff2') format('woff2'),
+    url('../src/fonts/Lack-Regular.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'format1452';
+  src: url('../src/fonts/Format_1452.woff2') format('woff2'),
+    url('../src/fonts/Format_1452.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'solide-mirage';
+  src: url('../src/fonts/Solide_Mirage-Etroit_web.woff2') format('woff2'),
+    url('../src/fonts/Solide_Mirage-Etroit_web.woff') format('woff');
   font-weight: normal;
   font-style: normal;
 }

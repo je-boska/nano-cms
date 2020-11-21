@@ -26,6 +26,8 @@
   font-size: 14px;
   margin-bottom: 10px;
   padding: 10px;
+  font-weight: 100;
+  opacity: 0.8;
 }
 
 .centered-text h1 {
@@ -35,6 +37,14 @@
 
 .centered-text a {
   color: white;
+  font-weight: 800;
+  text-decoration: none;
+  border-bottom: 1px solid white;
+  transition: 0.3s all ease;
+}
+
+.centered-text a:hover {
+  opacity: 0.6;
 }
 
 .section p {
