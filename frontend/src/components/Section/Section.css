@@ -23,11 +23,12 @@
 }
 
 .centered-text p {
-  margin-bottom: 20px;
-  padding: 20px;
+  margin-bottom: 10px;
+  padding: 10px;
 }
 
 .centered-text h1 {
+  font-size: 3rem;
   margin: 30px 0px;
 }
 
