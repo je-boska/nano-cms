@@ -9,12 +9,9 @@
   border-radius: 5px;
   margin: 20px 5px 20px 0px;
   overflow: hidden;
-}
-
-.section-preview img {
-  width: 100%;
-  height: 56px;
-  object-fit: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
 }
 
 .preview-title-text h5,
@@ -57,10 +54,6 @@
     flex-basis: 100px;
     height: 80px;
     margin: 20px 10px 20px 0px;
-  }
-
-  .section-preview img {
-    height: 80px;
   }
 
   .preview-title-text h5 {

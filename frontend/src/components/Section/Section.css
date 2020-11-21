@@ -15,12 +15,11 @@
   justify-content: center;
   align-items: center;
   background-color: black;
-  position: relative;
+  /* position: relative; */
   overflow: hidden;
-}
-
-.centered-text {
-  z-index: 1;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
 }
 
 .centered-text p {
@@ -34,18 +33,6 @@
 
 .section p {
   max-width: 400px;
-}
-
-.section img {
-  display: block;
-  max-height: 100%;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  min-height: 100%;
-  min-width: 100%;
-  transform: translate(-50%, -50%);
-  object-fit: cover;
 }
 
 .one-layout {

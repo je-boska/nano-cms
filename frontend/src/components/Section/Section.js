@@ -8,8 +8,10 @@ const Layout = ({ post, layout }) => {
   return (
     <>
       {post.sections.map(section => (
-        <section key={section.sectionId} className={`section ${layout}`}>
-          {section.image && <img src={section.image} alt={section.title} />}
+        <section
+          key={section.sectionId}
+          className={`section ${layout}`}
+          style={{ backgroundImage: section.image && `url(${section.image})` }}>
           {section.title || section.text ? (
             <div className='centered-text'>
               {section.title ? (

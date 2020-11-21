@@ -20,8 +20,10 @@ const SectionPreview = ({
     <div
       className={`section-preview ${editing ? 'editing' : 'not-editing'}`}
       onClick={selectSectionHandler}
-      style={editPostScreen && { cursor: 'pointer' }}>
-      {image && <img src={image} alt={title}></img>}
+      style={{
+        cursor: editPostScreen && 'pointer',
+        backgroundImage: image && `url(${image})`,
+      }}>
       {title ? (
         <div className='preview-title-text'>
           <h5 style={{ fontFamily: font }}>{title}</h5>
