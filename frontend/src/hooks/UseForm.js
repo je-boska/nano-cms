@@ -9,7 +9,7 @@ const defaultValues = {
     },
   ],
   sectionId: '',
-  font: 'backout',
+  font: 'format1452',
   title: '',
   text: '',
   image: '',
