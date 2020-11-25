@@ -22,6 +22,10 @@
   background-size: cover;
 }
 
+.centered-text {
+  width: 90%;
+}
+
 .centered-text p {
   margin: auto;
   font-size: 14px;
