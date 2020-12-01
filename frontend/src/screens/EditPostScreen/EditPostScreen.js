@@ -21,6 +21,8 @@ const EditPostScreen = ({ match, history }) => {
     setTitle,
     setText,
     setImage,
+    setColor,
+    setBackgroundColor,
     setSectionId,
     setLoading,
     setSectionSaved,
@@ -35,6 +37,8 @@ const EditPostScreen = ({ match, history }) => {
     title,
     text,
     image,
+    color,
+    backgroundColor,
     sectionId,
     loading,
     sectionSaved,
@@ -86,13 +90,16 @@ const EditPostScreen = ({ match, history }) => {
     history.push('/admin')
   }
 
-  const changeSectionHandler = async (
-    newFont,
-    newTitle,
-    newText,
-    newImage,
-    sectionId
-  ) => {
+  const changeSectionHandler = async section => {
+    const {
+      font,
+      title,
+      text,
+      image,
+      color,
+      backgroundColor,
+      sectionId,
+    } = section
     const createPost = isCreatePost()
     // When editing post, delete image only if image not in db
     if (image && !createPost && !sectionSaved) {
@@ -114,10 +121,12 @@ const EditPostScreen = ({ match, history }) => {
         }
       }
     }
-    setFont(newFont)
-    setTitle(newTitle)
-    setText(newText)
-    setImage(newImage)
+    setFont(font)
+    setTitle(title)
+    setText(text)
+    setImage(image)
+    setColor(color)
+    setBackgroundColor(backgroundColor)
     setSectionId(sectionId)
   }
 
@@ -162,13 +171,15 @@ const EditPostScreen = ({ match, history }) => {
         <button
           className='cancel-button'
           onClick={cancelHandler}
-          disabled={loading}>
+          disabled={loading}
+        >
           <h3>CANCEL</h3>
         </button>
         <button
           className='publish-button'
           onClick={submitHandler}
-          disabled={loading || !sectionSaved}>
+          disabled={loading || !sectionSaved}
+        >
           <h3>PUBLISH</h3>
         </button>
       </div>
@@ -200,6 +211,10 @@ const EditPostScreen = ({ match, history }) => {
         setText={setText}
         image={image}
         setImage={setImage}
+        color={color}
+        setColor={setColor}
+        backgroundColor={backgroundColor}
+        setBackgroundColor={setBackgroundColor}
         sectionId={sectionId}
         setSectionId={setSectionId}
         loading={loading}

@@ -8,11 +8,11 @@ const SectionPreview = ({
   editing,
   editPostScreen,
 }) => {
-  const { font, title, text, image, sectionId } = section
+  const { font, title, text, image, color, backgroundColor } = section
 
   const selectSectionHandler = () => {
     if (!editing && editPostScreen) {
-      changeSection(font, title, text, image, sectionId)
+      changeSection(section)
     }
   }
 
@@ -22,20 +22,25 @@ const SectionPreview = ({
         editPostScreen && 'edit-post-screen'
       }`}
       onClick={selectSectionHandler}
-      style={{ backgroundImage: image && `url(${image})` }}>
+      style={{
+        backgroundImage: image && `url(${image})`,
+        backgroundColor: backgroundColor,
+      }}
+    >
       {title ? (
         <div className='preview-title-text'>
-          <h5 style={{ fontFamily: font }}>{title}</h5>
+          <h5 style={{ fontFamily: font, color: color }}>{title}</h5>
         </div>
       ) : text ? (
         <div className='preview-title-text'>
-          <p>{text}</p>
+          <p style={{ color: color }}>{text}</p>
         </div>
       ) : null}
       {editPostScreen && editing && (
         <button
           className='delete-section-button'
-          onClick={deleteSectionHandler}>
+          onClick={deleteSectionHandler}
+        >
           <h3>-</h3>
         </button>
       )}

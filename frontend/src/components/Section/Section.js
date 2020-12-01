@@ -11,17 +11,25 @@ const Layout = ({ post, layout }) => {
         <section
           key={section.sectionId}
           className={`section ${layout}`}
-          style={{ backgroundImage: section.image && `url(${section.image})` }}>
+          style={{
+            backgroundImage: section.image && `url(${section.image})`,
+            backgroundColor: section.backgroundColor,
+          }}
+        >
           {section.title || section.text ? (
             <div className='centered-text'>
               {section.title ? (
-                <h1 style={{ fontFamily: section.font }}>{section.title}</h1>
+                <h1 style={{ fontFamily: section.font, color: section.color }}>
+                  {section.title}
+                </h1>
               ) : null}
               {section.text ? (
                 <div
                   dangerouslySetInnerHTML={{
                     __html: md.render(section.text),
-                  }}></div>
+                  }}
+                  style={{ color: section.color }}
+                ></div>
               ) : null}
             </div>
           ) : null}

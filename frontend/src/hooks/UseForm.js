@@ -13,6 +13,8 @@ const defaultValues = {
   title: '',
   text: '',
   image: '',
+  color: '',
+  backgroundColor: '#000000',
   loading: false,
   sectionSaved: false,
   imageCleanupPublish: [],
@@ -55,6 +57,20 @@ export default function useForm() {
     setValues(prev => ({
       ...prev,
       image,
+    }))
+  }
+
+  function setColor(color) {
+    setValues(prev => ({
+      ...prev,
+      color,
+    }))
+  }
+
+  function setBackgroundColor(backgroundColor) {
+    setValues(prev => ({
+      ...prev,
+      backgroundColor,
     }))
   }
 
@@ -110,6 +126,8 @@ export default function useForm() {
     setTitle,
     setText,
     setImage,
+    setColor,
+    setBackgroundColor,
     setSectionId,
     setLoading,
     setSectionSaved,

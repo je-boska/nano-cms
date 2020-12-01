@@ -15,6 +15,10 @@ const PostSectionForm = ({
   setText,
   image,
   setImage,
+  color,
+  setColor,
+  backgroundColor,
+  setBackgroundColor,
   sectionId,
   setSectionId,
   loading,
@@ -25,9 +29,7 @@ const PostSectionForm = ({
   setImageCleanupPublish,
 }) => {
   const [selectColor, setSelectColor] = useState(false)
-  const [color, setColor] = useState({})
   const [selectBackgroundColor, setSelectBackgroundColor] = useState(false)
-  const [backgroundColor, setBackgroundColor] = useState({})
 
   const submitSectionHandler = e => {
     e.preventDefault()
@@ -42,6 +44,8 @@ const PostSectionForm = ({
         title,
         text,
         image,
+        color,
+        backgroundColor,
       }
       setSections(newSections)
     } else {
@@ -54,6 +58,8 @@ const PostSectionForm = ({
             title,
             text,
             image,
+            color,
+            backgroundColor,
           },
         ])
       } else {
@@ -65,6 +71,8 @@ const PostSectionForm = ({
     setTitle('')
     setText('')
     setImage('')
+    setColor('')
+    setBackgroundColor('')
     setSectionId('')
     setSectionSaved(true)
   }
@@ -108,11 +116,11 @@ const PostSectionForm = ({
   }
 
   function setColorHandler(color) {
-    setColor(color)
+    setColor(color.hex)
   }
 
   function setBackgroundColorHandler(color) {
-    setBackgroundColor(color)
+    setBackgroundColor(color.hex)
   }
 
   return (
@@ -156,7 +164,7 @@ const PostSectionForm = ({
           <p>Background:</p>
           <div
             className='color-preview'
-            style={{ backgroundColor: backgroundColor.hex }}
+            style={{ backgroundColor: backgroundColor }}
             onClick={() => setSelectBackgroundColor(!selectBackgroundColor)}
           ></div>
           {selectBackgroundColor ? (
@@ -168,10 +176,10 @@ const PostSectionForm = ({
           ) : null}
         </div>
         <div className='color-selector'>
-          <p>Color:</p>
+          <p>Text:</p>
           <div
             className='color-preview'
-            style={{ backgroundColor: color.hex }}
+            style={{ backgroundColor: color }}
             onClick={() => setSelectColor(!selectColor)}
           ></div>
           {selectColor ? (
