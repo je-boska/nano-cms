@@ -160,30 +160,36 @@ const PostSectionForm = ({
           onChange={textHandler}
         ></textarea>
         <br />
-        <div className='color-selector'>
-          <p>Background:</p>
-          <div
-            className='color-preview'
-            style={{ backgroundColor: backgroundColor }}
-            onClick={() => setSelectBackgroundColor(!selectBackgroundColor)}
-          ></div>
+        <div className='color-selectors'>
+          <div className='color-selector'>
+            <p>Background</p>
+            <div
+              className='color-preview'
+              style={{ backgroundColor: backgroundColor }}
+              onClick={() => setSelectBackgroundColor(!selectBackgroundColor)}
+            ></div>
+          </div>
+          <div className='color-selector'>
+            <p>Text</p>
+            <div
+              className='color-preview'
+              style={{ backgroundColor: color }}
+              onClick={() => setSelectColor(!selectColor)}
+            ></div>
+          </div>
+        </div>
+        <div className='color-pickers'>
           {selectBackgroundColor ? (
             <SketchPicker
+              width={180}
               disableAlpha={true}
               color={backgroundColor}
               onChange={setBackgroundColorHandler}
             />
           ) : null}
-        </div>
-        <div className='color-selector'>
-          <p>Text:</p>
-          <div
-            className='color-preview'
-            style={{ backgroundColor: color }}
-            onClick={() => setSelectColor(!selectColor)}
-          ></div>
           {selectColor ? (
             <SketchPicker
+              width={180}
               disableAlpha={true}
               color={color}
               onChange={setColorHandler}

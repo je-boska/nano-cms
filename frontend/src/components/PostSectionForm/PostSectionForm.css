@@ -2,6 +2,14 @@
   opacity: 0.4;
 }
 
+.color-selectors {
+  display: flex;
+}
+
+.color-selector {
+  margin-right: 40px;
+}
+
 .color-selector p {
   font-family: monospace, sans-serif;
   font-size: 14px;
@@ -14,4 +22,8 @@
   border-radius: 5px;
   height: 50px;
   width: 50px;
+}
+
+.color-pickers {
+  display: flex;
 }
