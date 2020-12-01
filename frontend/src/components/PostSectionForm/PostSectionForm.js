@@ -24,11 +24,12 @@ const PostSectionForm = ({
   imageCleanupPublish,
   setImageCleanupPublish,
 }) => {
+  const [selectColor, setSelectColor] = useState(false)
+  const [color, setColor] = useState({})
   const [selectBackgroundColor, setSelectBackgroundColor] = useState(false)
   const [backgroundColor, setBackgroundColor] = useState({})
 
   const submitSectionHandler = e => {
-
     e.preventDefault()
     if (sectionId) {
       const sectionToReplaceIndex = sections.findIndex(
@@ -106,6 +107,10 @@ const PostSectionForm = ({
     setImage('')
   }
 
+  function setColorHandler(color) {
+    setColor(color)
+  }
+
   function setBackgroundColorHandler(color) {
     setBackgroundColor(color)
   }
@@ -117,19 +122,12 @@ const PostSectionForm = ({
           {loading ? <Loader /> : <h3>SAVE</h3>}
         </button>
         <br />
-        <div className="background-selector">
-        <p>Background:</p>
-        <div className="background-color-preview" 
-          style={{ backgroundColor: backgroundColor.hex }} 
-          onClick={() => setSelectBackgroundColor(!selectBackgroundColor)}>
-        </div>
-        {selectBackgroundColor ? <SketchPicker disableAlpha={true} color={backgroundColor} onChange={setBackgroundColorHandler}/> : null}
-        </div>
         <select
           name='font-select'
           className='font-select'
           value={font}
-          onChange={fontHandler}>
+          onChange={fontHandler}
+        >
           <option value='format1452'>Format 1452</option>
           <option value='cirrus-cumulus'>Cirrus Cumulus</option>
           <option value='solide-mirage'>Solide Mirage</option>
@@ -141,7 +139,8 @@ const PostSectionForm = ({
           id='title'
           placeholder='Title'
           value={title}
-          onChange={titleHandler}></input>
+          onChange={titleHandler}
+        ></input>
         <br />
         <textarea
           name='text'
@@ -150,7 +149,39 @@ const PostSectionForm = ({
           id='text'
           placeholder='Text'
           value={text}
-          onChange={textHandler}></textarea>
+          onChange={textHandler}
+        ></textarea>
+        <br />
+        <div className='color-selector'>
+          <p>Background:</p>
+          <div
+            className='color-preview'
+            style={{ backgroundColor: backgroundColor.hex }}
+            onClick={() => setSelectBackgroundColor(!selectBackgroundColor)}
+          ></div>
+          {selectBackgroundColor ? (
+            <SketchPicker
+              disableAlpha={true}
+              color={backgroundColor}
+              onChange={setBackgroundColorHandler}
+            />
+          ) : null}
+        </div>
+        <div className='color-selector'>
+          <p>Color:</p>
+          <div
+            className='color-preview'
+            style={{ backgroundColor: color.hex }}
+            onClick={() => setSelectColor(!selectColor)}
+          ></div>
+          {selectColor ? (
+            <SketchPicker
+              disableAlpha={true}
+              color={color}
+              onChange={setColorHandler}
+            />
+          ) : null}
+        </div>
         <br />
         {image && !loading && (
           <button onClick={removeImageHandler} id='remove-img-button'>
