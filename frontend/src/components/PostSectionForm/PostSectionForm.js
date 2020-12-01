@@ -1,7 +1,8 @@
-import React from 'react'
+import React, { useState } from 'react'
 import './PostSectionForm.css'
 import { uploadImage, deleteImage } from '../../requests/EditPostRequests'
 import Loader from '../Loader/Loader'
+import { SketchPicker } from 'react-color'
 
 const PostSectionForm = ({
   sections,
@@ -23,7 +24,11 @@ const PostSectionForm = ({
   imageCleanupPublish,
   setImageCleanupPublish,
 }) => {
+  const [selectBackgroundColor, setSelectBackgroundColor] = useState(false)
+  const [backgroundColor, setBackgroundColor] = useState({})
+
   const submitSectionHandler = e => {
+
     e.preventDefault()
     if (sectionId) {
       const sectionToReplaceIndex = sections.findIndex(
@@ -101,6 +106,10 @@ const PostSectionForm = ({
     setImage('')
   }
 
+  function setBackgroundColorHandler(color) {
+    setBackgroundColor(color)
+  }
+
   return (
     <>
       <form onSubmit={submitSectionHandler}>
@@ -108,6 +117,14 @@ const PostSectionForm = ({
           {loading ? <Loader /> : <h3>SAVE</h3>}
         </button>
         <br />
+        <div className="background-selector">
+        <p>Background:</p>
+        <div className="background-color-preview" 
+          style={{ backgroundColor: backgroundColor.hex }} 
+          onClick={() => setSelectBackgroundColor(!selectBackgroundColor)}>
+        </div>
+        {selectBackgroundColor ? <SketchPicker disableAlpha={true} color={backgroundColor} onChange={setBackgroundColorHandler}/> : null}
+        </div>
         <select
           name='font-select'
           className='font-select'
