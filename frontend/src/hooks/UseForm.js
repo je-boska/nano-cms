@@ -10,6 +10,7 @@ const defaultValues = {
   ],
   sectionId: '',
   font: 'format1452',
+  centered: false,
   title: '',
   text: '',
   image: '',
@@ -36,6 +37,13 @@ export default function useForm() {
     setValues(prev => ({
       ...prev,
       font,
+    }))
+  }
+
+  function setCentered(centered) {
+    setValues(prev => ({
+      ...prev,
+      centered,
     }))
   }
 
@@ -123,6 +131,7 @@ export default function useForm() {
     values,
     setSections,
     setFont,
+    setCentered,
     setTitle,
     setText,
     setImage,

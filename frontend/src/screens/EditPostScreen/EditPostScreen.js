@@ -18,6 +18,7 @@ const EditPostScreen = ({ match, history }) => {
     values,
     setSections,
     setFont,
+    setCentered,
     setTitle,
     setText,
     setImage,
@@ -34,6 +35,7 @@ const EditPostScreen = ({ match, history }) => {
     sections,
     position,
     font,
+    centered,
     title,
     text,
     image,
@@ -93,6 +95,7 @@ const EditPostScreen = ({ match, history }) => {
   const changeSectionHandler = async section => {
     const {
       font,
+      centered,
       title,
       text,
       image,
@@ -122,6 +125,7 @@ const EditPostScreen = ({ match, history }) => {
       }
     }
     setFont(font)
+    setCentered(centered)
     setTitle(title)
     setText(text)
     setImage(image)
@@ -132,6 +136,7 @@ const EditPostScreen = ({ match, history }) => {
 
   function resetForm() {
     setSectionId('')
+    setCentered(false)
     setTitle('')
     setText('')
     setImage('')
@@ -205,6 +210,8 @@ const EditPostScreen = ({ match, history }) => {
         sections={sections}
         font={font}
         setFont={setFont}
+        centered={centered}
+        setCentered={setCentered}
         title={title}
         setTitle={setTitle}
         text={text}

@@ -14,10 +14,11 @@ const Layout = ({ post, layout }) => {
           style={{
             backgroundImage: section.image && `url(${section.image})`,
             backgroundColor: section.backgroundColor,
+            textAlign: section.centered ? 'center' : 'left',
           }}
         >
           {section.title || section.text ? (
-            <div className='centered-text'>
+            <div className={`centered-text ${section.centered && 'centered'}`}>
               {section.title ? (
                 <h1 style={{ fontFamily: section.font, color: section.color }}>
                   {section.title}

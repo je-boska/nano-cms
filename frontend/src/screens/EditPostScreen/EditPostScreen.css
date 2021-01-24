@@ -31,7 +31,7 @@
 .font-select,
 .font-select option {
   font-family: monospace, sans-serif;
-  margin: 20px 0px;
+  margin: 10px 0px;
   padding: 20px;
   width: 340px;
   border-radius: 10px;
