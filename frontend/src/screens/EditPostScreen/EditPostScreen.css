@@ -24,19 +24,25 @@
 
 .cancel-button {
   margin-right: 10px;
+  background-color: white;
+  color: black;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+.publish-button {
+  background-color: rgb(12, 14, 134);
 }
 
 .form-container input,
 .form-container textarea,
 .font-select,
 .font-select option {
-  font-family: monospace, sans-serif;
   margin: 10px 0px;
   padding: 20px;
   width: 340px;
   border-radius: 10px;
   border: 1px solid rgba(0, 0, 0, 0.2);
-  /* box-shadow: 0px 5px 17px rgba(0, 0, 0, 0.12); */
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .form-container input[type='file'] {
@@ -51,19 +57,16 @@
 .image-upload-btn {
   color: white;
   background-color: black;
-  font-family: monospace, sans-serif;
-  border: 2px solid rgba(0, 0, 0, 0.2);
   padding: 8px;
   border-radius: 5px;
-  font-size: 14px;
-  font-weight: 600;
+  font-size: 0.8rem;
+  font-weight: 100;
   cursor: pointer;
   transition: 0.15s all linear;
 }
 
 .image-upload-btn:hover {
   opacity: 0.75;
-  background-color: rgb(45, 0, 49);
 }
 
 .image-preview {
@@ -88,7 +91,6 @@
   }
 
   .image-upload-btn {
-    font-size: 16px;
-    font-weight: 600;
+    font-size: 1rem;
   }
 }

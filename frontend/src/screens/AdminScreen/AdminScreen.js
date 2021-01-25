@@ -146,7 +146,7 @@ const AdminScreen = ({ history }) => {
                 <i className='fas fa-trash-alt' />
               </button>
               <Link to={`/admin/edit/${post._id}`}>
-                <button className='delete-edit-button'>
+                <button className='delete-edit-button edit-button'>
                   <i className='fas fa-edit' />
                 </button>
               </Link>

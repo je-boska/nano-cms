@@ -2,6 +2,10 @@ h2 {
   font-family: monospace, sans-serif;
 }
 
+.form-container input {
+  padding: 15px;
+}
+
 .error {
   background-color: rgb(253, 206, 206);
   border: 1px solid rgb(255, 184, 184);

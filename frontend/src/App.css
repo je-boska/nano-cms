@@ -5,11 +5,22 @@
 }
 
 body {
-  font-family: lack, sans-serif;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+button {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 h3 {
-  font-size: 14px;
+  font-size: 0.8rem;
+  font-weight: 100;
+}
+
+@media only screen and (min-width: 565px) {
+  h3 {
+    font-size: 1rem;
+  }
 }
 
 @font-face {
@@ -58,10 +69,4 @@ h3 {
     url('../src/fonts/Solide_Mirage-Etroit_web.woff') format('woff');
   font-weight: normal;
   font-style: normal;
-}
-
-@media only screen and (min-width: 565px) {
-  h3 {
-    font-size: 16px;
-  }
 }

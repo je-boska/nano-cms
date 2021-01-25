@@ -25,8 +25,7 @@ const SectionPreview = ({
       style={{
         backgroundImage: image && `url(${image})`,
         backgroundColor: backgroundColor,
-      }}
-    >
+      }}>
       {title ? (
         <div className='preview-title-text'>
           <h5 style={{ fontFamily: font, color: color }}>{title}</h5>
@@ -39,9 +38,8 @@ const SectionPreview = ({
       {editPostScreen && editing && (
         <button
           className='delete-section-button'
-          onClick={deleteSectionHandler}
-        >
-          <h3>-</h3>
+          onClick={deleteSectionHandler}>
+          -
         </button>
       )}
     </div>

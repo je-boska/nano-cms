@@ -33,7 +33,7 @@
 }
 
 .centered-text p {
-  font-size: 14px;
+  font-size: 1rem;
   margin-bottom: 10px;
   padding: 10px 0px;
   font-weight: 100;
@@ -50,7 +50,7 @@
   font-weight: 800;
   text-decoration: none;
   border-bottom: 1px solid white;
-  transition: 0.3s all ease;
+  transition: 0.15s all ease;
 }
 
 .centered-text a:hover {
@@ -96,6 +96,6 @@
   }
 
   .centered-text p {
-    font-size: 16px;
+    font-size: 1.3rem;
   }
 }

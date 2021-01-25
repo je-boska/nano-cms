@@ -2,6 +2,16 @@
   opacity: 0.4;
 }
 
+.centered-checkbox {
+  width: 340px;
+  height: 40px;
+  font-size: 14px;
+}
+
+.centered-checkbox input {
+  width: 30px;
+}
+
 .color-selectors {
   display: flex;
 }
@@ -11,7 +21,6 @@
 }
 
 .color-selector p {
-  font-family: monospace, sans-serif;
   font-size: 14px;
   font-weight: 200;
 }
@@ -22,17 +31,11 @@
   border-radius: 5px;
   height: 50px;
   width: 50px;
+  cursor: pointer;
 }
 
-.centered-checkbox {
-  width: 340px;
-  height: 40px;
-  font-family: monospace, sans-serif;
-  font-size: 14px;
-}
-
-.centered-checkbox input {
-  width: 30px;
+.color-preview:hover {
+  opacity: 0.75;
 }
 
 .color-pickers {
