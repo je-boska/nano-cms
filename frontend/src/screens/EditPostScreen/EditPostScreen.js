@@ -4,12 +4,12 @@ import { UserContext } from '../../UserContext'
 import useForm from '../../hooks/UseForm'
 import {
   submitForm,
-  cancelForm,
   checkImageInDatabase,
   deleteImage,
 } from '../../requests/EditPostRequests'
 import PostSectionForm from '../../components/PostSectionForm/PostSectionForm'
 import SectionPreview from '../../components/SectionPreview/SectionPreview'
+import { deletePost } from '../../requests/AdminRequests'
 
 const EditPostScreen = ({ match, history }) => {
   const { user } = useContext(UserContext)
@@ -66,7 +66,7 @@ const EditPostScreen = ({ match, history }) => {
     return createPost
   }
 
-  const submitHandler = async e => {
+  async function submitHandler(e) {
     e.preventDefault()
     const createPost = isCreatePost()
     for (let i = 0; i < imageCleanupPublish.length; i++) {
@@ -79,42 +79,59 @@ const EditPostScreen = ({ match, history }) => {
     history.push('/admin')
   }
 
-  const cancelHandler = async e => {
+  function deleteAllImages() {
+    sections.forEach(section => {
+      section.image && deleteImage(section.image, user.token)
+    })
+    if (image) {
+      deleteImage(image, user.token)
+    }
+  }
+
+  async function deleteAllImagesIfNotInDb() {
+    sections.forEach(async section => {
+      const imageInDb = await checkImageInDatabase(
+        section.image,
+        match.params.id
+      )
+      !imageInDb && deleteImage(section.image, user.token)
+    })
+    if (image) {
+      const imageInDb = await checkImageInDatabase(image, match.params.id)
+      !imageInDb && deleteImage(image, user.token)
+    }
+  }
+
+  async function cancelHandler(e) {
     e.preventDefault()
     setLoading(true)
-    await cancelForm(
-      window.location.search,
-      user.token,
-      match.params.id,
-      sections,
-      image
-    )
+    const createPost = isCreatePost()
+    if (createPost) {
+      deleteAllImages()
+      await deletePost(user.token, match.params.id)
+    } else {
+      deleteAllImagesIfNotInDb()
+    }
     history.push('/admin')
   }
 
-  const changeSectionHandler = async section => {
-    const createPost = isCreatePost()
-    // When editing post, delete image only if image not in db
-    if (image && !createPost && !sectionSaved) {
-      const imageInDb = await checkImageInDatabase(image, match.params.id)
-      if (!imageInDb) {
-        deleteImage(image, user.token)
-      }
-      // When creating post, delete image if not saved
-    } else if (createPost && !sectionSaved) {
-      if (image) {
-        let imageSaved = false
-        for (let i = 0; i < sections.length; i++) {
-          if (image === sections[i].image) {
-            imageSaved = true
-          }
-        }
-        if (!imageSaved) {
-          deleteImage(image, user.token)
-        }
-      }
+  async function changeSectionHandler(section) {
+    const imageInDb = await checkImageInDatabase(image, match.params.id)
+    const imageSaved = checkImageSaved()
+    if (image && !imageInDb && !imageSaved) {
+      deleteImage(image, user.token)
     }
     setFormToSection(section)
+  }
+
+  function checkImageSaved() {
+    let imageSaved = false
+    for (let i = 0; i < sections.length; i++) {
+      if (image === sections[i].image) {
+        imageSaved = true
+      }
+    }
+    return imageSaved
   }
 
   function setFormToSection(section) {
