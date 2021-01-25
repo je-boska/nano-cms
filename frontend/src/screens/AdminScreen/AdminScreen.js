@@ -140,7 +140,7 @@ const AdminScreen = ({ history }) => {
             </div>
             <div className='delete-edit-buttons'>
               <button
-                className='delete-edit-button'
+                className='delete-edit-button delete-button'
                 onClick={() => deleteHandler(post._id, post.position)}
                 disabled={loading}>
                 <i className='fas fa-trash-alt' />

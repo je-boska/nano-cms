@@ -74,7 +74,7 @@ const PostSectionForm = ({
         return
       }
     }
-    setFont('Georgia')
+    setFont('format1452')
     setCentered(false)
     setTitle('')
     setText('')
