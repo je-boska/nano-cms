@@ -93,16 +93,6 @@ const EditPostScreen = ({ match, history }) => {
   }
 
   const changeSectionHandler = async section => {
-    const {
-      font,
-      centered,
-      title,
-      text,
-      image,
-      color,
-      backgroundColor,
-      sectionId,
-    } = section
     const createPost = isCreatePost()
     // When editing post, delete image only if image not in db
     if (image && !createPost && !sectionSaved) {
@@ -124,14 +114,18 @@ const EditPostScreen = ({ match, history }) => {
         }
       }
     }
-    setFont(font)
-    setCentered(centered)
-    setTitle(title)
-    setText(text)
-    setImage(image)
-    setColor(color)
-    setBackgroundColor(backgroundColor)
-    setSectionId(sectionId)
+    setFormToSection(section)
+  }
+
+  function setFormToSection(section) {
+    setFont(section.font)
+    setCentered(section.centered)
+    setTitle(section.title)
+    setText(section.text)
+    setImage(section.image)
+    setColor(section.color)
+    setBackgroundColor(section.backgroundColor)
+    setSectionId(section.sectionId)
   }
 
   function resetForm() {
@@ -140,6 +134,8 @@ const EditPostScreen = ({ match, history }) => {
     setTitle('')
     setText('')
     setImage('')
+    setColor('#FFFFFF')
+    setBackgroundColor('#000000')
   }
 
   function addSectionHandler(e) {
@@ -176,15 +172,13 @@ const EditPostScreen = ({ match, history }) => {
         <button
           className='cancel-button'
           onClick={cancelHandler}
-          disabled={loading}
-        >
+          disabled={loading}>
           <h3>CANCEL</h3>
         </button>
         <button
           className='publish-button'
           onClick={submitHandler}
-          disabled={loading || !sectionSaved}
-        >
+          disabled={loading || !sectionSaved}>
           <h3>PUBLISH</h3>
         </button>
       </div>
