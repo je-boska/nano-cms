@@ -31,21 +31,16 @@ const EditPostScreen = ({ match, history }) => {
     getPost,
     getPostsLength,
   } = useForm()
+
   const {
     sections,
-    position,
-    font,
-    centered,
-    title,
-    text,
-    image,
-    color,
-    backgroundColor,
     sectionId,
+    position,
+    image,
+    postsLength,
+    imageCleanupPublish,
     loading,
     sectionSaved,
-    imageCleanupPublish,
-    postsLength,
   } = values
 
   useEffect(() => {
@@ -218,29 +213,19 @@ const EditPostScreen = ({ match, history }) => {
         )}
       </div>
       <PostSectionForm
-        sections={sections}
-        font={font}
+        values={values}
         setFont={setFont}
-        centered={centered}
         setCentered={setCentered}
-        title={title}
         setTitle={setTitle}
-        text={text}
         setText={setText}
-        image={image}
         setImage={setImage}
-        color={color}
         setColor={setColor}
-        backgroundColor={backgroundColor}
         setBackgroundColor={setBackgroundColor}
-        sectionId={sectionId}
         setSectionId={setSectionId}
-        loading={loading}
         setLoading={setLoading}
         setSections={setSections}
         sectionSaved={sectionSaved}
         setSectionSaved={setSectionSaved}
-        imageCleanupPublish={imageCleanupPublish}
         setImageCleanupPublish={setImageCleanupPublish}
         token={user.token}
       />
