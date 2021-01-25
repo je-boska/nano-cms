@@ -33,12 +33,16 @@
   background-color: rgb(12, 14, 134);
 }
 
+.save-button {
+  margin-bottom: 10px;
+}
+
 .form-container input,
 .form-container textarea,
 .font-select,
 .font-select option {
   margin: 10px 0px;
-  padding: 20px;
+  padding: 15px;
   width: 340px;
   border-radius: 10px;
   border: 1px solid rgba(0, 0, 0, 0.2);

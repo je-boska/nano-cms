@@ -10,6 +10,13 @@
 
 .centered-checkbox input {
   width: 30px;
+  height: 15px;
+  margin-left: -5px;
+}
+
+.centered-checkbox label {
+  position: absolute;
+  transform: translateY(8px);
 }
 
 .color-selectors {

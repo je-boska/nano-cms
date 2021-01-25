@@ -138,16 +138,6 @@ const PostSectionForm = ({
           {loading ? <Loader /> : <h3>SAVE</h3>}
         </button>
         <br />
-        <select
-          name='font-select'
-          className='font-select'
-          value={font}
-          onChange={fontHandler}>
-          <option value='format1452'>Format 1452</option>
-          <option value='cirrus-cumulus'>Cirrus Cumulus</option>
-          <option value='solide-mirage'>Solide Mirage</option>
-        </select>
-        <br />
         <div className='centered-checkbox'>
           <input
             type='checkbox'
@@ -158,6 +148,17 @@ const PostSectionForm = ({
           />
           <label htmlFor='centered'>Centered</label>
         </div>
+        <select
+          name='font-select'
+          className='font-select'
+          value={font}
+          onChange={fontHandler}>
+          <option value='format1452'>Format 1452</option>
+          <option value='cirrus-cumulus'>Cirrus Cumulus</option>
+          <option value='solide-mirage'>Solide Mirage</option>
+        </select>
+        <br />
+
         <input
           name='title'
           size='50'
@@ -165,7 +166,6 @@ const PostSectionForm = ({
           placeholder='Title'
           value={title}
           onChange={titleHandler}></input>
-        <br />
         <br />
         <textarea
           name='text'
@@ -176,6 +176,7 @@ const PostSectionForm = ({
           value={text}
           onChange={textHandler}></textarea>
         <br />
+
         <div className='color-selectors'>
           <div className='color-selector'>
             <p>Background</p>
@@ -213,7 +214,7 @@ const PostSectionForm = ({
             />
           ) : null}
         </div>
-        <br />
+
         {image && !loading && (
           <button onClick={removeImageHandler} id='remove-img-button'>
             <h3>- REMOVE IMAGE</h3>
