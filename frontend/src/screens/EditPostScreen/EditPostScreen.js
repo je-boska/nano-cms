@@ -10,6 +10,7 @@ import {
   checkImageInDatabase,
   deleteImage,
 } from '../../requests/EditPostRequests'
+import { isCreatePost } from '../../utils/utils'
 
 const EditPostScreen = ({ match, history }) => {
   const { user } = useContext(UserContext)
@@ -55,18 +56,10 @@ const EditPostScreen = ({ match, history }) => {
     }
   }, [user, history])
 
-  function isCreatePost() {
-    const urlParams = new URLSearchParams(window.location.search)
-    const createPost = urlParams.get('create')
-    return createPost
-  }
-
   async function submitHandler(e) {
     e.preventDefault()
     const createPost = isCreatePost()
-    for (let i = 0; i < imageCleanupPublish.length; i++) {
-      deleteImage(imageCleanupPublish[i], user.token)
-    }
+    imageCleanupPublish.forEach(image => deleteImage(image, user.token))
     await submitForm(
       {
         sections,
@@ -125,11 +118,11 @@ const EditPostScreen = ({ match, history }) => {
 
   function checkImageSaved() {
     let imageSaved = false
-    for (let i = 0; i < sections.length; i++) {
-      if (image === sections[i].image) {
+    sections.forEach(section => {
+      if (image === section.image) {
         imageSaved = true
       }
-    }
+    })
     return imageSaved
   }
 

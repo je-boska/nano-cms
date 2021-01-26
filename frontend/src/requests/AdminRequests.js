@@ -21,11 +21,11 @@ export async function createPost(token) {
 export async function deletePost(token, id) {
   const post = await axios.get(`/api/posts/${id}`)
   const { sections } = post.data
-  for (let i = 0; i < sections.length; i++) {
-    if (sections[i].image) {
-      deleteImage(sections[i].image, token)
+  sections.forEach(section => {
+    if (section.image) {
+      deleteImage(section.image, token)
     }
-  }
+  })
   await axios.delete(`/api/posts/${id}`, {
     headers: {
       Authorization: `Bearer ${token}`,

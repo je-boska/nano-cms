@@ -40,9 +40,7 @@ export function deleteImage(image, token) {
 export async function checkImageInDatabase(image, id) {
   const data = await getPostData(id)
   const postImages = []
-  for (let i = 0; i < data.sections.length; i++) {
-    postImages.push(data.sections[i].image)
-  }
+  data.sections.forEach(section => postImages.push(section.image))
   if (postImages.includes(image)) {
     return true
   } else {
