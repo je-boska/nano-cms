@@ -33,25 +33,27 @@ const AdminScreen = ({ history }) => {
     setLoading(true)
     if (window.confirm('Are you sure?')) {
       await deletePost(user.token, id)
-      const rearrangedPosts = posts
-        .filter(post => post.position !== deletePosition)
-        .map(post => {
-          return {
-            ...post,
-            position:
-              post.position > deletePosition
-                ? post.position - 1
-                : post.position,
-          }
-        })
-      for (let i = 0; i < rearrangedPosts.length; i++) {
-        if (rearrangedPosts[i].position >= deletePosition) {
-          submitForm(rearrangedPosts[i]._id, user.token, rearrangedPosts[i])
+      const rearrangedPosts = rearrangeOnDelete(deletePosition)
+      rearrangedPosts.forEach(post => {
+        if (post.position >= deletePosition) {
+          submitForm(post, user.token)
         }
-      }
+      })
       setPosts(rearrangedPosts)
     }
     setLoading(false)
+  }
+
+  function rearrangeOnDelete(deletePosition) {
+    return posts
+      .filter(post => post.position !== deletePosition)
+      .map(post => {
+        return {
+          ...post,
+          position:
+            post.position > deletePosition ? post.position - 1 : post.position,
+        }
+      })
   }
 
   async function createPostHandler() {
@@ -81,7 +83,7 @@ const AdminScreen = ({ history }) => {
         rearrangedPosts[i].position === position ||
         rearrangedPosts[i].position === position + 1
       ) {
-        submitForm(rearrangedPosts[i]._id, user.token, rearrangedPosts[i])
+        submitForm(rearrangedPosts[i], user.token)
       }
     }
     setPosts(rearrangedPosts)
@@ -104,7 +106,7 @@ const AdminScreen = ({ history }) => {
         rearrangedPosts[i].position === position ||
         rearrangedPosts[i].position === position - 1
       ) {
-        submitForm(rearrangedPosts[i]._id, user.token, rearrangedPosts[i])
+        submitForm(rearrangedPosts[i], user.token)
       }
     }
     setPosts(rearrangedPosts)

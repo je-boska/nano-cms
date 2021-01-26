@@ -19,13 +19,13 @@ export async function uploadImage(image, token) {
   return data.data
 }
 
-export async function submitForm(id, token, data) {
+export async function submitForm(post, token) {
   const headers = {
     'Content-Type': 'application/json',
     Authorization: `Bearer ${token}`,
   }
 
-  await axios.put(`/api/posts/${id}`, data, { headers })
+  await axios.put(`/api/posts/${post._id}`, post, { headers })
 }
 
 export function deleteImage(image, token) {

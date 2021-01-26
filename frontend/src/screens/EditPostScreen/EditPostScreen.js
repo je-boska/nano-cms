@@ -67,10 +67,14 @@ const EditPostScreen = ({ match, history }) => {
     for (let i = 0; i < imageCleanupPublish.length; i++) {
       deleteImage(imageCleanupPublish[i], user.token)
     }
-    await submitForm(match.params.id, user.token, {
-      sections,
-      position: createPost ? postsLength : position,
-    })
+    await submitForm(
+      {
+        sections,
+        position: createPost ? postsLength : position,
+        _id: match.params.id,
+      },
+      user.token
+    )
     history.push('/admin')
   }
 
