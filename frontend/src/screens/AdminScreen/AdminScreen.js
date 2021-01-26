@@ -127,11 +127,15 @@ const AdminScreen = ({ history }) => {
         .map(post => (
           <div className='post-card' key={post._id}>
             <div className='up-down-arrows'>
-              <button onClick={() => movePostUpHandler(post.position)}>
+              <button
+                className='up-arrow'
+                onClick={() => movePostUpHandler(post.position)}>
                 <h3>↑</h3>
               </button>
               <br />
-              <button onClick={() => movePostDownHandler(post.position)}>
+              <button
+                className='down-arrow'
+                onClick={() => movePostDownHandler(post.position)}>
                 <h3>↓</h3>
               </button>
             </div>
