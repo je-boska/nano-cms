@@ -14,10 +14,9 @@
     "react-scripts": "3.4.3"
   },
   "scripts": {
-    "cypress:open": "cypress open",
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "test": "cypress open",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {

@@ -4,7 +4,7 @@ describe('Admin login', function () {
   })
 
   it('Enters correct username and password', function () {
-    cy.login('admin@example.com', '123456')
+    cy.login(Cypress.env('email'), Cypress.env('password'))
 
     cy.location('pathname').should('eq', '/admin')
 
