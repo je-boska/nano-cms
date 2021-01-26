@@ -61,7 +61,7 @@ const AdminScreen = ({ history }) => {
 
   function logoutHandler() {
     setUser(null)
-    sessionStorage.removeItem('user')
+    localStorage.removeItem('user')
   }
 
   function movePostUpHandler(position) {

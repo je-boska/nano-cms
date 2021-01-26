@@ -16,8 +16,9 @@ const LoginScreen = ({ history }) => {
     setLoading(true)
     try {
       const data = await authUser(email, password)
-      sessionStorage.setItem('user', data)
-      setUser(data)
+      const userToken = { token: data.token }
+      localStorage.setItem('user', userToken)
+      setUser(userToken)
       setLoading(false)
     } catch (err) {
       setError(true)

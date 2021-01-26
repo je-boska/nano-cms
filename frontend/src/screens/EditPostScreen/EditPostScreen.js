@@ -2,14 +2,14 @@ import React, { useEffect, useContext } from 'react'
 import './EditPostScreen.css'
 import { UserContext } from '../../UserContext'
 import useForm from '../../hooks/UseForm'
+import PostSectionForm from '../../components/PostSectionForm/PostSectionForm'
+import SectionPreview from '../../components/SectionPreview/SectionPreview'
+import { deletePost } from '../../requests/AdminRequests'
 import {
   submitForm,
   checkImageInDatabase,
   deleteImage,
 } from '../../requests/EditPostRequests'
-import PostSectionForm from '../../components/PostSectionForm/PostSectionForm'
-import SectionPreview from '../../components/SectionPreview/SectionPreview'
-import { deletePost } from '../../requests/AdminRequests'
 
 const EditPostScreen = ({ match, history }) => {
   const { user } = useContext(UserContext)
