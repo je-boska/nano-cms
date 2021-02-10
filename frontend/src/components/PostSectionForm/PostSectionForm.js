@@ -152,10 +152,12 @@ const PostSectionForm = ({
           name='font-select'
           className='font-select'
           value={font}
-          onChange={fontHandler}>
-          <option value='format1452'>Format 1452</option>
-          <option value='cirrus-cumulus'>Cirrus Cumulus</option>
-          <option value='solide-mirage'>Solide Mirage</option>
+          onChange={fontHandler}
+        >
+          <option value='pyromaani'>Pyromaani</option>
+          <option value='modell-envelo'>Modell Envelo</option>
+          <option value='synuous-bold'>Synuous Bold</option>
+          <option value='rbno31'>RBNo3.1</option>
         </select>
         <br />
 
@@ -165,7 +167,8 @@ const PostSectionForm = ({
           id='title'
           placeholder='Title'
           value={title}
-          onChange={titleHandler}></input>
+          onChange={titleHandler}
+        ></input>
         <br />
         <textarea
           name='text'
@@ -174,7 +177,8 @@ const PostSectionForm = ({
           id='text'
           placeholder='Text'
           value={text}
-          onChange={textHandler}></textarea>
+          onChange={textHandler}
+        ></textarea>
         <br />
 
         <div className='color-selectors'>
@@ -183,9 +187,8 @@ const PostSectionForm = ({
             <div
               className='color-preview'
               style={{ backgroundColor: backgroundColor }}
-              onClick={() =>
-                setSelectBackgroundColor(!selectBackgroundColor)
-              }></div>
+              onClick={() => setSelectBackgroundColor(!selectBackgroundColor)}
+            ></div>
           </div>
 
           <div className='color-selector'>
@@ -193,7 +196,8 @@ const PostSectionForm = ({
             <div
               className='color-preview'
               style={{ backgroundColor: color }}
-              onClick={() => setSelectColor(!selectColor)}></div>
+              onClick={() => setSelectColor(!selectColor)}
+            ></div>
           </div>
         </div>
         <div className='color-pickers'>

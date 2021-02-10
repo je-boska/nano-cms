@@ -7,6 +7,7 @@
   color: white;
   margin: 0;
   padding: 0;
+  font-family: 'Playfair Display', serif;
 }
 
 .section {
@@ -97,5 +98,23 @@
 
   .centered-text p {
     font-size: 1.3rem;
+  }
+}
+
+@media only screen and (min-width: 1000px) {
+  .centered-text {
+    width: 700px;
+  }
+
+  .centered-text h1 {
+    font-size: 4rem;
+  }
+
+  .section p {
+    max-width: 500px;
+  }
+
+  .centered-text p {
+    font-size: 1.5rem;
   }
 }

@@ -9,7 +9,7 @@ const defaultValues = {
     },
   ],
   sectionId: '',
-  font: 'format1452',
+  font: 'pyromaani',
   centered: false,
   title: '',
   text: '',

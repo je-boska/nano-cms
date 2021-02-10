@@ -70,3 +70,33 @@ h3 {
   font-weight: normal;
   font-style: normal;
 }
+
+@font-face {
+  font-family: 'pyromaani';
+  src: url('../src/fonts/Pyromaani.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'modell-envelo';
+  src: url('../src/fonts/Modell\ Envelo\ Regular.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'synuous-bold';
+  src: url('../src/fonts/Synuous\ Bold.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'rbno31';
+  src: url('../src/fonts/RBNo3.1-Black.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap');
