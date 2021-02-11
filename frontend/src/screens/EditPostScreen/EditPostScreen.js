@@ -58,6 +58,7 @@ const EditPostScreen = ({ match, history }) => {
 
   async function submitHandler(e) {
     e.preventDefault()
+    setLoading(true)
     const createPost = isCreatePost()
     imageCleanupPublish.forEach(image => deleteImage(image, user.token))
     await submitForm(
@@ -181,13 +182,15 @@ const EditPostScreen = ({ match, history }) => {
         <button
           className='cancel-button'
           onClick={cancelHandler}
-          disabled={loading}>
+          disabled={loading}
+        >
           <h3>CANCEL</h3>
         </button>
         <button
           className='publish-button'
           onClick={submitHandler}
-          disabled={loading || !sectionSaved}>
+          disabled={loading || !sectionSaved}
+        >
           <h3>PUBLISH</h3>
         </button>
       </div>

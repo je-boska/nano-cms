@@ -14,7 +14,7 @@ const defaultValues = {
   title: '',
   text: '',
   image: '',
-  color: '',
+  color: '#FFFFFF',
   backgroundColor: '#000000',
   loading: false,
   sectionSaved: false,

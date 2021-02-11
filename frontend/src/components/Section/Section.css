@@ -1,20 +1,17 @@
 .post {
-  background-color: black;
   width: 100%;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  color: white;
   margin: 0;
   padding: 0;
-  font-family: 'Playfair Display', serif;
+  font-family: areplos-book, serif;
 }
 
 .section {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: black;
   overflow: hidden;
   background-repeat: no-repeat;
   background-position: center;
@@ -39,6 +36,7 @@
   padding: 10px 0px;
   font-weight: 100;
   opacity: 0.8;
+  max-width: 400px;
 }
 
 .centered-text h1 {
@@ -47,19 +45,14 @@
 }
 
 .centered-text a {
-  color: white;
   font-weight: 800;
   text-decoration: none;
-  border-bottom: 1px solid white;
+  border-bottom: 1px solid;
   transition: 0.15s all ease;
 }
 
 .centered-text a:hover {
   opacity: 0.6;
-}
-
-.section p {
-  max-width: 400px;
 }
 
 .one-layout {
@@ -97,7 +90,7 @@
   }
 
   .centered-text p {
-    font-size: 1.3rem;
+    font-size: 1.2rem;
   }
 }
 

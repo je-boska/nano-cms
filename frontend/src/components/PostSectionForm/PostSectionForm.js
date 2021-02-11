@@ -79,8 +79,8 @@ const PostSectionForm = ({
     setTitle('')
     setText('')
     setImage('')
-    setColor('')
-    setBackgroundColor('')
+    setColor('#FFFFFF')
+    setBackgroundColor('#000000')
     setSectionId('')
     setSectionSaved(true)
   }

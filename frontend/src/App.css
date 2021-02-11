@@ -99,4 +99,11 @@ h3 {
   font-style: normal;
 }
 
+@font-face {
+  font-family: 'areplos-book';
+  src: url('../src/fonts/AreplosBook.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap');
