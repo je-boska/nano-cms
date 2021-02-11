@@ -1,8 +1,6 @@
 import React from 'react'
 import './Section.css'
-import MarkdownIt from 'markdown-it'
-
-const md = new MarkdownIt()
+import ReactMarkdown from 'react-markdown'
 
 const Layout = ({ post, layout }) => {
   return (
@@ -25,12 +23,7 @@ const Layout = ({ post, layout }) => {
                 </h1>
               ) : null}
               {section.text ? (
-                <div
-                  dangerouslySetInnerHTML={{
-                    __html: md.render(section.text),
-                  }}
-                  style={{ color: section.color }}
-                ></div>
+                <ReactMarkdown>{section.text}</ReactMarkdown>
               ) : null}
             </div>
           ) : null}
